@@ -4,8 +4,8 @@
 
 name: 'aryeo'
 version: '1.0.0'
-description: 'Dart SDK for Aryeo API'
-homepage: 'homepage'
+description: 'Dart SDK for Aryeo API.'
+homepage: 'https://github.com/AryeoHQ/aryeo-api-dart-sdk'
 environment:
   sdk: '>=2.12.0 <3.0.0'
 dependencies:
