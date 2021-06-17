@@ -18,7 +18,7 @@ Dart 2.0 or later
 
 ## Installation & Usage
 
-Add the following block to your `pubspec.yaml`:
+Add the following block to `pubspec.yaml`:
 
 ```yaml
 dependencies:
