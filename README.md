@@ -34,10 +34,10 @@ dependencies:
 import 'package:aryeo/api.dart';
 
 void main() {
-    defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').accessToken = '439|hYl9ugFazT7f2a4d7Mc9nxj6ZycMJDX7P0VoqAJM';
+    defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').accessToken = 'API_KEY';
 
     final api_instance = ListingsApi();
-    const id = '68f7116c-4811-4c96-8a23-8a25ede18455';
+    const id = 'UUID';
 
     try {
         api_instance.getListingsId(id)                    
