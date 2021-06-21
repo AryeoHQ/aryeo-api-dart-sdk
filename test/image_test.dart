@@ -21,6 +21,12 @@ void main() {
       // TODO
     });
 
+    // The UUID of the image.
+    // String uuid
+    test('to test the property `uuid`', () async {
+      // TODO
+    });
+
     // A URL for a thumbnail-sized version of the image.
     // String thumbnailUrl
     test('to test the property `thumbnailUrl`', () async {

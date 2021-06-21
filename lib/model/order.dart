@@ -20,6 +20,7 @@ class Order {
     this.paymentUrl,
     this.listing,
     @required this.fulfillmentStatus,
+    this.statusUrl,
   });
 
   /// ID of the order.
@@ -44,6 +45,9 @@ class Order {
   /// The fulfillment status of the order.
   OrderFulfillmentStatusEnum fulfillmentStatus;
 
+  /// A URL to see the order's status.
+  String statusUrl;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is Order &&
      other.id == id &&
@@ -53,7 +57,8 @@ class Order {
      other.paymentStatus == paymentStatus &&
      other.paymentUrl == paymentUrl &&
      other.listing == listing &&
-     other.fulfillmentStatus == fulfillmentStatus;
+     other.fulfillmentStatus == fulfillmentStatus &&
+     other.statusUrl == statusUrl;
 
   @override
   int get hashCode =>
@@ -64,10 +69,11 @@ class Order {
     (paymentStatus == null ? 0 : paymentStatus.hashCode) +
     (paymentUrl == null ? 0 : paymentUrl.hashCode) +
     (listing == null ? 0 : listing.hashCode) +
-    (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode);
+    (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode) +
+    (statusUrl == null ? 0 : statusUrl.hashCode);
 
   @override
-  String toString() => 'Order[id=$id, displayId=$displayId, totalPriceCents=$totalPriceCents, currency=$currency, paymentStatus=$paymentStatus, paymentUrl=$paymentUrl, listing=$listing, fulfillmentStatus=$fulfillmentStatus]';
+  String toString() => 'Order[id=$id, displayId=$displayId, totalPriceCents=$totalPriceCents, currency=$currency, paymentStatus=$paymentStatus, paymentUrl=$paymentUrl, listing=$listing, fulfillmentStatus=$fulfillmentStatus, statusUrl=$statusUrl]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -83,6 +89,9 @@ class Order {
       json[r'listing'] = listing;
     }
       json[r'fulfillment_status'] = fulfillmentStatus;
+    if (statusUrl != null) {
+      json[r'status_url'] = statusUrl;
+    }
     return json;
   }
 
@@ -99,6 +108,7 @@ class Order {
         paymentUrl: json[r'payment_url'],
         listing: PartialListing.fromJson(json[r'listing']),
         fulfillmentStatus: OrderFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
+        statusUrl: json[r'status_url'],
     );
 
   static List<Order> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

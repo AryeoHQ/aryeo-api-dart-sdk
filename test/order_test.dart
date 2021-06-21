@@ -61,6 +61,12 @@ void main() {
       // TODO
     });
 
+    // A URL to see the order's status.
+    // String statusUrl
+    test('to test the property `statusUrl`', () async {
+      // TODO
+    });
+
 
   });
 

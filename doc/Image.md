@@ -9,6 +9,7 @@ import 'package:aryeo/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | ID of the image. | 
+**uuid** | **String** | The UUID of the image. | [optional] 
 **thumbnailUrl** | **String** | A URL for a thumbnail-sized version of the image. | 
 **largeUrl** | **String** | A URL for a large version of the image. | 
 **originalUrl** | **String** | A URL for the original, full-resolution version of the image. Useful for downloading. | 

@@ -62,6 +62,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ListingsApi* | [**getListings**](doc//ListingsApi.md#getlistings) | **GET** /listings | Get the listings available to a group.
 *ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{id} | Get information about a listing.
+*MarketingMaterialsApi* | [**putMarketingMaterialsUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialsuuidpublish) | **PUT** /marketing-materials/{uuid}/publish | Publish a marketing material.
 *OrdersApi* | [**getOrders**](doc//OrdersApi.md#getorders) | **GET** /orders | Get orders available to a group.
 *OrdersApi* | [**postOrders**](doc//OrdersApi.md#postorders) | **POST** /orders | Create an order.
 *VendorsApi* | [**getVendors**](doc//VendorsApi.md#getvendors) | **GET** /vendors | Get vendors available to a group.
@@ -80,6 +81,7 @@ Class | Method | HTTP request | Description
  - [InteractiveContent](doc//InteractiveContent.md)
  - [Listing](doc//Listing.md)
  - [ListingResource](doc//ListingResource.md)
+ - [MarketingMaterialPublishPayload](doc//MarketingMaterialPublishPayload.md)
  - [Order](doc//Order.md)
  - [OrderCollection](doc//OrderCollection.md)
  - [OrderForm](doc//OrderForm.md)
