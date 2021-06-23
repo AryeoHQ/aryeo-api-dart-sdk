@@ -16,6 +16,15 @@ void main() {
   final instance = MarketingMaterialsApi();
 
   group('tests for MarketingMaterialsApi', () {
+    // Publish a marketing material template.
+    //
+    // Publish a marketing material template.
+    //
+    //Future putMarketingMaterialsTemplatesUuidPublish(String uuid, { MarketingMaterialTemplatePublishPayload marketingMaterialTemplatePublishPayload }) async
+    test('test putMarketingMaterialsTemplatesUuidPublish', () async {
+      // TODO
+    });
+
     // Publish a marketing material.
     //
     // Publish a marketing material.

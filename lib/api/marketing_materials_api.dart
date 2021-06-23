@@ -15,6 +15,67 @@ class MarketingMaterialsApi {
 
   final ApiClient apiClient;
 
+  /// Publish a marketing material template.
+  ///
+  /// Publish a marketing material template.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] uuid (required):
+  ///   UUID of the marketing material template record.
+  ///
+  /// * [MarketingMaterialTemplatePublishPayload] marketingMaterialTemplatePublishPayload:
+  Future<Response> putMarketingMaterialsTemplatesUuidPublishWithHttpInfo(String uuid, { MarketingMaterialTemplatePublishPayload marketingMaterialTemplatePublishPayload }) async {
+    // Verify required params are set.
+    if (uuid == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: uuid');
+    }
+
+    final path = r'/marketing-materials/templates/{uuid}/publish'
+      .replaceAll('{' + 'uuid' + '}', uuid.toString());
+
+    Object postBody = marketingMaterialTemplatePublishPayload;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['JWT'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'PUT',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Publish a marketing material template.
+  ///
+  /// Publish a marketing material template.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] uuid (required):
+  ///   UUID of the marketing material template record.
+  ///
+  /// * [MarketingMaterialTemplatePublishPayload] marketingMaterialTemplatePublishPayload:
+  Future<void> putMarketingMaterialsTemplatesUuidPublish(String uuid, { MarketingMaterialTemplatePublishPayload marketingMaterialTemplatePublishPayload }) async {
+    final response = await putMarketingMaterialsTemplatesUuidPublishWithHttpInfo(uuid,  marketingMaterialTemplatePublishPayload: marketingMaterialTemplatePublishPayload );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+  }
+
   /// Publish a marketing material.
   ///
   /// Publish a marketing material.

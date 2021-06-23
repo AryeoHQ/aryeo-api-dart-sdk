@@ -62,6 +62,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ListingsApi* | [**getListings**](doc//ListingsApi.md#getlistings) | **GET** /listings | Get the listings available to a group.
 *ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{id} | Get information about a listing.
+*MarketingMaterialsApi* | [**putMarketingMaterialsTemplatesUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialstemplatesuuidpublish) | **PUT** /marketing-materials/templates/{uuid}/publish | Publish a marketing material template.
 *MarketingMaterialsApi* | [**putMarketingMaterialsUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialsuuidpublish) | **PUT** /marketing-materials/{uuid}/publish | Publish a marketing material.
 *OrdersApi* | [**getOrders**](doc//OrdersApi.md#getorders) | **GET** /orders | Get orders available to a group.
 *OrdersApi* | [**postOrders**](doc//OrdersApi.md#postorders) | **POST** /orders | Create an order.
@@ -82,6 +83,7 @@ Class | Method | HTTP request | Description
  - [Listing](doc//Listing.md)
  - [ListingResource](doc//ListingResource.md)
  - [MarketingMaterialPublishPayload](doc//MarketingMaterialPublishPayload.md)
+ - [MarketingMaterialTemplatePublishPayload](doc//MarketingMaterialTemplatePublishPayload.md)
  - [Order](doc//Order.md)
  - [OrderCollection](doc//OrderCollection.md)
  - [OrderForm](doc//OrderForm.md)

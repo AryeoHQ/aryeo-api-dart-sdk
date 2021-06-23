@@ -42,6 +42,7 @@ part 'model/interactive_content.dart';
 part 'model/listing.dart';
 part 'model/listing_resource.dart';
 part 'model/marketing_material_publish_payload.dart';
+part 'model/marketing_material_template_publish_payload.dart';
 part 'model/order.dart';
 part 'model/order_collection.dart';
 part 'model/order_form.dart';
