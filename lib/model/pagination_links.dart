@@ -74,12 +74,12 @@ class PaginationLinks {
   static List<PaginationLinks> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PaginationLinks>[]
-      : json.map((v) => PaginationLinks.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PaginationLinks.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PaginationLinks> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PaginationLinks>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PaginationLinks.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PaginationLinks.fromJson(value));
     }
     return map;
   }
@@ -87,9 +87,9 @@ class PaginationLinks {
   // maps a json object with a list of PaginationLinks-objects as value to a dart map
   static Map<String, List<PaginationLinks>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PaginationLinks>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PaginationLinks.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PaginationLinks.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

@@ -100,12 +100,12 @@ class PartialGroup {
   static List<PartialGroup> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PartialGroup>[]
-      : json.map((v) => PartialGroup.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PartialGroup.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PartialGroup> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PartialGroup>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PartialGroup.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PartialGroup.fromJson(value));
     }
     return map;
   }
@@ -113,9 +113,9 @@ class PartialGroup {
   // maps a json object with a list of PartialGroup-objects as value to a dart map
   static Map<String, List<PartialGroup>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PartialGroup>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PartialGroup.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PartialGroup.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

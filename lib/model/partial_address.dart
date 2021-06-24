@@ -148,12 +148,12 @@ class PartialAddress {
   static List<PartialAddress> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <PartialAddress>[]
-      : json.map((v) => PartialAddress.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => PartialAddress.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, PartialAddress> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PartialAddress>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = PartialAddress.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PartialAddress.fromJson(value));
     }
     return map;
   }
@@ -161,9 +161,9 @@ class PartialAddress {
   // maps a json object with a list of PartialAddress-objects as value to a dart map
   static Map<String, List<PartialAddress>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PartialAddress>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = PartialAddress.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PartialAddress.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

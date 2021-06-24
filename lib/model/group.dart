@@ -157,12 +157,12 @@ class Group {
   static List<Group> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Group>[]
-      : json.map((v) => Group.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Group.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Group> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Group>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Group.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Group.fromJson(value));
     }
     return map;
   }
@@ -170,9 +170,9 @@ class Group {
   // maps a json object with a list of Group-objects as value to a dart map
   static Map<String, List<Group>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Group>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Group.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Group.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

@@ -118,12 +118,12 @@ class Video {
   static List<Video> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <Video>[]
-      : json.map((v) => Video.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => Video.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, Video> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Video>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = Video.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Video.fromJson(value));
     }
     return map;
   }
@@ -131,9 +131,9 @@ class Video {
   // maps a json object with a list of Video-objects as value to a dart map
   static Map<String, List<Video>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Video>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = Video.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Video.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

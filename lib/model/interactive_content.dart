@@ -80,12 +80,12 @@ class InteractiveContent {
   static List<InteractiveContent> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
       ? true == emptyIsNull ? null : <InteractiveContent>[]
-      : json.map((v) => InteractiveContent.fromJson(v)).toList(growable: true == growable);
+      : json.map((dynamic value) => InteractiveContent.fromJson(value)).toList(growable: true == growable);
 
   static Map<String, InteractiveContent> mapFromJson(Map<String, dynamic> json) {
     final map = <String, InteractiveContent>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) => map[key] = InteractiveContent.fromJson(v));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = InteractiveContent.fromJson(value));
     }
     return map;
   }
@@ -93,9 +93,9 @@ class InteractiveContent {
   // maps a json object with a list of InteractiveContent-objects as value to a dart map
   static Map<String, List<InteractiveContent>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<InteractiveContent>>{};
-    if (json != null && json.isNotEmpty) {
-      json.forEach((String key, dynamic v) {
-        map[key] = InteractiveContent.listFromJson(v, emptyIsNull: emptyIsNull, growable: growable);
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = InteractiveContent.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;
