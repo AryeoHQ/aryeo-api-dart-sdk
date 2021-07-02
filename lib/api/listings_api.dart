@@ -141,16 +141,16 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] id (required):
+  /// * [String] uuid (required):
   ///   The UUID of a listing.
-  Future<Response> getListingsIdWithHttpInfo(String id) async {
+  Future<Response> getListingsIdWithHttpInfo(String uuid) async {
     // Verify required params are set.
-    if (id == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: id');
+    if (uuid == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: uuid');
     }
 
-    final path = r'/listings/{id}'
-      .replaceAll('{' + 'id' + '}', id.toString());
+    final path = r'/listings/{uuid}'
+      .replaceAll('{' + 'uuid' + '}', uuid.toString());
 
     Object postBody;
 
@@ -181,10 +181,10 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] id (required):
+  /// * [String] uuid (required):
   ///   The UUID of a listing.
-  Future<ListingResource> getListingsId(String id) async {
-    final response = await getListingsIdWithHttpInfo(id);
+  Future<ListingResource> getListingsId(String uuid) async {
+    final response = await getListingsIdWithHttpInfo(uuid);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

@@ -10,7 +10,7 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getListings**](ListingsApi.md#getlistings) | **GET** /listings | Get the listings available to a group.
-[**getListingsId**](ListingsApi.md#getlistingsid) | **GET** /listings/{id} | Get information about a listing.
+[**getListingsId**](ListingsApi.md#getlistingsid) | **GET** /listings/{uuid} | Get information about a listing.
 
 
 # **getListings**
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getListingsId**
-> ListingResource getListingsId(id)
+> ListingResource getListingsId(uuid)
 
 Get information about a listing.
 
@@ -92,10 +92,10 @@ import 'package:aryeo/api.dart';
 //defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = ListingsApi();
-final id = 05a1c594-f469-483c-b490-51d790090593; // String | The UUID of a listing.
+final uuid = 05a1c594-f469-483c-b490-51d790090593; // String | The UUID of a listing.
 
 try { 
-    final result = api_instance.getListingsId(id);
+    final result = api_instance.getListingsId(uuid);
     print(result);
 } catch (e) {
     print('Exception when calling ListingsApi->getListingsId: $e\n');
@@ -106,7 +106,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**String**](.md)| The UUID of a listing. | 
+ **uuid** | [**String**](.md)| The UUID of a listing. | 
 
 ### Return type
 

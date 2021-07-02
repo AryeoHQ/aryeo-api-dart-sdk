@@ -29,7 +29,7 @@ void main() {
     //
     // Get information about a listing.
     //
-    //Future<ListingResource> getListingsId(String id) async
+    //Future<ListingResource> getListingsId(String uuid) async
     test('test getListingsId', () async {
       // TODO
     });
