@@ -27,6 +27,7 @@ part 'auth/http_basic_auth.dart';
 part 'auth/http_bearer_auth.dart';
 
 part 'api/listings_api.dart';
+part 'api/marketing_materials_api.dart';
 part 'api/orders_api.dart';
 part 'api/vendors_api.dart';
 
@@ -40,6 +41,8 @@ part 'model/image.dart';
 part 'model/interactive_content.dart';
 part 'model/listing.dart';
 part 'model/listing_resource.dart';
+part 'model/marketing_material_publish_payload.dart';
+part 'model/marketing_material_template_publish_payload.dart';
 part 'model/order.dart';
 part 'model/order_collection.dart';
 part 'model/order_form.dart';

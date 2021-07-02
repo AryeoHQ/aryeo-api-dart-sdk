@@ -212,6 +212,10 @@ class ApiClient {
           return Listing.fromJson(value);
         case 'ListingResource':
           return ListingResource.fromJson(value);
+        case 'MarketingMaterialPublishPayload':
+          return MarketingMaterialPublishPayload.fromJson(value);
+        case 'MarketingMaterialTemplatePublishPayload':
+          return MarketingMaterialTemplatePublishPayload.fromJson(value);
         case 'Order':
           return Order.fromJson(value);
         case 'OrderCollection':

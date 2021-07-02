@@ -37,10 +37,10 @@ void main() {
     defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').accessToken = 'API_KEY';
 
     final api_instance = ListingsApi();
-    const uuid = 'UUID';
+    const id = 'UUID';
 
     try {
-        api_instance.getListingsId(uuid)                    
+        api_instance.getListingsId(id)                    
                     .catchError((e) {
                         print("Got error: ${e.error}");
                         return 42;
@@ -61,7 +61,9 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ListingsApi* | [**getListings**](doc//ListingsApi.md#getlistings) | **GET** /listings | Get the listings available to a group.
-*ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{uuid} | Get information about a listing.
+*ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{id} | Get information about a listing.
+*MarketingMaterialsApi* | [**putMarketingMaterialsTemplatesUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialstemplatesuuidpublish) | **PUT** /marketing-materials/templates/{uuid}/publish | Publish a marketing material template.
+*MarketingMaterialsApi* | [**putMarketingMaterialsUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialsuuidpublish) | **PUT** /marketing-materials/{uuid}/publish | Publish a marketing material.
 *OrdersApi* | [**getOrders**](doc//OrdersApi.md#getorders) | **GET** /orders | Get orders available to a group.
 *OrdersApi* | [**postOrders**](doc//OrdersApi.md#postorders) | **POST** /orders | Create an order.
 *VendorsApi* | [**getVendors**](doc//VendorsApi.md#getvendors) | **GET** /vendors | Get vendors available to a group.
@@ -80,6 +82,8 @@ Class | Method | HTTP request | Description
  - [InteractiveContent](doc//InteractiveContent.md)
  - [Listing](doc//Listing.md)
  - [ListingResource](doc//ListingResource.md)
+ - [MarketingMaterialPublishPayload](doc//MarketingMaterialPublishPayload.md)
+ - [MarketingMaterialTemplatePublishPayload](doc//MarketingMaterialTemplatePublishPayload.md)
  - [Order](doc//Order.md)
  - [OrderCollection](doc//OrderCollection.md)
  - [OrderForm](doc//OrderForm.md)
