@@ -10,14 +10,14 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for MarketingMaterialPublishPayload
+// tests for ApiFail
 void main() {
-  final instance = MarketingMaterialPublishPayload();
+  final instance = ApiFail();
 
-  group('test MarketingMaterialPublishPayload', () {
-    // String representation of a polotno JSON object.
-    // String polotnoJson
-    test('to test the property `polotnoJson`', () async {
+  group('test ApiFail', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
       // TODO
     });
 

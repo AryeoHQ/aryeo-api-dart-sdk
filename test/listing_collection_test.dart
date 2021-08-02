@@ -10,12 +10,19 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for PartialListingCollection
+// tests for ListingCollection
 void main() {
-  final instance = PartialListingCollection();
+  final instance = ListingCollection();
 
-  group('test PartialListingCollection', () {
-    // List<PartialListing> data (default value: const [])
+  group('test ListingCollection', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
+    // 
+    // List<Listing> data (default value: const [])
     test('to test the property `data`', () async {
       // TODO
     });

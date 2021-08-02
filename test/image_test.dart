@@ -16,14 +16,8 @@ void main() {
 
   group('test Image', () {
     // ID of the image.
-    // int id
+    // String id
     test('to test the property `id`', () async {
-      // TODO
-    });
-
-    // The UUID of the image.
-    // String uuid
-    test('to test the property `uuid`', () async {
       // TODO
     });
 

@@ -14,32 +14,26 @@ class OrderPostPayload {
   OrderPostPayload({
     this.fulfillmentStatus,
     this.paymentStatus,
-    this.productItems = const [],
   });
 
-  /// The fulfillment status of the order.
+  /// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
   OrderPostPayloadFulfillmentStatusEnum fulfillmentStatus;
 
-  /// The payment status of the order.
+  /// The payment status of the order. Defaults to \"UNPAID\". 
   OrderPostPayloadPaymentStatusEnum paymentStatus;
-
-  /// product_items
-  List<ProductItem> productItems;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
-     other.paymentStatus == paymentStatus &&
-     other.productItems == productItems;
+     other.paymentStatus == paymentStatus;
 
   @override
   int get hashCode =>
     (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode) +
-    (paymentStatus == null ? 0 : paymentStatus.hashCode) +
-    (productItems == null ? 0 : productItems.hashCode);
+    (paymentStatus == null ? 0 : paymentStatus.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus, productItems=$productItems]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -48,9 +42,6 @@ class OrderPostPayload {
     }
     if (paymentStatus != null) {
       json[r'payment_status'] = paymentStatus;
-    }
-    if (productItems != null) {
-      json[r'product_items'] = productItems;
     }
     return json;
   }
@@ -62,7 +53,6 @@ class OrderPostPayload {
     : OrderPostPayload(
         fulfillmentStatus: OrderPostPayloadFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
         paymentStatus: OrderPostPayloadPaymentStatusEnum.fromJson(json[r'payment_status']),
-        productItems: ProductItem.listFromJson(json[r'product_items']),
     );
 
   static List<OrderPostPayload> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
@@ -90,7 +80,7 @@ class OrderPostPayload {
   }
 }
 
-/// The fulfillment status of the order.
+/// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
 class OrderPostPayloadFulfillmentStatusEnum {
   /// Instantiate a new enum with the provided [value].
   const OrderPostPayloadFulfillmentStatusEnum._(this.value);
@@ -103,13 +93,13 @@ class OrderPostPayloadFulfillmentStatusEnum {
 
   String toJson() => value;
 
-  static const fulfilled = OrderPostPayloadFulfillmentStatusEnum._(r'fulfilled');
-  static const unfulfilled = OrderPostPayloadFulfillmentStatusEnum._(r'unfulfilled');
+  static const FULFILLED = OrderPostPayloadFulfillmentStatusEnum._(r'FULFILLED');
+  static const UNFULFILLED = OrderPostPayloadFulfillmentStatusEnum._(r'UNFULFILLED');
 
   /// List of all possible values in this [enum][OrderPostPayloadFulfillmentStatusEnum].
   static const values = <OrderPostPayloadFulfillmentStatusEnum>[
-    fulfilled,
-    unfulfilled,
+    FULFILLED,
+    UNFULFILLED,
   ];
 
   static OrderPostPayloadFulfillmentStatusEnum fromJson(dynamic value) =>
@@ -142,8 +132,8 @@ class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   OrderPostPayloadFulfillmentStatusEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'fulfilled': return OrderPostPayloadFulfillmentStatusEnum.fulfilled;
-      case r'unfulfilled': return OrderPostPayloadFulfillmentStatusEnum.unfulfilled;
+      case r'FULFILLED': return OrderPostPayloadFulfillmentStatusEnum.FULFILLED;
+      case r'UNFULFILLED': return OrderPostPayloadFulfillmentStatusEnum.UNFULFILLED;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');
@@ -156,7 +146,7 @@ class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
   static OrderPostPayloadFulfillmentStatusEnumTypeTransformer _instance;
 }
 
-/// The payment status of the order.
+/// The payment status of the order. Defaults to \"UNPAID\". 
 class OrderPostPayloadPaymentStatusEnum {
   /// Instantiate a new enum with the provided [value].
   const OrderPostPayloadPaymentStatusEnum._(this.value);
@@ -169,13 +159,13 @@ class OrderPostPayloadPaymentStatusEnum {
 
   String toJson() => value;
 
-  static const paid = OrderPostPayloadPaymentStatusEnum._(r'paid');
-  static const unpaid = OrderPostPayloadPaymentStatusEnum._(r'unpaid');
+  static const PAID = OrderPostPayloadPaymentStatusEnum._(r'PAID');
+  static const UNPAID = OrderPostPayloadPaymentStatusEnum._(r'UNPAID');
 
   /// List of all possible values in this [enum][OrderPostPayloadPaymentStatusEnum].
   static const values = <OrderPostPayloadPaymentStatusEnum>[
-    paid,
-    unpaid,
+    PAID,
+    UNPAID,
   ];
 
   static OrderPostPayloadPaymentStatusEnum fromJson(dynamic value) =>
@@ -208,8 +198,8 @@ class OrderPostPayloadPaymentStatusEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   OrderPostPayloadPaymentStatusEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'paid': return OrderPostPayloadPaymentStatusEnum.paid;
-      case r'unpaid': return OrderPostPayloadPaymentStatusEnum.unpaid;
+      case r'PAID': return OrderPostPayloadPaymentStatusEnum.PAID;
+      case r'UNPAID': return OrderPostPayloadPaymentStatusEnum.UNPAID;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');

@@ -15,9 +15,21 @@ void main() {
   final instance = ApiError();
 
   group('test ApiError', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
     // The error message.
     // String message
     test('to test the property `message`', () async {
+      // TODO
+    });
+
+    // A numeric code corresponding to the error.
+    // int code
+    test('to test the property `code`', () async {
       // TODO
     });
 

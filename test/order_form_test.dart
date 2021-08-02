@@ -21,9 +21,9 @@ void main() {
       // TODO
     });
 
-    // The name of the order form.
-    // String name
-    test('to test the property `name`', () async {
+    // The title or name of the order form.
+    // String title
+    test('to test the property `title`', () async {
       // TODO
     });
 

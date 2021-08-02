@@ -15,49 +15,43 @@ void main() {
   final instance = User();
 
   group('test User', () {
-    // UUID of the user.
+    // ID of the user.
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // Avatar.
-    // String avatar
-    test('to test the property `avatar`', () async {
-      // TODO
-    });
-
-    // Email.
+    // Email address of the user.
     // String email
     test('to test the property `email`', () async {
       // TODO
     });
 
-    // First name.
+    // First name of the user.
     // String firstName
     test('to test the property `firstName`', () async {
       // TODO
     });
 
-    // Last name.
+    // Last name of the user.
     // String lastName
     test('to test the property `lastName`', () async {
       // TODO
     });
 
-    // Timezone.
-    // String timezone
-    test('to test the property `timezone`', () async {
-      // TODO
-    });
-
-    // Phone number.
+    // A phone number represented in whichever standards specified by the user, typically ###-###-#### (separated by hyphens).
     // String phone
     test('to test the property `phone`', () async {
       // TODO
     });
 
-    // Describes user's relationship (access level) to a specified group.
+    // The avatar image URL of a user.
+    // String avatarUrl
+    test('to test the property `avatarUrl`', () async {
+      // TODO
+    });
+
+    // Describes user's relationship (access level) to a specified group. Only returned if this resource is returned as a sub-resource of a group.
     // String relationship
     test('to test the property `relationship`', () async {
       // TODO

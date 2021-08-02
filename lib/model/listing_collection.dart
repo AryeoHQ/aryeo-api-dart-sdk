@@ -9,9 +9,9 @@
 
 part of openapi.api;
 
-class GroupCollection {
-  /// Returns a new [GroupCollection] instance.
-  GroupCollection({
+class ListingCollection {
+  /// Returns a new [ListingCollection] instance.
+  ListingCollection({
     @required this.status,
     this.data,
     this.meta,
@@ -22,14 +22,14 @@ class GroupCollection {
   String status;
 
   /// 
-  List<Group> data;
+  List<Listing> data;
 
   PaginationMeta meta;
 
   PaginationLinks links;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is GroupCollection &&
+  bool operator ==(Object other) => identical(this, other) || other is ListingCollection &&
      other.status == status &&
      other.data == data &&
      other.meta == meta &&
@@ -43,7 +43,7 @@ class GroupCollection {
     (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'GroupCollection[status=$status, data=$data, meta=$meta, links=$links]';
+  String toString() => 'ListingCollection[status=$status, data=$data, meta=$meta, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -60,36 +60,36 @@ class GroupCollection {
     return json;
   }
 
-  /// Returns a new [GroupCollection] instance and imports its values from
+  /// Returns a new [ListingCollection] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
-  static GroupCollection fromJson(Map<String, dynamic> json) => json == null
+  static ListingCollection fromJson(Map<String, dynamic> json) => json == null
     ? null
-    : GroupCollection(
+    : ListingCollection(
         status: json[r'status'],
-        data: Group.listFromJson(json[r'data']),
+        data: Listing.listFromJson(json[r'data']),
         meta: PaginationMeta.fromJson(json[r'meta']),
         links: PaginationLinks.fromJson(json[r'links']),
     );
 
-  static List<GroupCollection> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+  static List<ListingCollection> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
     json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <GroupCollection>[]
-      : json.map((dynamic value) => GroupCollection.fromJson(value)).toList(growable: true == growable);
+      ? true == emptyIsNull ? null : <ListingCollection>[]
+      : json.map((dynamic value) => ListingCollection.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, GroupCollection> mapFromJson(Map<String, dynamic> json) {
-    final map = <String, GroupCollection>{};
+  static Map<String, ListingCollection> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, ListingCollection>{};
     if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = GroupCollection.fromJson(value));
+      json.forEach((key, value) => map[key] = ListingCollection.fromJson(value));
     }
     return map;
   }
 
-  // maps a json object with a list of GroupCollection-objects as value to a dart map
-  static Map<String, List<GroupCollection>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
-    final map = <String, List<GroupCollection>>{};
+  // maps a json object with a list of ListingCollection-objects as value to a dart map
+  static Map<String, List<ListingCollection>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+    final map = <String, List<ListingCollection>>{};
     if (json?.isNotEmpty == true) {
       json.forEach((key, value) {
-        map[key] = GroupCollection.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+        map[key] = ListingCollection.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
       });
     }
     return map;

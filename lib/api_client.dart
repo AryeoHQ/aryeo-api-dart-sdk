@@ -12,7 +12,7 @@ part of openapi.api;
 class ApiClient {
   ApiClient({this.basePath = 'https://api.aryeo.com/v1'}) {
     // Setup authentications (key: authentication name, value: authentication).
-    _authentications[r'JWT'] = HttpBearerAuth();
+    _authentications[r'Token'] = HttpBearerAuth();
   }
 
   final String basePath;
@@ -192,30 +192,36 @@ class ApiClient {
           break;
         case 'double':
           return value is double ? value : double.parse('$value');
+        case 'Address':
+          return Address.fromJson(value);
         case 'ApiError':
           return ApiError.fromJson(value);
-        case 'Currency':
-          return Currency.fromJson(value);
+        case 'ApiFail':
+          return ApiFail.fromJson(value);
         case 'FloorPlan':
           return FloorPlan.fromJson(value);
         case 'Group':
           return Group.fromJson(value);
-        case 'GroupAgentProperties':
-          return GroupAgentProperties.fromJson(value);
         case 'GroupCollection':
           return GroupCollection.fromJson(value);
+        case 'GroupResource':
+          return GroupResource.fromJson(value);
         case 'Image':
           return Image.fromJson(value);
         case 'InteractiveContent':
           return InteractiveContent.fromJson(value);
         case 'Listing':
           return Listing.fromJson(value);
+        case 'ListingBuilding':
+          return ListingBuilding.fromJson(value);
+        case 'ListingCollection':
+          return ListingCollection.fromJson(value);
+        case 'ListingLot':
+          return ListingLot.fromJson(value);
+        case 'ListingPrice':
+          return ListingPrice.fromJson(value);
         case 'ListingResource':
           return ListingResource.fromJson(value);
-        case 'MarketingMaterialPublishPayload':
-          return MarketingMaterialPublishPayload.fromJson(value);
-        case 'MarketingMaterialTemplatePublishPayload':
-          return MarketingMaterialTemplatePublishPayload.fromJson(value);
         case 'Order':
           return Order.fromJson(value);
         case 'OrderCollection':
@@ -230,20 +236,8 @@ class ApiClient {
           return PaginationLinks.fromJson(value);
         case 'PaginationMeta':
           return PaginationMeta.fromJson(value);
-        case 'PartialAddress':
-          return PartialAddress.fromJson(value);
-        case 'PartialGroup':
-          return PartialGroup.fromJson(value);
-        case 'PartialListing':
-          return PartialListing.fromJson(value);
-        case 'PartialListingCollection':
-          return PartialListingCollection.fromJson(value);
-        case 'ProductItem':
-          return ProductItem.fromJson(value);
-        case 'PropertyDetails':
-          return PropertyDetails.fromJson(value);
-        case 'PropertyWebsites':
-          return PropertyWebsites.fromJson(value);
+        case 'PropertyWebsite':
+          return PropertyWebsite.fromJson(value);
         case 'SocialProfiles':
           return SocialProfiles.fromJson(value);
         case 'User':

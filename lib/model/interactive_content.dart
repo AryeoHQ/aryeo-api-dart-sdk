@@ -115,15 +115,15 @@ class InteractiveContentDisplayTypeEnum {
 
   String toJson() => value;
 
-  static const branded = InteractiveContentDisplayTypeEnum._(r'branded');
-  static const unbranded = InteractiveContentDisplayTypeEnum._(r'unbranded');
-  static const both = InteractiveContentDisplayTypeEnum._(r'both');
+  static const BRANDED = InteractiveContentDisplayTypeEnum._(r'BRANDED');
+  static const UNBRANDED = InteractiveContentDisplayTypeEnum._(r'UNBRANDED');
+  static const BOTH = InteractiveContentDisplayTypeEnum._(r'BOTH');
 
   /// List of all possible values in this [enum][InteractiveContentDisplayTypeEnum].
   static const values = <InteractiveContentDisplayTypeEnum>[
-    branded,
-    unbranded,
-    both,
+    BRANDED,
+    UNBRANDED,
+    BOTH,
   ];
 
   static InteractiveContentDisplayTypeEnum fromJson(dynamic value) =>
@@ -156,9 +156,9 @@ class InteractiveContentDisplayTypeEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   InteractiveContentDisplayTypeEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'branded': return InteractiveContentDisplayTypeEnum.branded;
-      case r'unbranded': return InteractiveContentDisplayTypeEnum.unbranded;
-      case r'both': return InteractiveContentDisplayTypeEnum.both;
+      case r'BRANDED': return InteractiveContentDisplayTypeEnum.BRANDED;
+      case r'UNBRANDED': return InteractiveContentDisplayTypeEnum.UNBRANDED;
+      case r'BOTH': return InteractiveContentDisplayTypeEnum.BOTH;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');
@@ -184,13 +184,13 @@ class InteractiveContentContentTypeEnum {
 
   String toJson() => value;
 
-  static const matterport = InteractiveContentContentTypeEnum._(r'matterport');
-  static const other = InteractiveContentContentTypeEnum._(r'other');
+  static const MATTERPORT = InteractiveContentContentTypeEnum._(r'MATTERPORT');
+  static const OTHER = InteractiveContentContentTypeEnum._(r'OTHER');
 
   /// List of all possible values in this [enum][InteractiveContentContentTypeEnum].
   static const values = <InteractiveContentContentTypeEnum>[
-    matterport,
-    other,
+    MATTERPORT,
+    OTHER,
   ];
 
   static InteractiveContentContentTypeEnum fromJson(dynamic value) =>
@@ -223,8 +223,8 @@ class InteractiveContentContentTypeEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   InteractiveContentContentTypeEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'matterport': return InteractiveContentContentTypeEnum.matterport;
-      case r'other': return InteractiveContentContentTypeEnum.other;
+      case r'MATTERPORT': return InteractiveContentContentTypeEnum.MATTERPORT;
+      case r'OTHER': return InteractiveContentContentTypeEnum.OTHER;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');

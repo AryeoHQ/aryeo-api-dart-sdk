@@ -14,20 +14,23 @@ class Video {
   Video({
     @required this.id,
     this.title,
+    this.duration,
     @required this.displayType,
     @required this.sourceType,
     @required this.thumbnailUrl,
     @required this.playbackUrl,
     this.downloadUrl,
-    this.seconds,
     this.shareUrl,
   });
 
   /// ID of the video.
-  int id;
+  String id;
 
   /// The title of the video given by the uploading user.
   String title;
+
+  /// The video's runtime in seconds.
+  int duration;
 
   /// The display type determines if the video is branded or unbranded (can also be none or both). This affects whether the video is displayed on branded or unbranded marketing materials such as the property website.
   VideoDisplayTypeEnum displayType;
@@ -35,47 +38,44 @@ class Video {
   /// The original upload source of the video, used to determine how to handle the playback_url of the video and other display properties. 
   VideoSourceTypeEnum sourceType;
 
-  /// Thumbnail URL for the video.
+  /// A thumbnail image URL for the video.
   String thumbnailUrl;
 
-  /// A URL linking to the video.
+  /// A URL linking to playback stream of the video.
   String playbackUrl;
 
   /// A URL for downloading the video.
   String downloadUrl;
 
-  /// The video's runtime in seconds.
-  int seconds;
-
-  /// Aryeo iFrame player URL
+  /// A URL linking to a public viewing optimized webpage the video.
   String shareUrl;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Video &&
      other.id == id &&
      other.title == title &&
+     other.duration == duration &&
      other.displayType == displayType &&
      other.sourceType == sourceType &&
      other.thumbnailUrl == thumbnailUrl &&
      other.playbackUrl == playbackUrl &&
      other.downloadUrl == downloadUrl &&
-     other.seconds == seconds &&
      other.shareUrl == shareUrl;
 
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
     (title == null ? 0 : title.hashCode) +
+    (duration == null ? 0 : duration.hashCode) +
     (displayType == null ? 0 : displayType.hashCode) +
     (sourceType == null ? 0 : sourceType.hashCode) +
     (thumbnailUrl == null ? 0 : thumbnailUrl.hashCode) +
     (playbackUrl == null ? 0 : playbackUrl.hashCode) +
     (downloadUrl == null ? 0 : downloadUrl.hashCode) +
-    (seconds == null ? 0 : seconds.hashCode) +
     (shareUrl == null ? 0 : shareUrl.hashCode);
 
   @override
-  String toString() => 'Video[id=$id, title=$title, displayType=$displayType, sourceType=$sourceType, thumbnailUrl=$thumbnailUrl, playbackUrl=$playbackUrl, downloadUrl=$downloadUrl, seconds=$seconds, shareUrl=$shareUrl]';
+  String toString() => 'Video[id=$id, title=$title, duration=$duration, displayType=$displayType, sourceType=$sourceType, thumbnailUrl=$thumbnailUrl, playbackUrl=$playbackUrl, downloadUrl=$downloadUrl, shareUrl=$shareUrl]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -83,15 +83,15 @@ class Video {
     if (title != null) {
       json[r'title'] = title;
     }
+    if (duration != null) {
+      json[r'duration'] = duration;
+    }
       json[r'display_type'] = displayType;
       json[r'source_type'] = sourceType;
       json[r'thumbnail_url'] = thumbnailUrl;
       json[r'playback_url'] = playbackUrl;
     if (downloadUrl != null) {
       json[r'download_url'] = downloadUrl;
-    }
-    if (seconds != null) {
-      json[r'seconds'] = seconds;
     }
     if (shareUrl != null) {
       json[r'share_url'] = shareUrl;
@@ -106,12 +106,12 @@ class Video {
     : Video(
         id: json[r'id'],
         title: json[r'title'],
+        duration: json[r'duration'],
         displayType: VideoDisplayTypeEnum.fromJson(json[r'display_type']),
         sourceType: VideoSourceTypeEnum.fromJson(json[r'source_type']),
         thumbnailUrl: json[r'thumbnail_url'],
         playbackUrl: json[r'playback_url'],
         downloadUrl: json[r'download_url'],
-        seconds: json[r'seconds'],
         shareUrl: json[r'share_url'],
     );
 
@@ -153,17 +153,17 @@ class VideoDisplayTypeEnum {
 
   String toJson() => value;
 
-  static const branded = VideoDisplayTypeEnum._(r'branded');
-  static const unbranded = VideoDisplayTypeEnum._(r'unbranded');
-  static const both = VideoDisplayTypeEnum._(r'both');
-  static const none = VideoDisplayTypeEnum._(r'none');
+  static const BRANDED = VideoDisplayTypeEnum._(r'BRANDED');
+  static const UNBRANDED = VideoDisplayTypeEnum._(r'UNBRANDED');
+  static const BOTH = VideoDisplayTypeEnum._(r'BOTH');
+  static const NONE = VideoDisplayTypeEnum._(r'NONE');
 
   /// List of all possible values in this [enum][VideoDisplayTypeEnum].
   static const values = <VideoDisplayTypeEnum>[
-    branded,
-    unbranded,
-    both,
-    none,
+    BRANDED,
+    UNBRANDED,
+    BOTH,
+    NONE,
   ];
 
   static VideoDisplayTypeEnum fromJson(dynamic value) =>
@@ -196,10 +196,10 @@ class VideoDisplayTypeEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   VideoDisplayTypeEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'branded': return VideoDisplayTypeEnum.branded;
-      case r'unbranded': return VideoDisplayTypeEnum.unbranded;
-      case r'both': return VideoDisplayTypeEnum.both;
-      case r'none': return VideoDisplayTypeEnum.none;
+      case r'BRANDED': return VideoDisplayTypeEnum.BRANDED;
+      case r'UNBRANDED': return VideoDisplayTypeEnum.UNBRANDED;
+      case r'BOTH': return VideoDisplayTypeEnum.BOTH;
+      case r'NONE': return VideoDisplayTypeEnum.NONE;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');
@@ -225,19 +225,19 @@ class VideoSourceTypeEnum {
 
   String toJson() => value;
 
-  static const youtube = VideoSourceTypeEnum._(r'youtube');
-  static const vimeo = VideoSourceTypeEnum._(r'vimeo');
-  static const optimized = VideoSourceTypeEnum._(r'optimized');
-  static const uploaded = VideoSourceTypeEnum._(r'uploaded');
-  static const link = VideoSourceTypeEnum._(r'link');
+  static const YOUTUBE = VideoSourceTypeEnum._(r'YOUTUBE');
+  static const VIMEO = VideoSourceTypeEnum._(r'VIMEO');
+  static const OPTIMIZED = VideoSourceTypeEnum._(r'OPTIMIZED');
+  static const UPLOADED = VideoSourceTypeEnum._(r'UPLOADED');
+  static const LINK = VideoSourceTypeEnum._(r'LINK');
 
   /// List of all possible values in this [enum][VideoSourceTypeEnum].
   static const values = <VideoSourceTypeEnum>[
-    youtube,
-    vimeo,
-    optimized,
-    uploaded,
-    link,
+    YOUTUBE,
+    VIMEO,
+    OPTIMIZED,
+    UPLOADED,
+    LINK,
   ];
 
   static VideoSourceTypeEnum fromJson(dynamic value) =>
@@ -270,11 +270,11 @@ class VideoSourceTypeEnumTypeTransformer {
   /// and users are still using an old app with the old code.
   VideoSourceTypeEnum decode(dynamic data, {bool allowNull}) {
     switch (data) {
-      case r'youtube': return VideoSourceTypeEnum.youtube;
-      case r'vimeo': return VideoSourceTypeEnum.vimeo;
-      case r'optimized': return VideoSourceTypeEnum.optimized;
-      case r'uploaded': return VideoSourceTypeEnum.uploaded;
-      case r'link': return VideoSourceTypeEnum.link;
+      case r'YOUTUBE': return VideoSourceTypeEnum.YOUTUBE;
+      case r'VIMEO': return VideoSourceTypeEnum.VIMEO;
+      case r'OPTIMIZED': return VideoSourceTypeEnum.OPTIMIZED;
+      case r'UPLOADED': return VideoSourceTypeEnum.UPLOADED;
+      case r'LINK': return VideoSourceTypeEnum.LINK;
       default:
         if (allowNull == false) {
           throw ArgumentError('Unknown enum value to decode: $data');

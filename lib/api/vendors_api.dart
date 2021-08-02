@@ -20,7 +20,14 @@ class VendorsApi {
   /// Get vendors available to a group.
   ///
   /// Note: This method returns the HTTP [Response].
-  Future<Response> getVendorsWithHttpInfo() async {
+  ///
+  /// Parameters:
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<Response> getVendorsWithHttpInfo({ String include }) async {
+    // Verify required params are set.
+
     final path = r'/vendors';
 
     Object postBody;
@@ -29,9 +36,13 @@ class VendorsApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
+    }
+
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -49,8 +60,13 @@ class VendorsApi {
   /// Get vendors available to a group.
   ///
   /// Get vendors available to a group.
-  Future<GroupCollection> getVendors() async {
-    final response = await getVendorsWithHttpInfo();
+  ///
+  /// Parameters:
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<GroupCollection> getVendors({ String include }) async {
+    final response = await getVendorsWithHttpInfo( include: include );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -63,26 +79,27 @@ class VendorsApi {
     return Future<GroupCollection>.value(null);
   }
 
-  /// Get vendors that can be added to the group's vendor list.
+  /// Get vendors available to a group.
   ///
-  /// Get vendors that can be added to the group's vendor list, excluding those already available to a group. 
+  /// Get information about a vendor.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
-  /// * [String] query:
-  ///   A search query.
+  /// * [String] vendorId (required):
+  ///   ID of the group that is associated as a vendor.
   ///
-  /// * [String] perPage:
-  ///   The number of items per page. Defaults to 25.
-  ///
-  /// * [String] page:
-  ///   The requested page. Defaults to 1.
-  Future<Response> getVendorsSearchWithHttpInfo({ String query, String perPage, String page }) async {
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<Response> getVendorsIdWithHttpInfo(String vendorId, { String include }) async {
     // Verify required params are set.
+    if (vendorId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: vendorId');
+    }
 
-    final path = r'/vendors/search';
+    final path = r'/vendors/{vendor_id}'
+      .replaceAll('{' + 'vendor_id' + '}', vendorId.toString());
 
     Object postBody;
 
@@ -90,19 +107,13 @@ class VendorsApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    if (query != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'query', query));
-    }
-    if (perPage != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
-    }
-    if (page != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
     }
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -117,22 +128,19 @@ class VendorsApi {
     );
   }
 
-  /// Get vendors that can be added to the group's vendor list.
+  /// Get vendors available to a group.
   ///
-  /// Get vendors that can be added to the group's vendor list, excluding those already available to a group. 
+  /// Get information about a vendor.
   ///
   /// Parameters:
   ///
-  /// * [String] query:
-  ///   A search query.
+  /// * [String] vendorId (required):
+  ///   ID of the group that is associated as a vendor.
   ///
-  /// * [String] perPage:
-  ///   The number of items per page. Defaults to 25.
-  ///
-  /// * [String] page:
-  ///   The requested page. Defaults to 1.
-  Future<GroupCollection> getVendorsSearch({ String query, String perPage, String page }) async {
-    final response = await getVendorsSearchWithHttpInfo( query: query, perPage: perPage, page: page );
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<GroupResource> getVendorsId(String vendorId, { String include }) async {
+    final response = await getVendorsIdWithHttpInfo(vendorId,  include: include );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -140,8 +148,8 @@ class VendorsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'GroupCollection',) as GroupCollection;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'GroupResource',) as GroupResource;
         }
-    return Future<GroupCollection>.value(null);
+    return Future<GroupResource>.value(null);
   }
 }

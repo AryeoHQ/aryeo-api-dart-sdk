@@ -1,4 +1,4 @@
-# aryeo.model.Currency
+# aryeo.model.ListingPrice
 
 ## Load the model package
 ```dart
@@ -8,10 +8,7 @@ import 'package:aryeo/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | The ID of the currency. | 
-**name** | **String** | The name of the currency. | 
-**symbol** | **String** | The currency symbol. | 
-**enabled** | **bool** | Is this currency enabled for Aryeo? | 
+**listPrice** | **int** | The current price of the listing. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

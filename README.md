@@ -37,10 +37,10 @@ void main() {
     defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').accessToken = 'API_KEY';
 
     final api_instance = ListingsApi();
-    const id = 'UUID';
+    const uuid = 'UUID';
 
     try {
-        api_instance.getListingsId(id)                    
+        api_instance.getListingsId(uuid)                    
                     .catchError((e) {
                         print("Got error: ${e.error}");
                         return 42;
@@ -61,29 +61,30 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ListingsApi* | [**getListings**](doc//ListingsApi.md#getlistings) | **GET** /listings | Get the listings available to a group.
-*ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{id} | Get information about a listing.
-*MarketingMaterialsApi* | [**putMarketingMaterialsTemplatesUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialstemplatesuuidpublish) | **PUT** /marketing-materials/templates/{uuid}/publish | Publish a marketing material template.
-*MarketingMaterialsApi* | [**putMarketingMaterialsUuidPublish**](doc//MarketingMaterialsApi.md#putmarketingmaterialsuuidpublish) | **PUT** /marketing-materials/{uuid}/publish | Publish a marketing material.
+*ListingsApi* | [**getListingsId**](doc//ListingsApi.md#getlistingsid) | **GET** /listings/{listing_id} | Get information about a listing.
 *OrdersApi* | [**getOrders**](doc//OrdersApi.md#getorders) | **GET** /orders | Get orders available to a group.
 *OrdersApi* | [**postOrders**](doc//OrdersApi.md#postorders) | **POST** /orders | Create an order.
 *VendorsApi* | [**getVendors**](doc//VendorsApi.md#getvendors) | **GET** /vendors | Get vendors available to a group.
-*VendorsApi* | [**getVendorsSearch**](doc//VendorsApi.md#getvendorssearch) | **GET** /vendors/search | Get vendors that can be added to the group's vendor list.
+*VendorsApi* | [**getVendorsId**](doc//VendorsApi.md#getvendorsid) | **GET** /vendors/{vendor_id} | Get vendors available to a group.
 
 
 ## Documentation For Models
 
+ - [Address](doc//Address.md)
  - [ApiError](doc//ApiError.md)
- - [Currency](doc//Currency.md)
+ - [ApiFail](doc//ApiFail.md)
  - [FloorPlan](doc//FloorPlan.md)
  - [Group](doc//Group.md)
- - [GroupAgentProperties](doc//GroupAgentProperties.md)
  - [GroupCollection](doc//GroupCollection.md)
+ - [GroupResource](doc//GroupResource.md)
  - [Image](doc//Image.md)
  - [InteractiveContent](doc//InteractiveContent.md)
  - [Listing](doc//Listing.md)
+ - [ListingBuilding](doc//ListingBuilding.md)
+ - [ListingCollection](doc//ListingCollection.md)
+ - [ListingLot](doc//ListingLot.md)
+ - [ListingPrice](doc//ListingPrice.md)
  - [ListingResource](doc//ListingResource.md)
- - [MarketingMaterialPublishPayload](doc//MarketingMaterialPublishPayload.md)
- - [MarketingMaterialTemplatePublishPayload](doc//MarketingMaterialTemplatePublishPayload.md)
  - [Order](doc//Order.md)
  - [OrderCollection](doc//OrderCollection.md)
  - [OrderForm](doc//OrderForm.md)
@@ -91,13 +92,7 @@ Class | Method | HTTP request | Description
  - [OrderResource](doc//OrderResource.md)
  - [PaginationLinks](doc//PaginationLinks.md)
  - [PaginationMeta](doc//PaginationMeta.md)
- - [PartialAddress](doc//PartialAddress.md)
- - [PartialGroup](doc//PartialGroup.md)
- - [PartialListing](doc//PartialListing.md)
- - [PartialListingCollection](doc//PartialListingCollection.md)
- - [ProductItem](doc//ProductItem.md)
- - [PropertyDetails](doc//PropertyDetails.md)
- - [PropertyWebsites](doc//PropertyWebsites.md)
+ - [PropertyWebsite](doc//PropertyWebsite.md)
  - [SocialProfiles](doc//SocialProfiles.md)
  - [User](doc//User.md)
  - [Video](doc//Video.md)
@@ -106,7 +101,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-## JWT
+## Token
 
 - **Type**: HTTP Bearer authentication
 

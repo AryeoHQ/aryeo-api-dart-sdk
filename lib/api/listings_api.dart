@@ -23,27 +23,57 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] query:
-  ///   A search query.
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  ///
+  /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
+  ///   Return listings that have fields matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketAddressRightSquareBracket:
+  ///   Return listings that have an address matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketListAgentRightSquareBracket:
+  ///   Return listings that have a listing agent or co-listing agent matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketStatusRightSquareBracket:
+  ///   Return listings that have a certain status.
+  ///
+  /// * [bool] filterLeftSquareBracketActiveRightSquareBracket:
+  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). 
+  ///
+  /// * [num] filterLeftSquareBracketPriceGteRightSquareBracket:
+  ///   Return listings where the price field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketPriceLteRightSquareBracket:
+  ///   Return listings where the price field is less than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketSquareFeetGteRightSquareBracket:
+  ///   Return listings where the square feet field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketSquareFeetLteRightSquareBracket:
+  ///   Return listings where the square feet field is less than or equal to this value.
+  ///
+  /// * [int] filterLeftSquareBracketBedroomsGteRightSquareBracket:
+  ///   Return listings where the bedrooms field is greater than or equal to this value.
+  ///
+  /// * [int] filterLeftSquareBracketBedroomsLteRightSquareBracket:
+  ///   Return listings where the bedrooms field is less than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketBathroomsGteRightSquareBracket:
+  ///   Return listings where the bathrooms field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketBathroomsLteRightSquareBracket:
+  ///   Return listings where the bathrooms field is less than or equal to this value.
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`.
   ///
   /// * [String] perPage:
   ///   The number of items per page. Defaults to 25.
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  ///
-  /// * [String] status:
-  ///   The status you want to scope down to, example sold,  coming_soon,  for_sale, sold
-  ///
-  /// * [int] price:
-  ///   The price value and greater will be returned.
-  ///
-  /// * [num] bathrooms:
-  ///   Number of bathrooms minimum.
-  ///
-  /// * [int] bedrooms:
-  ///   Number of bedrooms minimum.
-  Future<Response> getListingsWithHttpInfo({ String query, String perPage, String page, String status, int price, num bathrooms, int bedrooms }) async {
+  Future<Response> getListingsWithHttpInfo({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async {
     // Verify required params are set.
 
     final path = r'/listings';
@@ -54,8 +84,50 @@ class ListingsApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    if (query != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'query', query));
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
+    }
+    if (filterLeftSquareBracketSearchRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[search]', filterLeftSquareBracketSearchRightSquareBracket));
+    }
+    if (filterLeftSquareBracketAddressRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[address]', filterLeftSquareBracketAddressRightSquareBracket));
+    }
+    if (filterLeftSquareBracketListAgentRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[list_agent]', filterLeftSquareBracketListAgentRightSquareBracket));
+    }
+    if (filterLeftSquareBracketStatusRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[status]', filterLeftSquareBracketStatusRightSquareBracket));
+    }
+    if (filterLeftSquareBracketActiveRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[active]', filterLeftSquareBracketActiveRightSquareBracket));
+    }
+    if (filterLeftSquareBracketPriceGteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[price_gte]', filterLeftSquareBracketPriceGteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketPriceLteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[price_lte]', filterLeftSquareBracketPriceLteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketSquareFeetGteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[square_feet_gte]', filterLeftSquareBracketSquareFeetGteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketSquareFeetLteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[square_feet_lte]', filterLeftSquareBracketSquareFeetLteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketBedroomsGteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[bedrooms_gte]', filterLeftSquareBracketBedroomsGteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketBedroomsLteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[bedrooms_lte]', filterLeftSquareBracketBedroomsLteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketBathroomsGteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[bathrooms_gte]', filterLeftSquareBracketBathroomsGteRightSquareBracket));
+    }
+    if (filterLeftSquareBracketBathroomsLteRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[bathrooms_lte]', filterLeftSquareBracketBathroomsLteRightSquareBracket));
+    }
+    if (sort != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'sort', sort));
     }
     if (perPage != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
@@ -63,22 +135,10 @@ class ListingsApi {
     if (page != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
     }
-    if (status != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'status', status));
-    }
-    if (price != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'price', price));
-    }
-    if (bathrooms != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bathrooms', bathrooms));
-    }
-    if (bedrooms != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'bedrooms', bedrooms));
-    }
 
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -99,28 +159,58 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] query:
-  ///   A search query.
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  ///
+  /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
+  ///   Return listings that have fields matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketAddressRightSquareBracket:
+  ///   Return listings that have an address matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketListAgentRightSquareBracket:
+  ///   Return listings that have a listing agent or co-listing agent matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketStatusRightSquareBracket:
+  ///   Return listings that have a certain status.
+  ///
+  /// * [bool] filterLeftSquareBracketActiveRightSquareBracket:
+  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). 
+  ///
+  /// * [num] filterLeftSquareBracketPriceGteRightSquareBracket:
+  ///   Return listings where the price field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketPriceLteRightSquareBracket:
+  ///   Return listings where the price field is less than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketSquareFeetGteRightSquareBracket:
+  ///   Return listings where the square feet field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketSquareFeetLteRightSquareBracket:
+  ///   Return listings where the square feet field is less than or equal to this value.
+  ///
+  /// * [int] filterLeftSquareBracketBedroomsGteRightSquareBracket:
+  ///   Return listings where the bedrooms field is greater than or equal to this value.
+  ///
+  /// * [int] filterLeftSquareBracketBedroomsLteRightSquareBracket:
+  ///   Return listings where the bedrooms field is less than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketBathroomsGteRightSquareBracket:
+  ///   Return listings where the bathrooms field is greater than or equal to this value.
+  ///
+  /// * [num] filterLeftSquareBracketBathroomsLteRightSquareBracket:
+  ///   Return listings where the bathrooms field is less than or equal to this value.
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`.
   ///
   /// * [String] perPage:
   ///   The number of items per page. Defaults to 25.
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  ///
-  /// * [String] status:
-  ///   The status you want to scope down to, example sold,  coming_soon,  for_sale, sold
-  ///
-  /// * [int] price:
-  ///   The price value and greater will be returned.
-  ///
-  /// * [num] bathrooms:
-  ///   Number of bathrooms minimum.
-  ///
-  /// * [int] bedrooms:
-  ///   Number of bedrooms minimum.
-  Future<PartialListingCollection> getListings({ String query, String perPage, String page, String status, int price, num bathrooms, int bedrooms }) async {
-    final response = await getListingsWithHttpInfo( query: query, perPage: perPage, page: page, status: status, price: price, bathrooms: bathrooms, bedrooms: bedrooms );
+  Future<ListingCollection> getListings({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async {
+    final response = await getListingsWithHttpInfo( include: include, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketAddressRightSquareBracket: filterLeftSquareBracketAddressRightSquareBracket, filterLeftSquareBracketListAgentRightSquareBracket: filterLeftSquareBracketListAgentRightSquareBracket, filterLeftSquareBracketStatusRightSquareBracket: filterLeftSquareBracketStatusRightSquareBracket, filterLeftSquareBracketActiveRightSquareBracket: filterLeftSquareBracketActiveRightSquareBracket, filterLeftSquareBracketPriceGteRightSquareBracket: filterLeftSquareBracketPriceGteRightSquareBracket, filterLeftSquareBracketPriceLteRightSquareBracket: filterLeftSquareBracketPriceLteRightSquareBracket, filterLeftSquareBracketSquareFeetGteRightSquareBracket: filterLeftSquareBracketSquareFeetGteRightSquareBracket, filterLeftSquareBracketSquareFeetLteRightSquareBracket: filterLeftSquareBracketSquareFeetLteRightSquareBracket, filterLeftSquareBracketBedroomsGteRightSquareBracket: filterLeftSquareBracketBedroomsGteRightSquareBracket, filterLeftSquareBracketBedroomsLteRightSquareBracket: filterLeftSquareBracketBedroomsLteRightSquareBracket, filterLeftSquareBracketBathroomsGteRightSquareBracket: filterLeftSquareBracketBathroomsGteRightSquareBracket, filterLeftSquareBracketBathroomsLteRightSquareBracket: filterLeftSquareBracketBathroomsLteRightSquareBracket, sort: sort, perPage: perPage, page: page );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -128,9 +218,9 @@ class ListingsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'PartialListingCollection',) as PartialListingCollection;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ListingCollection',) as ListingCollection;
         }
-    return Future<PartialListingCollection>.value(null);
+    return Future<ListingCollection>.value(null);
   }
 
   /// Get information about a listing.
@@ -141,16 +231,19 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] id (required):
-  ///   The UUID of a listing.
-  Future<Response> getListingsIdWithHttpInfo(String id) async {
+  /// * [String] listingId (required):
+  ///   The ID of a listing.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<Response> getListingsIdWithHttpInfo(String listingId, { String include }) async {
     // Verify required params are set.
-    if (id == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: id');
+    if (listingId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: listingId');
     }
 
-    final path = r'/listings/{id}'
-      .replaceAll('{' + 'id' + '}', id.toString());
+    final path = r'/listings/{listing_id}'
+      .replaceAll('{' + 'listing_id' + '}', listingId.toString());
 
     Object postBody;
 
@@ -158,9 +251,13 @@ class ListingsApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
+    }
+
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -181,10 +278,13 @@ class ListingsApi {
   ///
   /// Parameters:
   ///
-  /// * [String] id (required):
-  ///   The UUID of a listing.
-  Future<ListingResource> getListingsId(String id) async {
-    final response = await getListingsIdWithHttpInfo(id);
+  /// * [String] listingId (required):
+  ///   The ID of a listing.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<ListingResource> getListingsId(String listingId, { String include }) async {
+    final response = await getListingsIdWithHttpInfo(listingId,  include: include );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

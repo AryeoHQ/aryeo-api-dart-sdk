@@ -16,14 +16,14 @@ void main() {
 
   group('test FloorPlan', () {
     // ID of the floor plan.
-    // int id
+    // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // A URL for a thumbnail-sized version of the floor plan.
-    // String thumbnailUrl
-    test('to test the property `thumbnailUrl`', () async {
+    // A URL for the original, full-resolution version of the floor plan. Useful for downloading.
+    // String originalUrl
+    test('to test the property `originalUrl`', () async {
       // TODO
     });
 
@@ -33,9 +33,9 @@ void main() {
       // TODO
     });
 
-    // A URL for the original, full-resolution version of the floor plan. Useful for downloading.
-    // String originalUrl
-    test('to test the property `originalUrl`', () async {
+    // A URL for a thumbnail-sized version of the floor plan.
+    // String thumbnailUrl
+    test('to test the property `thumbnailUrl`', () async {
       // TODO
     });
 

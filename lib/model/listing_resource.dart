@@ -12,24 +12,31 @@ part of openapi.api;
 class ListingResource {
   /// Returns a new [ListingResource] instance.
   ListingResource({
+    @required this.status,
     this.data,
   });
+
+  /// What was the state of the request?
+  String status;
 
   Listing data;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ListingResource &&
+     other.status == status &&
      other.data == data;
 
   @override
   int get hashCode =>
+    (status == null ? 0 : status.hashCode) +
     (data == null ? 0 : data.hashCode);
 
   @override
-  String toString() => 'ListingResource[data=$data]';
+  String toString() => 'ListingResource[status=$status, data=$data]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'status'] = status;
     if (data != null) {
       json[r'data'] = data;
     }
@@ -41,6 +48,7 @@ class ListingResource {
   static ListingResource fromJson(Map<String, dynamic> json) => json == null
     ? null
     : ListingResource(
+        status: json[r'status'],
         data: Listing.fromJson(json[r'data']),
     );
 

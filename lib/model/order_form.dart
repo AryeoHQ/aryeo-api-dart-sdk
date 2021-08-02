@@ -13,15 +13,15 @@ class OrderForm {
   /// Returns a new [OrderForm] instance.
   OrderForm({
     @required this.id,
-    this.name,
+    this.title,
     @required this.url,
   });
 
   /// UUID of the order form.
   String id;
 
-  /// The name of the order form.
-  String name;
+  /// The title or name of the order form.
+  String title;
 
   /// A URL of a publicly-accessible webpage for this order form.
   String url;
@@ -29,23 +29,23 @@ class OrderForm {
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderForm &&
      other.id == id &&
-     other.name == name &&
+     other.title == title &&
      other.url == url;
 
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
-    (name == null ? 0 : name.hashCode) +
+    (title == null ? 0 : title.hashCode) +
     (url == null ? 0 : url.hashCode);
 
   @override
-  String toString() => 'OrderForm[id=$id, name=$name, url=$url]';
+  String toString() => 'OrderForm[id=$id, title=$title, url=$url]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
       json[r'id'] = id;
-    if (name != null) {
-      json[r'name'] = name;
+    if (title != null) {
+      json[r'title'] = title;
     }
       json[r'url'] = url;
     return json;
@@ -57,7 +57,7 @@ class OrderForm {
     ? null
     : OrderForm(
         id: json[r'id'],
-        name: json[r'name'],
+        title: json[r'title'],
         url: json[r'url'],
     );
 

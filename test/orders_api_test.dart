@@ -20,7 +20,7 @@ void main() {
     //
     // Get orders of a group.
     //
-    //Future<OrderCollection> getOrders() async
+    //Future<OrderCollection> getOrders({ String sort, String perPage, String page }) async
     test('test getOrders', () async {
       // TODO
     });

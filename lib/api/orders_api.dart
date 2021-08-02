@@ -20,7 +20,20 @@ class OrdersApi {
   /// Get orders of a group.
   ///
   /// Note: This method returns the HTTP [Response].
-  Future<Response> getOrdersWithHttpInfo() async {
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`.
+  ///
+  /// * [String] perPage:
+  ///   The number of items per page. Defaults to 25.
+  ///
+  /// * [String] page:
+  ///   The requested page. Defaults to 1.
+  Future<Response> getOrdersWithHttpInfo({ String sort, String perPage, String page }) async {
+    // Verify required params are set.
+
     final path = r'/orders';
 
     Object postBody;
@@ -29,9 +42,19 @@ class OrdersApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
+    if (sort != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'sort', sort));
+    }
+    if (perPage != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
+    }
+    if (page != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
+    }
+
     final contentTypes = <String>[];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -49,8 +72,19 @@ class OrdersApi {
   /// Get orders available to a group.
   ///
   /// Get orders of a group.
-  Future<OrderCollection> getOrders() async {
-    final response = await getOrdersWithHttpInfo();
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`.
+  ///
+  /// * [String] perPage:
+  ///   The number of items per page. Defaults to 25.
+  ///
+  /// * [String] page:
+  ///   The requested page. Defaults to 1.
+  Future<OrderCollection> getOrders({ String sort, String perPage, String page }) async {
+    final response = await getOrdersWithHttpInfo( sort: sort, perPage: perPage, page: page );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -72,6 +106,7 @@ class OrdersApi {
   /// Parameters:
   ///
   /// * [OrderPostPayload] orderPostPayload:
+  ///   OrderPostPayload
   Future<Response> postOrdersWithHttpInfo({ OrderPostPayload orderPostPayload }) async {
     // Verify required params are set.
 
@@ -85,7 +120,7 @@ class OrdersApi {
 
     final contentTypes = <String>['application/json'];
     final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['JWT'];
+    final authNames = <String>['Token'];
 
 
     return await apiClient.invokeAPI(
@@ -107,6 +142,7 @@ class OrdersApi {
   /// Parameters:
   ///
   /// * [OrderPostPayload] orderPostPayload:
+  ///   OrderPostPayload
   Future<OrderResource> postOrders({ OrderPostPayload orderPostPayload }) async {
     final response = await postOrdersWithHttpInfo( orderPostPayload: orderPostPayload );
     if (response.statusCode >= HttpStatus.badRequest) {

@@ -3,7 +3,7 @@
 #
 
 name: 'aryeo'
-version: '1.0.0'
+version: ''
 description: 'Dart SDK for Aryeo API.'
 homepage: 'https://github.com/AryeoHQ/aryeo-api-dart-sdk'
 environment:

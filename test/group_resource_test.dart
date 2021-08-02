@@ -10,14 +10,19 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for ProductItem
+// tests for GroupResource
 void main() {
-  final instance = ProductItem();
+  final instance = GroupResource();
 
-  group('test ProductItem', () {
-    // ID of the product item.
-    // String id
-    test('to test the property `id`', () async {
+  group('test GroupResource', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
+    // Group data
+    test('to test the property `data`', () async {
       // TODO
     });
 

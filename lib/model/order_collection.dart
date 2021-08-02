@@ -12,11 +12,16 @@ part of openapi.api;
 class OrderCollection {
   /// Returns a new [OrderCollection] instance.
   OrderCollection({
-    this.data = const [],
+    @required this.status,
+    this.data,
     this.meta,
     this.links,
   });
 
+  /// What was the state of the request?
+  String status;
+
+  /// 
   List<Order> data;
 
   PaginationMeta meta;
@@ -25,21 +30,24 @@ class OrderCollection {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderCollection &&
+     other.status == status &&
      other.data == data &&
      other.meta == meta &&
      other.links == links;
 
   @override
   int get hashCode =>
+    (status == null ? 0 : status.hashCode) +
     (data == null ? 0 : data.hashCode) +
     (meta == null ? 0 : meta.hashCode) +
     (links == null ? 0 : links.hashCode);
 
   @override
-  String toString() => 'OrderCollection[data=$data, meta=$meta, links=$links]';
+  String toString() => 'OrderCollection[status=$status, data=$data, meta=$meta, links=$links]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'status'] = status;
     if (data != null) {
       json[r'data'] = data;
     }
@@ -57,6 +65,7 @@ class OrderCollection {
   static OrderCollection fromJson(Map<String, dynamic> json) => json == null
     ? null
     : OrderCollection(
+        status: json[r'status'],
         data: Order.listFromJson(json[r'data']),
         meta: PaginationMeta.fromJson(json[r'meta']),
         links: PaginationLinks.fromJson(json[r'links']),

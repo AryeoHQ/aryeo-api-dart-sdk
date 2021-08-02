@@ -10,26 +10,26 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for PropertyWebsites
+// tests for PropertyWebsite
 void main() {
-  final instance = PropertyWebsites();
+  final instance = PropertyWebsite();
 
-  group('test PropertyWebsites', () {
-    // URL for website.
+  group('test PropertyWebsite', () {
+    // ID of the website.
+    // String id
+    test('to test the property `id`', () async {
+      // TODO
+    });
+
+    // URL for branded version of website.
     // String brandedUrl
     test('to test the property `brandedUrl`', () async {
       // TODO
     });
 
-    // URL for website.
+    // URL for unbranded version of website.
     // String unbrandedUrl
     test('to test the property `unbrandedUrl`', () async {
-      // TODO
-    });
-
-    // ID for property website
-    // int id
-    test('to test the property `id`', () async {
       // TODO
     });
 

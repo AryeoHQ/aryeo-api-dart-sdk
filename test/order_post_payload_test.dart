@@ -15,21 +15,15 @@ void main() {
   final instance = OrderPostPayload();
 
   group('test OrderPostPayload', () {
-    // The fulfillment status of the order.
+    // The fulfillment status of the order. Defaults to \"UNFULFILLED\".
     // String fulfillmentStatus
     test('to test the property `fulfillmentStatus`', () async {
       // TODO
     });
 
-    // The payment status of the order.
+    // The payment status of the order. Defaults to \"UNPAID\". 
     // String paymentStatus
     test('to test the property `paymentStatus`', () async {
-      // TODO
-    });
-
-    // product_items
-    // List<ProductItem> productItems (default value: const [])
-    test('to test the property `productItems`', () async {
       // TODO
     });
 

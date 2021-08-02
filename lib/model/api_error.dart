@@ -12,26 +12,42 @@ part of openapi.api;
 class ApiError {
   /// Returns a new [ApiError] instance.
   ApiError({
+    @required this.status,
     @required this.message,
+    this.code,
   });
+
+  /// What was the state of the request?
+  String status;
 
   /// The error message.
   String message;
 
+  /// A numeric code corresponding to the error.
+  int code;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is ApiError &&
-     other.message == message;
+     other.status == status &&
+     other.message == message &&
+     other.code == code;
 
   @override
   int get hashCode =>
-    (message == null ? 0 : message.hashCode);
+    (status == null ? 0 : status.hashCode) +
+    (message == null ? 0 : message.hashCode) +
+    (code == null ? 0 : code.hashCode);
 
   @override
-  String toString() => 'ApiError[message=$message]';
+  String toString() => 'ApiError[status=$status, message=$message, code=$code]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'status'] = status;
       json[r'message'] = message;
+    if (code != null) {
+      json[r'code'] = code;
+    }
     return json;
   }
 
@@ -40,7 +56,9 @@ class ApiError {
   static ApiError fromJson(Map<String, dynamic> json) => json == null
     ? null
     : ApiError(
+        status: json[r'status'],
         message: json[r'message'],
+        code: json[r'code'],
     );
 
   static List<ApiError> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

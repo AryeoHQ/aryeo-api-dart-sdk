@@ -10,11 +10,11 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getVendors**](VendorsApi.md#getvendors) | **GET** /vendors | Get vendors available to a group.
-[**getVendorsSearch**](VendorsApi.md#getvendorssearch) | **GET** /vendors/search | Get vendors that can be added to the group's vendor list.
+[**getVendorsId**](VendorsApi.md#getvendorsid) | **GET** /vendors/{vendor_id} | Get vendors available to a group.
 
 
 # **getVendors**
-> GroupCollection getVendors()
+> GroupCollection getVendors(include)
 
 Get vendors available to a group.
 
@@ -23,17 +23,18 @@ Get vendors available to a group.
 ### Example 
 ```dart
 import 'package:aryeo/api.dart';
-// TODO Configure HTTP Bearer authorization: JWT
+// TODO Configure HTTP Bearer authorization: Token
 // Case 1. Use String Token
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken('YOUR_ACCESS_TOKEN');
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
 // Case 2. Use Function which generate token.
 // String yourTokenGeneratorFunction() { ... }
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken(yourTokenGeneratorFunction);
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = VendorsApi();
+final include = users; // String | Comma separated list of optional data to include in the response.
 
 try { 
-    final result = api_instance.getVendors();
+    final result = api_instance.getVendors(include);
     print(result);
 } catch (e) {
     print('Exception when calling VendorsApi->getVendors: $e\n');
@@ -41,7 +42,10 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
 
 ### Return type
 
@@ -49,7 +53,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[JWT](../README.md#JWT)
+[Token](../README.md#Token)
 
 ### HTTP request headers
 
@@ -58,33 +62,32 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getVendorsSearch**
-> GroupCollection getVendorsSearch(query, perPage, page)
+# **getVendorsId**
+> GroupResource getVendorsId(vendorId, include)
 
-Get vendors that can be added to the group's vendor list.
+Get vendors available to a group.
 
-Get vendors that can be added to the group's vendor list, excluding those already available to a group. 
+Get information about a vendor.
 
 ### Example 
 ```dart
 import 'package:aryeo/api.dart';
-// TODO Configure HTTP Bearer authorization: JWT
+// TODO Configure HTTP Bearer authorization: Token
 // Case 1. Use String Token
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken('YOUR_ACCESS_TOKEN');
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
 // Case 2. Use Function which generate token.
 // String yourTokenGeneratorFunction() { ... }
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken(yourTokenGeneratorFunction);
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = VendorsApi();
-final query = Demo Photography Company; // String | A search query.
-final perPage = 25; // String | The number of items per page. Defaults to 25.
-final page = 2; // String | The requested page. Defaults to 1.
+final vendorId = 00000000-0000-0000-0000-000000000000; // String | ID of the group that is associated as a vendor.
+final include = default_order_form; // String | Comma separated list of optional data to include in the response.
 
 try { 
-    final result = api_instance.getVendorsSearch(query, perPage, page);
+    final result = api_instance.getVendorsId(vendorId, include);
     print(result);
 } catch (e) {
-    print('Exception when calling VendorsApi->getVendorsSearch: $e\n');
+    print('Exception when calling VendorsApi->getVendorsId: $e\n');
 }
 ```
 
@@ -92,17 +95,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **String**| A search query. | [optional] 
- **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
- **page** | **String**| The requested page. Defaults to 1. | [optional] 
+ **vendorId** | [**String**](.md)| ID of the group that is associated as a vendor. | 
+ **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
 
 ### Return type
 
-[**GroupCollection**](GroupCollection.md)
+[**GroupResource**](GroupResource.md)
 
 ### Authorization
 
-[JWT](../README.md#JWT)
+[Token](../README.md#Token)
 
 ### HTTP request headers
 

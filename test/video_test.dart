@@ -16,7 +16,7 @@ void main() {
 
   group('test Video', () {
     // ID of the video.
-    // int id
+    // String id
     test('to test the property `id`', () async {
       // TODO
     });
@@ -24,6 +24,12 @@ void main() {
     // The title of the video given by the uploading user.
     // String title
     test('to test the property `title`', () async {
+      // TODO
+    });
+
+    // The video's runtime in seconds.
+    // int duration
+    test('to test the property `duration`', () async {
       // TODO
     });
 
@@ -39,13 +45,13 @@ void main() {
       // TODO
     });
 
-    // Thumbnail URL for the video.
+    // A thumbnail image URL for the video.
     // String thumbnailUrl
     test('to test the property `thumbnailUrl`', () async {
       // TODO
     });
 
-    // A URL linking to the video.
+    // A URL linking to playback stream of the video.
     // String playbackUrl
     test('to test the property `playbackUrl`', () async {
       // TODO
@@ -57,13 +63,7 @@ void main() {
       // TODO
     });
 
-    // The video's runtime in seconds.
-    // int seconds
-    test('to test the property `seconds`', () async {
-      // TODO
-    });
-
-    // Aryeo iFrame player URL
+    // A URL linking to a public viewing optimized webpage the video.
     // String shareUrl
     test('to test the property `shareUrl`', () async {
       // TODO

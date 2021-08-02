@@ -9,18 +9,21 @@ import 'package:aryeo/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** | ID of the group. | 
-**groupType** | **String** | The type of group. | 
+**type** | **String** | The type of the group. Can be CREATOR, AGENT, or BROKERAGE, and may dictate the attributes of the group returned. | 
 **name** | **String** | The name of the group. | 
-**logo** | **String** | Group logo. | [optional] 
-**email** | **String** | Email. | [optional] 
-**phone** | **String** | Phone number. | [optional] 
-**website** | **String** | Website. | [optional] 
-**isBrokerageOrBrokerageAgent** | **bool** | Does this group represent a brokerage or an agent who belongs to a brokerage? | 
+**email** | **String** | The email address of a group. | [optional] 
+**phone** | **String** | A phone number represented in whichever standards specified by the group, typically ###-###-#### (separated by hyphens). | [optional] 
+**websiteUrl** | **String** | The website URL of a group. | [optional] 
+**logoUrl** | **String** | The logo URL of a group. | [optional] 
+**avatarUrl** | **String** | The profile image URL of a real estate agent. Only returned if group's type is AGENT. | [optional] 
+**officeName** | **String** | The name of the brokerage or team of a real estate agent. Only returned if group's type is AGENT. | [optional] 
+**licenseNumber** | **String** | The license number of a real estate agent. Only returned if group's type is AGENT. | [optional] 
 **socialProfiles** | [**SocialProfiles**](SocialProfiles.md) |  | [optional] 
-**agentProperties** | [**GroupAgentProperties**](GroupAgentProperties.md) |  | [optional] 
-**users** | [**List<User>**](User.md) | users | [optional] [default to const []]
 **defaultOrderForm** | [**OrderForm**](OrderForm.md) |  | [optional] 
-**orderForms** | [**List<OrderForm>**](OrderForm.md) | An array of order forms. | [optional] [default to const []]
+**orderForms** | [**List<OrderForm>**](OrderForm.md) | An array of order forms a vendor group provides for placing orders. Only returned if group's type is CREATOR.  | [optional] [default to const []]
+**owner** | [**User**](User.md) |  | [optional] 
+**users** | [**List<User>**](User.md) | The Aryeo users associated with this group. | [optional] [default to const []]
+**isBrokerageOrBrokerageAgent** | **bool** | Does this group represent a brokerage or an agent who belongs to a brokerage? | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

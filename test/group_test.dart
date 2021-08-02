@@ -21,9 +21,9 @@ void main() {
       // TODO
     });
 
-    // The type of group.
-    // String groupType
-    test('to test the property `groupType`', () async {
+    // The type of the group. Can be CREATOR, AGENT, or BROKERAGE, and may dictate the attributes of the group returned.
+    // String type
+    test('to test the property `type`', () async {
       // TODO
     });
 
@@ -33,33 +33,45 @@ void main() {
       // TODO
     });
 
-    // Group logo.
-    // String logo
-    test('to test the property `logo`', () async {
-      // TODO
-    });
-
-    // Email.
+    // The email address of a group.
     // String email
     test('to test the property `email`', () async {
       // TODO
     });
 
-    // Phone number.
+    // A phone number represented in whichever standards specified by the group, typically ###-###-#### (separated by hyphens).
     // String phone
     test('to test the property `phone`', () async {
       // TODO
     });
 
-    // Website.
-    // String website
-    test('to test the property `website`', () async {
+    // The website URL of a group.
+    // String websiteUrl
+    test('to test the property `websiteUrl`', () async {
       // TODO
     });
 
-    // Does this group represent a brokerage or an agent who belongs to a brokerage?
-    // bool isBrokerageOrBrokerageAgent
-    test('to test the property `isBrokerageOrBrokerageAgent`', () async {
+    // The logo URL of a group.
+    // String logoUrl
+    test('to test the property `logoUrl`', () async {
+      // TODO
+    });
+
+    // The profile image URL of a real estate agent. Only returned if group's type is AGENT.
+    // String avatarUrl
+    test('to test the property `avatarUrl`', () async {
+      // TODO
+    });
+
+    // The name of the brokerage or team of a real estate agent. Only returned if group's type is AGENT.
+    // String officeName
+    test('to test the property `officeName`', () async {
+      // TODO
+    });
+
+    // The license number of a real estate agent. Only returned if group's type is AGENT.
+    // String licenseNumber
+    test('to test the property `licenseNumber`', () async {
       // TODO
     });
 
@@ -68,25 +80,31 @@ void main() {
       // TODO
     });
 
-    // GroupAgentProperties agentProperties
-    test('to test the property `agentProperties`', () async {
-      // TODO
-    });
-
-    // users
-    // List<User> users (default value: const [])
-    test('to test the property `users`', () async {
-      // TODO
-    });
-
     // OrderForm defaultOrderForm
     test('to test the property `defaultOrderForm`', () async {
       // TODO
     });
 
-    // An array of order forms.
+    // An array of order forms a vendor group provides for placing orders. Only returned if group's type is CREATOR. 
     // List<OrderForm> orderForms (default value: const [])
     test('to test the property `orderForms`', () async {
+      // TODO
+    });
+
+    // User owner
+    test('to test the property `owner`', () async {
+      // TODO
+    });
+
+    // The Aryeo users associated with this group.
+    // List<User> users (default value: const [])
+    test('to test the property `users`', () async {
+      // TODO
+    });
+
+    // Does this group represent a brokerage or an agent who belongs to a brokerage?
+    // bool isBrokerageOrBrokerageAgent
+    test('to test the property `isBrokerageOrBrokerageAgent`', () async {
       // TODO
     });
 

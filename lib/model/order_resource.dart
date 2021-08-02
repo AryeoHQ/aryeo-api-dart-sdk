@@ -12,24 +12,31 @@ part of openapi.api;
 class OrderResource {
   /// Returns a new [OrderResource] instance.
   OrderResource({
+    @required this.status,
     this.data,
   });
+
+  /// What was the state of the request?
+  String status;
 
   Order data;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderResource &&
+     other.status == status &&
      other.data == data;
 
   @override
   int get hashCode =>
+    (status == null ? 0 : status.hashCode) +
     (data == null ? 0 : data.hashCode);
 
   @override
-  String toString() => 'OrderResource[data=$data]';
+  String toString() => 'OrderResource[status=$status, data=$data]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'status'] = status;
     if (data != null) {
       json[r'data'] = data;
     }
@@ -41,6 +48,7 @@ class OrderResource {
   static OrderResource fromJson(Map<String, dynamic> json) => json == null
     ? null
     : OrderResource(
+        status: json[r'status'],
         data: Order.fromJson(json[r'data']),
     );
 

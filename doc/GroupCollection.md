@@ -8,6 +8,7 @@ import 'package:aryeo/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**status** | **String** | What was the state of the request? | 
 **data** | [**List<Group>**](Group.md) |  | [optional] [default to const []]
 **meta** | [**PaginationMeta**](PaginationMeta.md) |  | [optional] 
 **links** | [**PaginationLinks**](PaginationLinks.md) |  | [optional] 

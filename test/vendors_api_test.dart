@@ -20,17 +20,17 @@ void main() {
     //
     // Get vendors available to a group.
     //
-    //Future<GroupCollection> getVendors() async
+    //Future<GroupCollection> getVendors({ String include }) async
     test('test getVendors', () async {
       // TODO
     });
 
-    // Get vendors that can be added to the group's vendor list.
+    // Get vendors available to a group.
     //
-    // Get vendors that can be added to the group's vendor list, excluding those already available to a group. 
+    // Get information about a vendor.
     //
-    //Future<GroupCollection> getVendorsSearch({ String query, String perPage, String page }) async
-    test('test getVendorsSearch', () async {
+    //Future<GroupResource> getVendorsId(String vendorId, { String include }) async
+    test('test getVendorsId', () async {
       // TODO
     });
 

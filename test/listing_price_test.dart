@@ -10,14 +10,14 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for MarketingMaterialTemplatePublishPayload
+// tests for ListingPrice
 void main() {
-  final instance = MarketingMaterialTemplatePublishPayload();
+  final instance = ListingPrice();
 
-  group('test MarketingMaterialTemplatePublishPayload', () {
-    // String representation of a polotno JSON object.
-    // String polotnoJson
-    test('to test the property `polotnoJson`', () async {
+  group('test ListingPrice', () {
+    // The current price of the listing.
+    // int listPrice
+    test('to test the property `listPrice`', () async {
       // TODO
     });
 

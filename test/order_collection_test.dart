@@ -15,6 +15,13 @@ void main() {
   final instance = OrderCollection();
 
   group('test OrderCollection', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
+    // 
     // List<Order> data (default value: const [])
     test('to test the property `data`', () async {
       // TODO

@@ -20,7 +20,7 @@ void main() {
     //
     // Get the listings available to a group.
     //
-    //Future<PartialListingCollection> getListings({ String query, String perPage, String page, String status, int price, num bathrooms, int bedrooms }) async
+    //Future<ListingCollection> getListings({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async
     test('test getListings', () async {
       // TODO
     });
@@ -29,7 +29,7 @@ void main() {
     //
     // Get information about a listing.
     //
-    //Future<ListingResource> getListingsId(String id) async
+    //Future<ListingResource> getListingsId(String listingId, { String include }) async
     test('test getListingsId', () async {
       // TODO
     });

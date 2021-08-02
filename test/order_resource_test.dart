@@ -15,6 +15,12 @@ void main() {
   final instance = OrderResource();
 
   group('test OrderResource', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
     // Order data
     test('to test the property `data`', () async {
       // TODO

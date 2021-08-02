@@ -15,6 +15,13 @@ void main() {
   final instance = GroupCollection();
 
   group('test GroupCollection', () {
+    // What was the state of the request?
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
+    // 
     // List<Group> data (default value: const [])
     test('to test the property `data`', () async {
       // TODO

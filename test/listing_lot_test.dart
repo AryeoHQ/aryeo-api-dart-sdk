@@ -10,19 +10,20 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for ListingResource
+// tests for ListingLot
 void main() {
-  final instance = ListingResource();
+  final instance = ListingLot();
 
-  group('test ListingResource', () {
-    // What was the state of the request?
-    // String status
-    test('to test the property `status`', () async {
+  group('test ListingLot', () {
+    // Total area of the lot of a listing in acres. 
+    // num sizeAcres
+    test('to test the property `sizeAcres`', () async {
       // TODO
     });
 
-    // Listing data
-    test('to test the property `data`', () async {
+    // Number of parking spaces.
+    // num openParkingSpaces
+    test('to test the property `openParkingSpaces`', () async {
       // TODO
     });
 

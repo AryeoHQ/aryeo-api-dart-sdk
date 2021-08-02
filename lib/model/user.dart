@@ -13,70 +13,61 @@ class User {
   /// Returns a new [User] instance.
   User({
     @required this.id,
-    this.avatar,
     @required this.email,
     this.firstName,
     this.lastName,
-    this.timezone,
     this.phone,
+    this.avatarUrl,
     this.relationship,
   });
 
-  /// UUID of the user.
+  /// ID of the user.
   String id;
 
-  /// Avatar.
-  String avatar;
-
-  /// Email.
+  /// Email address of the user.
   String email;
 
-  /// First name.
+  /// First name of the user.
   String firstName;
 
-  /// Last name.
+  /// Last name of the user.
   String lastName;
 
-  /// Timezone.
-  String timezone;
-
-  /// Phone number.
+  /// A phone number represented in whichever standards specified by the user, typically ###-###-#### (separated by hyphens).
   String phone;
 
-  /// Describes user's relationship (access level) to a specified group.
+  /// The avatar image URL of a user.
+  String avatarUrl;
+
+  /// Describes user's relationship (access level) to a specified group. Only returned if this resource is returned as a sub-resource of a group.
   String relationship;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is User &&
      other.id == id &&
-     other.avatar == avatar &&
      other.email == email &&
      other.firstName == firstName &&
      other.lastName == lastName &&
-     other.timezone == timezone &&
      other.phone == phone &&
+     other.avatarUrl == avatarUrl &&
      other.relationship == relationship;
 
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
-    (avatar == null ? 0 : avatar.hashCode) +
     (email == null ? 0 : email.hashCode) +
     (firstName == null ? 0 : firstName.hashCode) +
     (lastName == null ? 0 : lastName.hashCode) +
-    (timezone == null ? 0 : timezone.hashCode) +
     (phone == null ? 0 : phone.hashCode) +
+    (avatarUrl == null ? 0 : avatarUrl.hashCode) +
     (relationship == null ? 0 : relationship.hashCode);
 
   @override
-  String toString() => 'User[id=$id, avatar=$avatar, email=$email, firstName=$firstName, lastName=$lastName, timezone=$timezone, phone=$phone, relationship=$relationship]';
+  String toString() => 'User[id=$id, email=$email, firstName=$firstName, lastName=$lastName, phone=$phone, avatarUrl=$avatarUrl, relationship=$relationship]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
       json[r'id'] = id;
-    if (avatar != null) {
-      json[r'avatar'] = avatar;
-    }
       json[r'email'] = email;
     if (firstName != null) {
       json[r'first_name'] = firstName;
@@ -84,11 +75,11 @@ class User {
     if (lastName != null) {
       json[r'last_name'] = lastName;
     }
-    if (timezone != null) {
-      json[r'timezone'] = timezone;
-    }
     if (phone != null) {
       json[r'phone'] = phone;
+    }
+    if (avatarUrl != null) {
+      json[r'avatar_url'] = avatarUrl;
     }
     if (relationship != null) {
       json[r'relationship'] = relationship;
@@ -102,12 +93,11 @@ class User {
     ? null
     : User(
         id: json[r'id'],
-        avatar: json[r'avatar'],
         email: json[r'email'],
         firstName: json[r'first_name'],
         lastName: json[r'last_name'],
-        timezone: json[r'timezone'],
         phone: json[r'phone'],
+        avatarUrl: json[r'avatar_url'],
         relationship: json[r'relationship'],
     );
 

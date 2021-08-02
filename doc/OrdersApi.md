@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **getOrders**
-> OrderCollection getOrders()
+> OrderCollection getOrders(sort, perPage, page)
 
 Get orders available to a group.
 
@@ -23,17 +23,20 @@ Get orders of a group.
 ### Example 
 ```dart
 import 'package:aryeo/api.dart';
-// TODO Configure HTTP Bearer authorization: JWT
+// TODO Configure HTTP Bearer authorization: Token
 // Case 1. Use String Token
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken('YOUR_ACCESS_TOKEN');
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
 // Case 2. Use Function which generate token.
 // String yourTokenGeneratorFunction() { ... }
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken(yourTokenGeneratorFunction);
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = OrdersApi();
+final sort = -created_at; // String | Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`.
+final perPage = 25; // String | The number of items per page. Defaults to 25.
+final page = 2; // String | The requested page. Defaults to 1.
 
 try { 
-    final result = api_instance.getOrders();
+    final result = api_instance.getOrders(sort, perPage, page);
     print(result);
 } catch (e) {
     print('Exception when calling OrdersApi->getOrders: $e\n');
@@ -41,7 +44,12 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sort** | **String**| Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-created_at`. | [optional] 
+ **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
+ **page** | **String**| The requested page. Defaults to 1. | [optional] 
 
 ### Return type
 
@@ -49,7 +57,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[JWT](../README.md#JWT)
+[Token](../README.md#Token)
 
 ### HTTP request headers
 
@@ -68,15 +76,15 @@ Create an order.
 ### Example 
 ```dart
 import 'package:aryeo/api.dart';
-// TODO Configure HTTP Bearer authorization: JWT
+// TODO Configure HTTP Bearer authorization: Token
 // Case 1. Use String Token
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken('YOUR_ACCESS_TOKEN');
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
 // Case 2. Use Function which generate token.
 // String yourTokenGeneratorFunction() { ... }
-//defaultApiClient.getAuthentication<HttpBearerAuth>('JWT').setAccessToken(yourTokenGeneratorFunction);
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = OrdersApi();
-final orderPostPayload = OrderPostPayload(); // OrderPostPayload | 
+final orderPostPayload = OrderPostPayload(); // OrderPostPayload | OrderPostPayload
 
 try { 
     final result = api_instance.postOrders(orderPostPayload);
@@ -90,7 +98,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderPostPayload** | [**OrderPostPayload**](OrderPostPayload.md)|  | [optional] 
+ **orderPostPayload** | [**OrderPostPayload**](OrderPostPayload.md)| OrderPostPayload | [optional] 
 
 ### Return type
 
@@ -98,7 +106,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[JWT](../README.md#JWT)
+[Token](../README.md#Token)
 
 ### HTTP request headers
 

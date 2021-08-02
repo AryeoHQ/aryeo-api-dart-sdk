@@ -13,7 +13,6 @@ class Image {
   /// Returns a new [Image] instance.
   Image({
     @required this.id,
-    this.uuid,
     @required this.thumbnailUrl,
     @required this.largeUrl,
     @required this.originalUrl,
@@ -23,10 +22,7 @@ class Image {
   });
 
   /// ID of the image.
-  int id;
-
-  /// The UUID of the image.
-  String uuid;
+  String id;
 
   /// A URL for a thumbnail-sized version of the image.
   String thumbnailUrl;
@@ -49,7 +45,6 @@ class Image {
   @override
   bool operator ==(Object other) => identical(this, other) || other is Image &&
      other.id == id &&
-     other.uuid == uuid &&
      other.thumbnailUrl == thumbnailUrl &&
      other.largeUrl == largeUrl &&
      other.originalUrl == originalUrl &&
@@ -60,7 +55,6 @@ class Image {
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
-    (uuid == null ? 0 : uuid.hashCode) +
     (thumbnailUrl == null ? 0 : thumbnailUrl.hashCode) +
     (largeUrl == null ? 0 : largeUrl.hashCode) +
     (originalUrl == null ? 0 : originalUrl.hashCode) +
@@ -69,14 +63,11 @@ class Image {
     (displayInGallery == null ? 0 : displayInGallery.hashCode);
 
   @override
-  String toString() => 'Image[id=$id, uuid=$uuid, thumbnailUrl=$thumbnailUrl, largeUrl=$largeUrl, originalUrl=$originalUrl, index=$index, caption=$caption, displayInGallery=$displayInGallery]';
+  String toString() => 'Image[id=$id, thumbnailUrl=$thumbnailUrl, largeUrl=$largeUrl, originalUrl=$originalUrl, index=$index, caption=$caption, displayInGallery=$displayInGallery]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
       json[r'id'] = id;
-    if (uuid != null) {
-      json[r'uuid'] = uuid;
-    }
       json[r'thumbnail_url'] = thumbnailUrl;
       json[r'large_url'] = largeUrl;
       json[r'original_url'] = originalUrl;
@@ -96,7 +87,6 @@ class Image {
     ? null
     : Image(
         id: json[r'id'],
-        uuid: json[r'uuid'],
         thumbnailUrl: json[r'thumbnail_url'],
         largeUrl: json[r'large_url'],
         originalUrl: json[r'original_url'],
