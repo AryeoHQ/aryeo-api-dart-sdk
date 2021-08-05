@@ -15,7 +15,7 @@ void main() {
   final instance = OrderForm();
 
   group('test OrderForm', () {
-    // UUID of the order form.
+    // ID of the order form. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

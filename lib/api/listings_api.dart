@@ -232,7 +232,7 @@ class ListingsApi {
   /// Parameters:
   ///
   /// * [String] listingId (required):
-  ///   The ID of a listing.
+  ///   The ID of a listing. UUID Version 4.
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
@@ -279,7 +279,7 @@ class ListingsApi {
   /// Parameters:
   ///
   /// * [String] listingId (required):
-  ///   The ID of a listing.
+  ///   The ID of a listing. UUID Version 4.
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.

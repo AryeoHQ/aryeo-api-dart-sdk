@@ -31,7 +31,7 @@ class Address {
     this.unparsedAddressPartTwo,
   });
 
-  /// ID of the address.
+  /// ID of the address. UUID Version 4.
   String id;
 
   /// The geographic latitude of some reference point of the location, specified in degrees and decimal parts. Positive numbers must not include the plus symbol.

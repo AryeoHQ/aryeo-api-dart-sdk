@@ -8,7 +8,7 @@ import 'package:aryeo/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | ID of the content. | 
+**id** | **String** | ID of the content. UUID Version 4. | 
 **displayType** | **String** | Is the content branded, unbranded, or both? | 
 **contentType** | **String** | The type of interactive content. | 
 **url** | **String** | URL for the content. | 

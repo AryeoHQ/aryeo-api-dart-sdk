@@ -88,7 +88,7 @@ class VendorsApi {
   /// Parameters:
   ///
   /// * [String] vendorId (required):
-  ///   ID of the group that is associated as a vendor.
+  ///   The ID of the group that is associated as a vendor. UUID Version 4.
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
@@ -135,7 +135,7 @@ class VendorsApi {
   /// Parameters:
   ///
   /// * [String] vendorId (required):
-  ///   ID of the group that is associated as a vendor.
+  ///   The ID of the group that is associated as a vendor. UUID Version 4.
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.

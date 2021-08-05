@@ -15,7 +15,7 @@ void main() {
   final instance = Address();
 
   group('test Address', () {
-    // ID of the address.
+    // ID of the address. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

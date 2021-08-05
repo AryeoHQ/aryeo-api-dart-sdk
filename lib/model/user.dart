@@ -21,7 +21,7 @@ class User {
     this.relationship,
   });
 
-  /// ID of the user.
+  /// ID of the user. UUID Version 4.
   String id;
 
   /// Email address of the user.

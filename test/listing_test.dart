@@ -15,7 +15,7 @@ void main() {
   final instance = Listing();
 
   group('test Listing', () {
-    // ID of the listing.
+    // ID of the listing. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

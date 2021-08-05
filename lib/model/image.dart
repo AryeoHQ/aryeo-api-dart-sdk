@@ -21,7 +21,7 @@ class Image {
     @required this.displayInGallery,
   });
 
-  /// ID of the image.
+  /// ID of the image. UUID Version 4.
   String id;
 
   /// A URL for a thumbnail-sized version of the image.

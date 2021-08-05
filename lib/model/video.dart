@@ -23,7 +23,7 @@ class Video {
     this.shareUrl,
   });
 
-  /// ID of the video.
+  /// ID of the video. UUID Version 4.
   String id;
 
   /// The title of the video given by the uploading user.

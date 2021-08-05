@@ -17,7 +17,7 @@ class OrderForm {
     @required this.url,
   });
 
-  /// UUID of the order form.
+  /// ID of the order form. UUID Version 4.
   String id;
 
   /// The title or name of the order form.

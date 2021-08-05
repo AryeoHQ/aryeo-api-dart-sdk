@@ -17,7 +17,7 @@ class PropertyWebsite {
     @required this.unbrandedUrl,
   });
 
-  /// ID of the website.
+  /// ID of the website. UUID Version 4.
   String id;
 
   /// URL for branded version of website.

@@ -34,7 +34,7 @@ class Listing {
     @required this.downloadsEnabled,
   });
 
-  /// ID of the listing.
+  /// ID of the listing. UUID Version 4.
   String id;
 
   Address address;

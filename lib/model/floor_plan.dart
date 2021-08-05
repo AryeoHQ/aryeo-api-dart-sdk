@@ -20,7 +20,7 @@ class FloorPlan {
     this.index,
   });
 
-  /// ID of the floor plan.
+  /// ID of the floor plan. UUID Version 4.
   String id;
 
   /// A URL for the original, full-resolution version of the floor plan. Useful for downloading.

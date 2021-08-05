@@ -112,7 +112,7 @@ import 'package:aryeo/api.dart';
 //defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = ListingsApi();
-final listingId = 00000000-0000-0000-0000-000000000000; // String | The ID of a listing.
+final listingId = 00000000-0000-4000-8000-000000000000; // String | The ID of a listing. UUID Version 4.
 final include = images,videos,orders; // String | Comma separated list of optional data to include in the response.
 
 try { 
@@ -127,7 +127,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **listingId** | [**String**](.md)| The ID of a listing. | 
+ **listingId** | [**String**](.md)| The ID of a listing. UUID Version 4. | 
  **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
 
 ### Return type

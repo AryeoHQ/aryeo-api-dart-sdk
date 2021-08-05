@@ -23,7 +23,7 @@ class Order {
     this.statusUrl,
   });
 
-  /// ID of the order.
+  /// ID of the order. UUID Version 4.
   String id;
 
   /// A vanity id used for internal tracking of orders for a given vendor. 

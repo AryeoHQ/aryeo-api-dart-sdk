@@ -15,7 +15,7 @@ void main() {
   final instance = Video();
 
   group('test Video', () {
-    // ID of the video.
+    // ID of the video. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

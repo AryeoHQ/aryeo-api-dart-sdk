@@ -15,7 +15,7 @@ void main() {
   final instance = InteractiveContent();
 
   group('test InteractiveContent', () {
-    // ID of the content.
+    // ID of the content. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

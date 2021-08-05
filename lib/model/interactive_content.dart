@@ -19,7 +19,7 @@ class InteractiveContent {
     this.thumbnailUrl,
   });
 
-  /// ID of the content.
+  /// ID of the content. UUID Version 4.
   String id;
 
   /// Is the content branded, unbranded, or both?

@@ -80,7 +80,7 @@ import 'package:aryeo/api.dart';
 //defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = VendorsApi();
-final vendorId = 00000000-0000-0000-0000-000000000000; // String | ID of the group that is associated as a vendor.
+final vendorId = 00000000-0000-4000-8000-000000000000; // String | The ID of the group that is associated as a vendor. UUID Version 4.
 final include = default_order_form; // String | Comma separated list of optional data to include in the response.
 
 try { 
@@ -95,7 +95,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **vendorId** | [**String**](.md)| ID of the group that is associated as a vendor. | 
+ **vendorId** | [**String**](.md)| The ID of the group that is associated as a vendor. UUID Version 4. | 
  **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
 
 ### Return type

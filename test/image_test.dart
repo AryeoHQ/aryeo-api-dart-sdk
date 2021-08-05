@@ -15,7 +15,7 @@ void main() {
   final instance = Image();
 
   group('test Image', () {
-    // ID of the image.
+    // ID of the image. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO

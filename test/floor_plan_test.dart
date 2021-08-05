@@ -15,7 +15,7 @@ void main() {
   final instance = FloorPlan();
 
   group('test FloorPlan', () {
-    // ID of the floor plan.
+    // ID of the floor plan. UUID Version 4.
     // String id
     test('to test the property `id`', () async {
       // TODO
