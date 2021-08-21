@@ -14,6 +14,7 @@ class OrderPostPayload {
   OrderPostPayload({
     this.fulfillmentStatus,
     this.paymentStatus,
+    this.placeId,
   });
 
   /// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
@@ -22,18 +23,23 @@ class OrderPostPayload {
   /// The payment status of the order. Defaults to \"UNPAID\". 
   OrderPostPayloadPaymentStatusEnum paymentStatus;
 
+  /// Google Places ID of the address to attach to the order.
+  String placeId;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
-     other.paymentStatus == paymentStatus;
+     other.paymentStatus == paymentStatus &&
+     other.placeId == placeId;
 
   @override
   int get hashCode =>
     (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode) +
-    (paymentStatus == null ? 0 : paymentStatus.hashCode);
+    (paymentStatus == null ? 0 : paymentStatus.hashCode) +
+    (placeId == null ? 0 : placeId.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus, placeId=$placeId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -42,6 +48,9 @@ class OrderPostPayload {
     }
     if (paymentStatus != null) {
       json[r'payment_status'] = paymentStatus;
+    }
+    if (placeId != null) {
+      json[r'place_id'] = placeId;
     }
     return json;
   }
@@ -53,6 +62,7 @@ class OrderPostPayload {
     : OrderPostPayload(
         fulfillmentStatus: OrderPostPayloadFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
         paymentStatus: OrderPostPayloadPaymentStatusEnum.fromJson(json[r'payment_status']),
+        placeId: json[r'place_id'],
     );
 
   static List<OrderPostPayload> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

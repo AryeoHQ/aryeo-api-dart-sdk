@@ -15,9 +15,9 @@ class VendorsApi {
 
   final ApiClient apiClient;
 
-  /// Get vendors available to a group.
+  /// List all vendors.
   ///
-  /// Get vendors available to a group.
+  /// Lists all vendors available to a group.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -57,9 +57,9 @@ class VendorsApi {
     );
   }
 
-  /// Get vendors available to a group.
+  /// List all vendors.
   ///
-  /// Get vendors available to a group.
+  /// Lists all vendors available to a group.
   ///
   /// Parameters:
   ///
@@ -79,9 +79,9 @@ class VendorsApi {
     return Future<GroupCollection>.value(null);
   }
 
-  /// Get vendors available to a group.
+  /// Retrieve a vendor.
   ///
-  /// Get information about a vendor.
+  /// Retrieves the details of a vendor with the given ID.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -128,9 +128,9 @@ class VendorsApi {
     );
   }
 
-  /// Get vendors available to a group.
+  /// Retrieve a vendor.
   ///
-  /// Get information about a vendor.
+  /// Retrieves the details of a vendor with the given ID.
   ///
   /// Parameters:
   ///

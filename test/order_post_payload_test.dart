@@ -27,6 +27,12 @@ void main() {
       // TODO
     });
 
+    // Google Places ID of the address to attach to the order.
+    // String placeId
+    test('to test the property `placeId`', () async {
+      // TODO
+    });
+
 
   });
 

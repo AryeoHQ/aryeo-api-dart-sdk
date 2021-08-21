@@ -15,9 +15,9 @@ class OrdersApi {
 
   final ApiClient apiClient;
 
-  /// Get orders available to a group.
+  /// List all orders.
   ///
-  /// Get orders of a group.
+  /// Lists all orders of a group.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -69,9 +69,9 @@ class OrdersApi {
     );
   }
 
-  /// Get orders available to a group.
+  /// List all orders.
   ///
-  /// Get orders of a group.
+  /// Lists all orders of a group.
   ///
   /// Parameters:
   ///

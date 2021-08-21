@@ -16,9 +16,9 @@ void main() {
   final instance = OrdersApi();
 
   group('tests for OrdersApi', () {
-    // Get orders available to a group.
+    // List all orders.
     //
-    // Get orders of a group.
+    // Lists all orders of a group.
     //
     //Future<OrderCollection> getOrders({ String sort, String perPage, String page }) async
     test('test getOrders', () async {

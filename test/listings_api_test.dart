@@ -16,18 +16,18 @@ void main() {
   final instance = ListingsApi();
 
   group('tests for ListingsApi', () {
-    // Get the listings available to a group.
+    // List all listings.
     //
-    // Get the listings available to a group.
+    // Lists all listings available to a group.
     //
     //Future<ListingCollection> getListings({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async
     test('test getListings', () async {
       // TODO
     });
 
-    // Get information about a listing.
+    // Retrieve a listing.
     //
-    // Get information about a listing.
+    // Retrieves the details of a listing with the given ID.
     //
     //Future<ListingResource> getListingsId(String listingId, { String include }) async
     test('test getListingsId', () async {

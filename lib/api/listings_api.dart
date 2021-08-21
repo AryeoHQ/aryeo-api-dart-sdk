@@ -15,9 +15,9 @@ class ListingsApi {
 
   final ApiClient apiClient;
 
-  /// Get the listings available to a group.
+  /// List all listings.
   ///
-  /// Get the listings available to a group.
+  /// Lists all listings available to a group.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -153,9 +153,9 @@ class ListingsApi {
     );
   }
 
-  /// Get the listings available to a group.
+  /// List all listings.
   ///
-  /// Get the listings available to a group.
+  /// Lists all listings available to a group.
   ///
   /// Parameters:
   ///
@@ -223,9 +223,9 @@ class ListingsApi {
     return Future<ListingCollection>.value(null);
   }
 
-  /// Get information about a listing.
+  /// Retrieve a listing.
   ///
-  /// Get information about a listing.
+  /// Retrieves the details of a listing with the given ID.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -272,9 +272,9 @@ class ListingsApi {
     );
   }
 
-  /// Get information about a listing.
+  /// Retrieve a listing.
   ///
-  /// Get information about a listing.
+  /// Retrieves the details of a listing with the given ID.
   ///
   /// Parameters:
   ///

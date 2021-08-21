@@ -16,18 +16,18 @@ void main() {
   final instance = VendorsApi();
 
   group('tests for VendorsApi', () {
-    // Get vendors available to a group.
+    // List all vendors.
     //
-    // Get vendors available to a group.
+    // Lists all vendors available to a group.
     //
     //Future<GroupCollection> getVendors({ String include }) async
     test('test getVendors', () async {
       // TODO
     });
 
-    // Get vendors available to a group.
+    // Retrieve a vendor.
     //
-    // Get information about a vendor.
+    // Retrieves the details of a vendor with the given ID.
     //
     //Future<GroupResource> getVendorsId(String vendorId, { String include }) async
     test('test getVendorsId', () async {

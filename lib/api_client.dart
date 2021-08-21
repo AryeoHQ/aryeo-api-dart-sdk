@@ -119,7 +119,7 @@ class ApiClient {
       switch(method) {
         case 'POST': return await _client.post(uri, headers: nullableHeaderParams, body: msgBody,);
         case 'PUT': return await _client.put(uri, headers: nullableHeaderParams, body: msgBody,);
-        case 'DELETE': return await _client.delete(uri, headers: nullableHeaderParams,);
+        case 'DELETE': return await _client.delete(uri, headers: nullableHeaderParams, body: msgBody,);
         case 'PATCH': return await _client.patch(uri, headers: nullableHeaderParams, body: msgBody,);
         case 'HEAD': return await _client.head(uri, headers: nullableHeaderParams,);
         case 'GET': return await _client.get(uri, headers: nullableHeaderParams,);
@@ -198,6 +198,16 @@ class ApiClient {
           return ApiError.fromJson(value);
         case 'ApiFail':
           return ApiFail.fromJson(value);
+        case 'Appointment':
+          return Appointment.fromJson(value);
+        case 'AppointmentCancelPutPayload':
+          return AppointmentCancelPutPayload.fromJson(value);
+        case 'AppointmentCollection':
+          return AppointmentCollection.fromJson(value);
+        case 'AppointmentReschedulePutPayload':
+          return AppointmentReschedulePutPayload.fromJson(value);
+        case 'AppointmentResource':
+          return AppointmentResource.fromJson(value);
         case 'FloorPlan':
           return FloorPlan.fromJson(value);
         case 'Group':
@@ -228,6 +238,8 @@ class ApiClient {
           return OrderCollection.fromJson(value);
         case 'OrderForm':
           return OrderForm.fromJson(value);
+        case 'OrderItem':
+          return OrderItem.fromJson(value);
         case 'OrderPostPayload':
           return OrderPostPayload.fromJson(value);
         case 'OrderResource':
@@ -240,6 +252,10 @@ class ApiClient {
           return PropertyWebsite.fromJson(value);
         case 'SocialProfiles':
           return SocialProfiles.fromJson(value);
+        case 'UnconfirmedAppointment':
+          return UnconfirmedAppointment.fromJson(value);
+        case 'UnconfirmedAppointmentCollection':
+          return UnconfirmedAppointmentCollection.fromJson(value);
         case 'User':
           return User.fromJson(value);
         case 'Video':
