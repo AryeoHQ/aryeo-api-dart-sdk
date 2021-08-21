@@ -10,6 +10,7 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getOrders**](OrdersApi.md#getorders) | **GET** /orders | List all orders.
+[**getProducts**](OrdersApi.md#getproducts) | **GET** /products | Get products available to a group.
 [**postOrders**](OrdersApi.md#postorders) | **POST** /orders | Create an order.
 
 
@@ -54,6 +55,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrderCollection**](OrderCollection.md)
+
+### Authorization
+
+[Token](../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getProducts**
+> ProductCollection getProducts(sort, perPage, page, filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket)
+
+Get products available to a group.
+
+Get products of a group.
+
+### Example
+```dart
+import 'package:aryeo/api.dart';
+// TODO Configure HTTP Bearer authorization: Token
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = OrdersApi();
+final sort = -created_at; // String | Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `title`.
+final perPage = 25; // String | The number of items per page. Defaults to 25.
+final page = 2; // String | The requested page. Defaults to 1.
+final filterLeftSquareBracketSearchRightSquareBracket = filterLeftSquareBracketSearchRightSquareBracket_example; // String | Return products that have fields matching this term.
+final filterLeftSquareBracketCategoryIdsRightSquareBracket = filterLeftSquareBracketCategoryIdsRightSquareBracket_example; // String | Return products in the given categories.
+final filterLeftSquareBracketTypeRightSquareBracket = filterLeftSquareBracketTypeRightSquareBracket_example; // String | Return products matching the given type. Allowed values are: MAIN, ADDON.
+
+try {
+    final result = api_instance.getProducts(sort, perPage, page, filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket);
+    print(result);
+} catch (e) {
+    print('Exception when calling OrdersApi->getProducts: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sort** | **String**| Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `title`. | [optional] 
+ **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
+ **page** | **String**| The requested page. Defaults to 1. | [optional] 
+ **filterLeftSquareBracketSearchRightSquareBracket** | **String**| Return products that have fields matching this term. | [optional] 
+ **filterLeftSquareBracketCategoryIdsRightSquareBracket** | **String**| Return products in the given categories. | [optional] 
+ **filterLeftSquareBracketTypeRightSquareBracket** | **String**| Return products matching the given type. Allowed values are: MAIN, ADDON. | [optional] 
+
+### Return type
+
+[**ProductCollection**](ProductCollection.md)
 
 ### Authorization
 

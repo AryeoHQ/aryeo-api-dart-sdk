@@ -25,6 +25,15 @@ void main() {
       // TODO
     });
 
+    // Get products available to a group.
+    //
+    // Get products of a group.
+    //
+    //Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async
+    test('test getProducts', () async {
+      // TODO
+    });
+
     // Create an order.
     //
     // Create an order.

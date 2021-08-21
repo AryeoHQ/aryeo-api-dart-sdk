@@ -248,6 +248,14 @@ class ApiClient {
           return PaginationLinks.fromJson(value);
         case 'PaginationMeta':
           return PaginationMeta.fromJson(value);
+        case 'Product':
+          return Product.fromJson(value);
+        case 'ProductCategory':
+          return ProductCategory.fromJson(value);
+        case 'ProductCollection':
+          return ProductCollection.fromJson(value);
+        case 'ProductVariant':
+          return ProductVariant.fromJson(value);
         case 'PropertyWebsite':
           return PropertyWebsite.fromJson(value);
         case 'SocialProfiles':

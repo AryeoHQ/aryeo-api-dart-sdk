@@ -97,6 +97,115 @@ class OrdersApi {
     return Future<OrderCollection>.value(null);
   }
 
+  /// Get products available to a group.
+  ///
+  /// Get products of a group.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `title`.
+  ///
+  /// * [String] perPage:
+  ///   The number of items per page. Defaults to 25.
+  ///
+  /// * [String] page:
+  ///   The requested page. Defaults to 1.
+  ///
+  /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
+  ///   Return products that have fields matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  ///   Return products in the given categories.
+  ///
+  /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
+  ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
+  Future<Response> getProductsWithHttpInfo({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
+    // Verify required params are set.
+
+    final path = r'/products';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (sort != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'sort', sort));
+    }
+    if (perPage != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
+    }
+    if (page != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
+    }
+    if (filterLeftSquareBracketSearchRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[search]', filterLeftSquareBracketSearchRightSquareBracket));
+    }
+    if (filterLeftSquareBracketCategoryIdsRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[category_ids]', filterLeftSquareBracketCategoryIdsRightSquareBracket));
+    }
+    if (filterLeftSquareBracketTypeRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[type]', filterLeftSquareBracketTypeRightSquareBracket));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Get products available to a group.
+  ///
+  /// Get products of a group.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sort:
+  ///   Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `title`.
+  ///
+  /// * [String] perPage:
+  ///   The number of items per page. Defaults to 25.
+  ///
+  /// * [String] page:
+  ///   The requested page. Defaults to 1.
+  ///
+  /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
+  ///   Return products that have fields matching this term.
+  ///
+  /// * [String] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  ///   Return products in the given categories.
+  ///
+  /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
+  ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
+  Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
+    final response = await getProductsWithHttpInfo( sort: sort, perPage: perPage, page: page, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket: filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket: filterLeftSquareBracketTypeRightSquareBracket );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ProductCollection',) as ProductCollection;
+        }
+    return Future<ProductCollection>.value(null);
+  }
+
   /// Create an order.
   ///
   /// Create an order.
