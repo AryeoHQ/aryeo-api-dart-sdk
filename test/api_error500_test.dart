@@ -10,11 +10,11 @@
 import 'package:aryeo/api.dart';
 import 'package:test/test.dart';
 
-// tests for ApiError
+// tests for ApiError500
 void main() {
-  final instance = ApiError();
+  final instance = ApiError500();
 
-  group('test ApiError', () {
+  group('test ApiError500', () {
     // What was the state of the request?
     // String status
     test('to test the property `status`', () async {

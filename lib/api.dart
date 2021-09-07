@@ -32,8 +32,11 @@ part 'api/orders_api.dart';
 part 'api/vendors_api.dart';
 
 part 'model/address.dart';
-part 'model/api_error.dart';
-part 'model/api_fail.dart';
+part 'model/api_error403.dart';
+part 'model/api_error404.dart';
+part 'model/api_error409.dart';
+part 'model/api_error500.dart';
+part 'model/api_fail422.dart';
 part 'model/appointment.dart';
 part 'model/appointment_cancel_put_payload.dart';
 part 'model/appointment_collection.dart';

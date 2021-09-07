@@ -194,10 +194,16 @@ class ApiClient {
           return value is double ? value : double.parse('$value');
         case 'Address':
           return Address.fromJson(value);
-        case 'ApiError':
-          return ApiError.fromJson(value);
-        case 'ApiFail':
-          return ApiFail.fromJson(value);
+        case 'ApiError403':
+          return ApiError403.fromJson(value);
+        case 'ApiError404':
+          return ApiError404.fromJson(value);
+        case 'ApiError409':
+          return ApiError409.fromJson(value);
+        case 'ApiError500':
+          return ApiError500.fromJson(value);
+        case 'ApiFail422':
+          return ApiFail422.fromJson(value);
         case 'Appointment':
           return Appointment.fromJson(value);
         case 'AppointmentCancelPutPayload':

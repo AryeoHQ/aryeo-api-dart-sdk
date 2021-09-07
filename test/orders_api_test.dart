@@ -29,7 +29,7 @@ void main() {
     //
     // Get products of a group.
     //
-    //Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async
+    //Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async
     test('test getProducts', () async {
       // TODO
     });

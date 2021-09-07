@@ -21,6 +21,7 @@ class Appointment {
     this.duration,
     this.order,
     this.users,
+    this.items = const [],
   });
 
   /// The ID of the appointment.
@@ -49,6 +50,9 @@ class Appointment {
   /// Users attached to the appointment.
   List<User> users;
 
+  /// Items attached to the appointment.
+  List<OrderItem> items;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is Appointment &&
      other.id == id &&
@@ -59,7 +63,8 @@ class Appointment {
      other.endAt == endAt &&
      other.duration == duration &&
      other.order == order &&
-     other.users == users;
+     other.users == users &&
+     other.items == items;
 
   @override
   int get hashCode =>
@@ -71,10 +76,11 @@ class Appointment {
     (endAt == null ? 0 : endAt.hashCode) +
     (duration == null ? 0 : duration.hashCode) +
     (order == null ? 0 : order.hashCode) +
-    (users == null ? 0 : users.hashCode);
+    (users == null ? 0 : users.hashCode) +
+    (items == null ? 0 : items.hashCode);
 
   @override
-  String toString() => 'Appointment[id=$id, status=$status, title=$title, description=$description, startAt=$startAt, endAt=$endAt, duration=$duration, order=$order, users=$users]';
+  String toString() => 'Appointment[id=$id, status=$status, title=$title, description=$description, startAt=$startAt, endAt=$endAt, duration=$duration, order=$order, users=$users, items=$items]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -103,6 +109,9 @@ class Appointment {
     if (users != null) {
       json[r'users'] = users;
     }
+    if (items != null) {
+      json[r'items'] = items;
+    }
     return json;
   }
 
@@ -124,6 +133,7 @@ class Appointment {
         duration: json[r'duration'],
         order: Order.fromJson(json[r'order']),
         users: User.listFromJson(json[r'users']),
+        items: OrderItem.listFromJson(json[r'items']),
     );
 
   static List<Appointment> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

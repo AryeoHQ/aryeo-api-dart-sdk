@@ -68,6 +68,12 @@ void main() {
       // TODO
     });
 
+    // Items attached to the appointment.
+    // List<OrderItem> items (default value: const [])
+    test('to test the property `items`', () async {
+      // TODO
+    });
+
 
   });
 

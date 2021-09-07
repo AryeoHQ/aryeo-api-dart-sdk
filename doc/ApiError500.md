@@ -1,4 +1,4 @@
-# aryeo.model.ApiFail
+# aryeo.model.ApiError500
 
 ## Load the model package
 ```dart
@@ -9,6 +9,8 @@ import 'package:aryeo/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **String** | What was the state of the request? | 
+**message** | **String** | The error message. | 
+**code** | **int** | A numeric code corresponding to the error. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

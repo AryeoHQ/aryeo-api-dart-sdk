@@ -117,12 +117,12 @@ class OrdersApi {
   /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
   ///   Return products that have fields matching this term.
   ///
-  /// * [String] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  /// * [List] filterLeftSquareBracketCategoryIdsRightSquareBracket:
   ///   Return products in the given categories.
   ///
   /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
   ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
-  Future<Response> getProductsWithHttpInfo({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
+  Future<Response> getProductsWithHttpInfo({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
     // Verify required params are set.
 
     final path = r'/products';
@@ -187,12 +187,12 @@ class OrdersApi {
   /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
   ///   Return products that have fields matching this term.
   ///
-  /// * [String] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  /// * [List] filterLeftSquareBracketCategoryIdsRightSquareBracket:
   ///   Return products in the given categories.
   ///
   /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
   ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
-  Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
+  Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
     final response = await getProductsWithHttpInfo( sort: sort, perPage: perPage, page: page, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket: filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket: filterLeftSquareBracketTypeRightSquareBracket );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
