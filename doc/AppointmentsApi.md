@@ -11,6 +11,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAppointments**](AppointmentsApi.md#getappointments) | **GET** /appointments | List all appointments.
 [**getUnconfirmedAppointments**](AppointmentsApi.md#getunconfirmedappointments) | **GET** /unconfirmed-appointments | List all unconfirmed appointments.
+[**getUnconfirmedAppointmentsId**](AppointmentsApi.md#getunconfirmedappointmentsid) | **GET** /unconfirmed-appointments/{unconfirmed_appointment_id} | Retrieve an unconfirmed appointment.
 [**putAppointmentsAppointmentIdCancel**](AppointmentsApi.md#putappointmentsappointmentidcancel) | **PUT** /appointments/{appointment_id}/cancel | Cancel an appointment.
 [**putAppointmentsAppointmentIdReschedule**](AppointmentsApi.md#putappointmentsappointmentidreschedule) | **PUT** /appointments/{appointment_id}/reschedule | Reschedule an appointment.
 
@@ -123,6 +124,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UnconfirmedAppointmentCollection**](UnconfirmedAppointmentCollection.md)
+
+### Authorization
+
+[Token](../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getUnconfirmedAppointmentsId**
+> UnconfirmedAppointmentResource getUnconfirmedAppointmentsId(unconfirmedAppointmentId, include)
+
+Retrieve an unconfirmed appointment.
+
+Retrieves the details of an unconfirmed appointment with the given ID.
+
+### Example
+```dart
+import 'package:aryeo/api.dart';
+// TODO Configure HTTP Bearer authorization: Token
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = AppointmentsApi();
+final unconfirmedAppointmentId = 00000000-0000-0000-0000-000000000000; // String | The ID of an appointment.
+final include = order,users; // String | Comma separated list of optional data to include in the response.
+
+try {
+    final result = api_instance.getUnconfirmedAppointmentsId(unconfirmedAppointmentId, include);
+    print(result);
+} catch (e) {
+    print('Exception when calling AppointmentsApi->getUnconfirmedAppointmentsId: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **unconfirmedAppointmentId** | [**String**](.md)| The ID of an appointment. | 
+ **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
+
+### Return type
+
+[**UnconfirmedAppointmentResource**](UnconfirmedAppointmentResource.md)
 
 ### Authorization
 

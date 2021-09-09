@@ -242,6 +242,80 @@ class AppointmentsApi {
     return Future<UnconfirmedAppointmentCollection>.value(null);
   }
 
+  /// Retrieve an unconfirmed appointment.
+  ///
+  /// Retrieves the details of an unconfirmed appointment with the given ID.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] unconfirmedAppointmentId (required):
+  ///   The ID of an appointment.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<Response> getUnconfirmedAppointmentsIdWithHttpInfo(String unconfirmedAppointmentId, { String include }) async {
+    // Verify required params are set.
+    if (unconfirmedAppointmentId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: unconfirmedAppointmentId');
+    }
+
+    final path = r'/unconfirmed-appointments/{unconfirmed_appointment_id}'
+      .replaceAll('{' + 'unconfirmed_appointment_id' + '}', unconfirmedAppointmentId.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Retrieve an unconfirmed appointment.
+  ///
+  /// Retrieves the details of an unconfirmed appointment with the given ID.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] unconfirmedAppointmentId (required):
+  ///   The ID of an appointment.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<UnconfirmedAppointmentResource> getUnconfirmedAppointmentsId(String unconfirmedAppointmentId, { String include }) async {
+    final response = await getUnconfirmedAppointmentsIdWithHttpInfo(unconfirmedAppointmentId,  include: include );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UnconfirmedAppointmentResource',) as UnconfirmedAppointmentResource;
+        }
+    return Future<UnconfirmedAppointmentResource>.value(null);
+  }
+
   /// Cancel an appointment.
   ///
   /// Cancel an appointment. The appointments order's customer can be optionally notified of this change. 

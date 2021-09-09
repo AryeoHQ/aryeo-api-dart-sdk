@@ -70,6 +70,7 @@ part 'model/property_website.dart';
 part 'model/social_profiles.dart';
 part 'model/unconfirmed_appointment.dart';
 part 'model/unconfirmed_appointment_collection.dart';
+part 'model/unconfirmed_appointment_resource.dart';
 part 'model/user.dart';
 part 'model/video.dart';
 

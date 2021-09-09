@@ -34,6 +34,15 @@ void main() {
       // TODO
     });
 
+    // Retrieve an unconfirmed appointment.
+    //
+    // Retrieves the details of an unconfirmed appointment with the given ID.
+    //
+    //Future<UnconfirmedAppointmentResource> getUnconfirmedAppointmentsId(String unconfirmedAppointmentId, { String include }) async
+    test('test getUnconfirmedAppointmentsId', () async {
+      // TODO
+    });
+
     // Cancel an appointment.
     //
     // Cancel an appointment. The appointments order's customer can be optionally notified of this change. 

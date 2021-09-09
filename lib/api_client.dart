@@ -270,6 +270,8 @@ class ApiClient {
           return UnconfirmedAppointment.fromJson(value);
         case 'UnconfirmedAppointmentCollection':
           return UnconfirmedAppointmentCollection.fromJson(value);
+        case 'UnconfirmedAppointmentResource':
+          return UnconfirmedAppointmentResource.fromJson(value);
         case 'User':
           return User.fromJson(value);
         case 'Video':
