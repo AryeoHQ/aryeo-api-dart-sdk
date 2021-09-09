@@ -10,6 +10,7 @@ All URIs are relative to *https://api.aryeo.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getOrders**](OrdersApi.md#getorders) | **GET** /orders | List all orders.
+[**getOrdersId**](OrdersApi.md#getordersid) | **GET** /orders/{order_id} | Retrieve an order.
 [**getProducts**](OrdersApi.md#getproducts) | **GET** /products | Get products available to a group.
 [**postOrders**](OrdersApi.md#postorders) | **POST** /orders | Create an order.
 
@@ -55,6 +56,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrderCollection**](OrderCollection.md)
+
+### Authorization
+
+[Token](../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getOrdersId**
+> OrderResource getOrdersId(orderId, include)
+
+Retrieve an order.
+
+Retrieves the details of an order with the given ID.
+
+### Example
+```dart
+import 'package:aryeo/api.dart';
+// TODO Configure HTTP Bearer authorization: Token
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Token').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = OrdersApi();
+final orderId = 00000000-0000-4000-8000-000000000000; // String | The ID of an order. UUID Version 4.
+final include = items,appointments,unconfirmed_appointments; // String | Comma separated list of optional data to include in the response.
+
+try {
+    final result = api_instance.getOrdersId(orderId, include);
+    print(result);
+} catch (e) {
+    print('Exception when calling OrdersApi->getOrdersId: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **orderId** | [**String**](.md)| The ID of an order. UUID Version 4. | 
+ **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
+
+### Return type
+
+[**OrderResource**](OrderResource.md)
 
 ### Authorization
 

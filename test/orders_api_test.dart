@@ -25,6 +25,15 @@ void main() {
       // TODO
     });
 
+    // Retrieve an order.
+    //
+    // Retrieves the details of an order with the given ID.
+    //
+    //Future<OrderResource> getOrdersId(String orderId, { String include }) async
+    test('test getOrdersId', () async {
+      // TODO
+    });
+
     // Get products available to a group.
     //
     // Get products of a group.

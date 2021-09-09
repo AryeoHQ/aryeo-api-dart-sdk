@@ -97,6 +97,80 @@ class OrdersApi {
     return Future<OrderCollection>.value(null);
   }
 
+  /// Retrieve an order.
+  ///
+  /// Retrieves the details of an order with the given ID.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] orderId (required):
+  ///   The ID of an order. UUID Version 4.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<Response> getOrdersIdWithHttpInfo(String orderId, { String include }) async {
+    // Verify required params are set.
+    if (orderId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: orderId');
+    }
+
+    final path = r'/orders/{order_id}'
+      .replaceAll('{' + 'order_id' + '}', orderId.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (include != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Retrieve an order.
+  ///
+  /// Retrieves the details of an order with the given ID.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] orderId (required):
+  ///   The ID of an order. UUID Version 4.
+  ///
+  /// * [String] include:
+  ///   Comma separated list of optional data to include in the response.
+  Future<OrderResource> getOrdersId(String orderId, { String include }) async {
+    final response = await getOrdersIdWithHttpInfo(orderId,  include: include );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'OrderResource',) as OrderResource;
+        }
+    return Future<OrderResource>.value(null);
+  }
+
   /// Get products available to a group.
   ///
   /// Get products of a group.
