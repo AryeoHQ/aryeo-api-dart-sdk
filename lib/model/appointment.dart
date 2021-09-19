@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -68,6 +69,7 @@ class Appointment {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (status == null ? 0 : status.hashCode) +
     (title == null ? 0 : title.hashCode) +
@@ -116,46 +118,55 @@ class Appointment {
   }
 
   /// Returns a new [Appointment] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Appointment fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : Appointment(
-        id: json[r'id'],
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static Appointment fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return Appointment(
+        id: mapValueOfType<String>(json, r'id'),
         status: AppointmentStatusEnum.fromJson(json[r'status']),
-        title: json[r'title'],
-        description: json[r'description'],
-        startAt: json[r'start_at'] == null
-          ? null
-          : DateTime.parse(json[r'start_at']),
-        endAt: json[r'end_at'] == null
-          ? null
-          : DateTime.parse(json[r'end_at']),
-        duration: json[r'duration'],
+        title: mapValueOfType<String>(json, r'title'),
+        description: mapValueOfType<String>(json, r'description'),
+        startAt: mapDateTime(json, r'start_at', ''),
+        endAt: mapDateTime(json, r'end_at', ''),
+        duration: mapValueOfType<int>(json, r'duration'),
         order: Order.fromJson(json[r'order']),
         users: User.listFromJson(json[r'users']),
         items: OrderItem.listFromJson(json[r'items']),
-    );
+      );
+    }
+    return null;
+  }
 
-  static List<Appointment> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <Appointment>[]
-      : json.map((dynamic value) => Appointment.fromJson(value)).toList(growable: true == growable);
+  static List<Appointment> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Appointment.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Appointment>[];
 
-  static Map<String, Appointment> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Appointment> mapFromJson(dynamic json) {
     final map = <String, Appointment>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Appointment.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Appointment.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Appointment-objects as value to a dart map
-  static Map<String, List<Appointment>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Appointment>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Appointment>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Appointment.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Appointment.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -170,7 +181,7 @@ class AppointmentStatusEnum {
   final String value;
 
   @override
-  String toString() => value;
+  String toString() => value ?? '';
 
   String toJson() => value;
 
@@ -190,20 +201,18 @@ class AppointmentStatusEnum {
   static AppointmentStatusEnum fromJson(dynamic value) =>
     AppointmentStatusEnumTypeTransformer().decode(value);
 
-  static List<AppointmentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <AppointmentStatusEnum>[]
-      : json
-          .map((value) => AppointmentStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<AppointmentStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(AppointmentStatusEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <AppointmentStatusEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [AppointmentStatusEnum] to String,
 /// and [decode] dynamic data back to [AppointmentStatusEnum].
 class AppointmentStatusEnumTypeTransformer {
-  const AppointmentStatusEnumTypeTransformer._();
+  factory AppointmentStatusEnumTypeTransformer() => _instance ??= const AppointmentStatusEnumTypeTransformer._();
 
-  factory AppointmentStatusEnumTypeTransformer() => _instance ??= AppointmentStatusEnumTypeTransformer._();
+  const AppointmentStatusEnumTypeTransformer._();
 
   String encode(AppointmentStatusEnum data) => data.value;
 
@@ -216,15 +225,17 @@ class AppointmentStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   AppointmentStatusEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'SCHEDULED': return AppointmentStatusEnum.SCHEDULED;
-      case r'UNSCHEDULED': return AppointmentStatusEnum.UNSCHEDULED;
-      case r'RESCHEDULED': return AppointmentStatusEnum.RESCHEDULED;
-      case r'CANCELED': return AppointmentStatusEnum.CANCELED;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'SCHEDULED': return AppointmentStatusEnum.SCHEDULED;
+        case r'UNSCHEDULED': return AppointmentStatusEnum.UNSCHEDULED;
+        case r'RESCHEDULED': return AppointmentStatusEnum.RESCHEDULED;
+        case r'CANCELED': return AppointmentStatusEnum.CANCELED;
+        default:
+          if (allowNull == false) {
+            throw ArgumentError('Unknown enum value to decode: $data');
+          }
+      }
     }
     return null;
   }
@@ -232,4 +243,5 @@ class AppointmentStatusEnumTypeTransformer {
   /// Singleton [AppointmentStatusEnumTypeTransformer] instance.
   static AppointmentStatusEnumTypeTransformer _instance;
 }
+
 

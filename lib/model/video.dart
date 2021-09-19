@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -64,6 +65,7 @@ class Video {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (title == null ? 0 : title.hashCode) +
     (duration == null ? 0 : duration.hashCode) +
@@ -100,41 +102,54 @@ class Video {
   }
 
   /// Returns a new [Video] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Video fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : Video(
-        id: json[r'id'],
-        title: json[r'title'],
-        duration: json[r'duration'],
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static Video fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return Video(
+        id: mapValueOfType<String>(json, r'id'),
+        title: mapValueOfType<String>(json, r'title'),
+        duration: mapValueOfType<int>(json, r'duration'),
         displayType: VideoDisplayTypeEnum.fromJson(json[r'display_type']),
         sourceType: VideoSourceTypeEnum.fromJson(json[r'source_type']),
-        thumbnailUrl: json[r'thumbnail_url'],
-        playbackUrl: json[r'playback_url'],
-        downloadUrl: json[r'download_url'],
-        shareUrl: json[r'share_url'],
-    );
+        thumbnailUrl: mapValueOfType<String>(json, r'thumbnail_url'),
+        playbackUrl: mapValueOfType<String>(json, r'playback_url'),
+        downloadUrl: mapValueOfType<String>(json, r'download_url'),
+        shareUrl: mapValueOfType<String>(json, r'share_url'),
+      );
+    }
+    return null;
+  }
 
-  static List<Video> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <Video>[]
-      : json.map((dynamic value) => Video.fromJson(value)).toList(growable: true == growable);
+  static List<Video> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Video.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Video>[];
 
-  static Map<String, Video> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Video> mapFromJson(dynamic json) {
     final map = <String, Video>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Video.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Video.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Video-objects as value to a dart map
-  static Map<String, List<Video>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Video>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Video>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Video.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Video.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }
@@ -149,7 +164,7 @@ class VideoDisplayTypeEnum {
   final String value;
 
   @override
-  String toString() => value;
+  String toString() => value ?? '';
 
   String toJson() => value;
 
@@ -169,20 +184,18 @@ class VideoDisplayTypeEnum {
   static VideoDisplayTypeEnum fromJson(dynamic value) =>
     VideoDisplayTypeEnumTypeTransformer().decode(value);
 
-  static List<VideoDisplayTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <VideoDisplayTypeEnum>[]
-      : json
-          .map((value) => VideoDisplayTypeEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<VideoDisplayTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(VideoDisplayTypeEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <VideoDisplayTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [VideoDisplayTypeEnum] to String,
 /// and [decode] dynamic data back to [VideoDisplayTypeEnum].
 class VideoDisplayTypeEnumTypeTransformer {
-  const VideoDisplayTypeEnumTypeTransformer._();
+  factory VideoDisplayTypeEnumTypeTransformer() => _instance ??= const VideoDisplayTypeEnumTypeTransformer._();
 
-  factory VideoDisplayTypeEnumTypeTransformer() => _instance ??= VideoDisplayTypeEnumTypeTransformer._();
+  const VideoDisplayTypeEnumTypeTransformer._();
 
   String encode(VideoDisplayTypeEnum data) => data.value;
 
@@ -195,15 +208,17 @@ class VideoDisplayTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   VideoDisplayTypeEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'BRANDED': return VideoDisplayTypeEnum.BRANDED;
-      case r'UNBRANDED': return VideoDisplayTypeEnum.UNBRANDED;
-      case r'BOTH': return VideoDisplayTypeEnum.BOTH;
-      case r'NONE': return VideoDisplayTypeEnum.NONE;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'BRANDED': return VideoDisplayTypeEnum.BRANDED;
+        case r'UNBRANDED': return VideoDisplayTypeEnum.UNBRANDED;
+        case r'BOTH': return VideoDisplayTypeEnum.BOTH;
+        case r'NONE': return VideoDisplayTypeEnum.NONE;
+        default:
+          if (allowNull == false) {
+            throw ArgumentError('Unknown enum value to decode: $data');
+          }
+      }
     }
     return null;
   }
@@ -211,6 +226,7 @@ class VideoDisplayTypeEnumTypeTransformer {
   /// Singleton [VideoDisplayTypeEnumTypeTransformer] instance.
   static VideoDisplayTypeEnumTypeTransformer _instance;
 }
+
 
 /// The original upload source of the video, used to determine how to handle the playback_url of the video and other display properties. 
 class VideoSourceTypeEnum {
@@ -221,7 +237,7 @@ class VideoSourceTypeEnum {
   final String value;
 
   @override
-  String toString() => value;
+  String toString() => value ?? '';
 
   String toJson() => value;
 
@@ -243,20 +259,18 @@ class VideoSourceTypeEnum {
   static VideoSourceTypeEnum fromJson(dynamic value) =>
     VideoSourceTypeEnumTypeTransformer().decode(value);
 
-  static List<VideoSourceTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <VideoSourceTypeEnum>[]
-      : json
-          .map((value) => VideoSourceTypeEnum.fromJson(value))
-          .toList(growable: true == growable);
+  static List<VideoSourceTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(VideoSourceTypeEnum.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <VideoSourceTypeEnum>[];
 }
 
 /// Transformation class that can [encode] an instance of [VideoSourceTypeEnum] to String,
 /// and [decode] dynamic data back to [VideoSourceTypeEnum].
 class VideoSourceTypeEnumTypeTransformer {
-  const VideoSourceTypeEnumTypeTransformer._();
+  factory VideoSourceTypeEnumTypeTransformer() => _instance ??= const VideoSourceTypeEnumTypeTransformer._();
 
-  factory VideoSourceTypeEnumTypeTransformer() => _instance ??= VideoSourceTypeEnumTypeTransformer._();
+  const VideoSourceTypeEnumTypeTransformer._();
 
   String encode(VideoSourceTypeEnum data) => data.value;
 
@@ -269,16 +283,18 @@ class VideoSourceTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   VideoSourceTypeEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'YOUTUBE': return VideoSourceTypeEnum.YOUTUBE;
-      case r'VIMEO': return VideoSourceTypeEnum.VIMEO;
-      case r'OPTIMIZED': return VideoSourceTypeEnum.OPTIMIZED;
-      case r'UPLOADED': return VideoSourceTypeEnum.UPLOADED;
-      case r'LINK': return VideoSourceTypeEnum.LINK;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
+    if (data != null) {
+      switch (data.toString()) {
+        case r'YOUTUBE': return VideoSourceTypeEnum.YOUTUBE;
+        case r'VIMEO': return VideoSourceTypeEnum.VIMEO;
+        case r'OPTIMIZED': return VideoSourceTypeEnum.OPTIMIZED;
+        case r'UPLOADED': return VideoSourceTypeEnum.UPLOADED;
+        case r'LINK': return VideoSourceTypeEnum.LINK;
+        default:
+          if (allowNull == false) {
+            throw ArgumentError('Unknown enum value to decode: $data');
+          }
+      }
     }
     return null;
   }
@@ -286,4 +302,5 @@ class VideoSourceTypeEnumTypeTransformer {
   /// Singleton [VideoSourceTypeEnumTypeTransformer] instance.
   static VideoSourceTypeEnumTypeTransformer _instance;
 }
+
 

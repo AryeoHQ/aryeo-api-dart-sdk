@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -39,6 +40,7 @@ class ListingBuilding {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (bedrooms == null ? 0 : bedrooms.hashCode) +
     (bathrooms == null ? 0 : bathrooms.hashCode) +
     (squareFeet == null ? 0 : squareFeet.hashCode) +
@@ -65,40 +67,53 @@ class ListingBuilding {
   }
 
   /// Returns a new [ListingBuilding] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static ListingBuilding fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : ListingBuilding(
-        bedrooms: json[r'bedrooms'],
-        bathrooms: json[r'bathrooms'] == null ?
-          null :
-          json[r'bathrooms'].toDouble(),
-        squareFeet: json[r'square_feet'] == null ?
-          null :
-          json[r'square_feet'].toDouble(),
-        yearBuilt: json[r'year_built'],
-    );
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static ListingBuilding fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return ListingBuilding(
+        bedrooms: mapValueOfType<int>(json, r'bedrooms'),
+        bathrooms: json[r'bathrooms'] == null
+          ? null
+          : num.parse(json[r'bathrooms'].toString()),
+        squareFeet: json[r'square_feet'] == null
+          ? null
+          : num.parse(json[r'square_feet'].toString()),
+        yearBuilt: mapValueOfType<int>(json, r'year_built'),
+      );
+    }
+    return null;
+  }
 
-  static List<ListingBuilding> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <ListingBuilding>[]
-      : json.map((dynamic value) => ListingBuilding.fromJson(value)).toList(growable: true == growable);
+  static List<ListingBuilding> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ListingBuilding.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ListingBuilding>[];
 
-  static Map<String, ListingBuilding> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, ListingBuilding> mapFromJson(dynamic json) {
     final map = <String, ListingBuilding>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = ListingBuilding.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = ListingBuilding.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ListingBuilding-objects as value to a dart map
-  static Map<String, List<ListingBuilding>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<ListingBuilding>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ListingBuilding>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = ListingBuilding.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = ListingBuilding.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

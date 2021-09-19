@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -37,6 +38,7 @@ class ListingCollection {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode) +
     (data == null ? 0 : data.hashCode) +
     (meta == null ? 0 : meta.hashCode) +
@@ -61,36 +63,49 @@ class ListingCollection {
   }
 
   /// Returns a new [ListingCollection] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static ListingCollection fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : ListingCollection(
-        status: json[r'status'],
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static ListingCollection fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return ListingCollection(
+        status: mapValueOfType<String>(json, r'status'),
         data: Listing.listFromJson(json[r'data']),
         meta: PaginationMeta.fromJson(json[r'meta']),
         links: PaginationLinks.fromJson(json[r'links']),
-    );
+      );
+    }
+    return null;
+  }
 
-  static List<ListingCollection> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <ListingCollection>[]
-      : json.map((dynamic value) => ListingCollection.fromJson(value)).toList(growable: true == growable);
+  static List<ListingCollection> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(ListingCollection.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <ListingCollection>[];
 
-  static Map<String, ListingCollection> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, ListingCollection> mapFromJson(dynamic json) {
     final map = <String, ListingCollection>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = ListingCollection.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = ListingCollection.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ListingCollection-objects as value to a dart map
-  static Map<String, List<ListingCollection>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<ListingCollection>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ListingCollection>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = ListingCollection.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = ListingCollection.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

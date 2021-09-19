@@ -19,7 +19,10 @@ Name | Type | Description | Notes
 **statusUrl** | **String** | A URL of a publicly-accessible webpage to see the order's status. | 
 **address** | [**Address**](Address.md) |  | [optional] 
 **customer** | [**Group**](Group.md) |  | [optional] 
+**listing** | [**Listing**](Listing.md) |  | [optional] 
 **items** | [**List<OrderItem>**](OrderItem.md) | items | [optional] [default to const []]
+**appointments** | [**List<Appointment>**](Appointment.md) |  | [optional] [default to const []]
+**unconfirmedAppointments** | [**List<UnconfirmedAppointment>**](UnconfirmedAppointment.md) |  | [optional] [default to const []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

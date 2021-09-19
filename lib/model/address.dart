@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -108,6 +109,7 @@ class Address {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (latitude == null ? 0 : latitude.hashCode) +
     (longitude == null ? 0 : longitude.hashCode) +
@@ -180,53 +182,66 @@ class Address {
   }
 
   /// Returns a new [Address] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static Address fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : Address(
-        id: json[r'id'],
-        latitude: json[r'latitude'] == null ?
-          null :
-          json[r'latitude'].toDouble(),
-        longitude: json[r'longitude'] == null ?
-          null :
-          json[r'longitude'].toDouble(),
-        streetNumber: json[r'street_number'],
-        streetName: json[r'street_name'],
-        unitNumber: json[r'unit_number'],
-        postalCode: json[r'postal_code'],
-        city: json[r'city'],
-        cityRegion: json[r'city_region'],
-        countyOrParish: json[r'county_or_parish'],
-        stateOrProvince: json[r'state_or_province'],
-        stateOrProvinceRegion: json[r'state_or_province_region'],
-        country: json[r'country'],
-        countryRegion: json[r'country_region'],
-        unparsedAddress: json[r'unparsed_address'],
-        unparsedAddressPartOne: json[r'unparsed_address_part_one'],
-        unparsedAddressPartTwo: json[r'unparsed_address_part_two'],
-    );
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static Address fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return Address(
+        id: mapValueOfType<String>(json, r'id'),
+        latitude: json[r'latitude'] == null
+          ? null
+          : num.parse(json[r'latitude'].toString()),
+        longitude: json[r'longitude'] == null
+          ? null
+          : num.parse(json[r'longitude'].toString()),
+        streetNumber: mapValueOfType<String>(json, r'street_number'),
+        streetName: mapValueOfType<String>(json, r'street_name'),
+        unitNumber: mapValueOfType<String>(json, r'unit_number'),
+        postalCode: mapValueOfType<String>(json, r'postal_code'),
+        city: mapValueOfType<String>(json, r'city'),
+        cityRegion: mapValueOfType<String>(json, r'city_region'),
+        countyOrParish: mapValueOfType<String>(json, r'county_or_parish'),
+        stateOrProvince: mapValueOfType<String>(json, r'state_or_province'),
+        stateOrProvinceRegion: mapValueOfType<String>(json, r'state_or_province_region'),
+        country: mapValueOfType<String>(json, r'country'),
+        countryRegion: mapValueOfType<String>(json, r'country_region'),
+        unparsedAddress: mapValueOfType<String>(json, r'unparsed_address'),
+        unparsedAddressPartOne: mapValueOfType<String>(json, r'unparsed_address_part_one'),
+        unparsedAddressPartTwo: mapValueOfType<String>(json, r'unparsed_address_part_two'),
+      );
+    }
+    return null;
+  }
 
-  static List<Address> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <Address>[]
-      : json.map((dynamic value) => Address.fromJson(value)).toList(growable: true == growable);
+  static List<Address> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(Address.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <Address>[];
 
-  static Map<String, Address> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, Address> mapFromJson(dynamic json) {
     final map = <String, Address>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = Address.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = Address.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Address-objects as value to a dart map
-  static Map<String, List<Address>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Address>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Address>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = Address.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = Address.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

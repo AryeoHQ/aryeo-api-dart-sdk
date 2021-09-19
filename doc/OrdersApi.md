@@ -11,7 +11,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getOrders**](OrdersApi.md#getorders) | **GET** /orders | List all orders.
 [**getOrdersId**](OrdersApi.md#getordersid) | **GET** /orders/{order_id} | Retrieve an order.
-[**getProducts**](OrdersApi.md#getproducts) | **GET** /products | Get products available to a group.
+[**getProducts**](OrdersApi.md#getproducts) | **GET** /products | List all products.
 [**postOrders**](OrdersApi.md#postorders) | **POST** /orders | Create an order.
 
 
@@ -122,9 +122,9 @@ Name | Type | Description  | Notes
 # **getProducts**
 > ProductCollection getProducts(sort, perPage, page, filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket)
 
-Get products available to a group.
+List all products.
 
-Get products of a group.
+List all products of a group.
 
 ### Example
 ```dart
@@ -141,7 +141,7 @@ final sort = -created_at; // String | Comma separated list of fields used for so
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
 final filterLeftSquareBracketSearchRightSquareBracket = Photography; // String | Return products that have fields matching this term.
-final filterLeftSquareBracketCategoryIdsRightSquareBracket = ["00000000-0000-4000-8000-000000000000"]; // List | Return products in the given categories.
+final filterLeftSquareBracketCategoryIdsRightSquareBracket = []; // List<String> | Return products in the given categories.
 final filterLeftSquareBracketTypeRightSquareBracket = MAIN; // String | Return products matching the given type. Allowed values are: MAIN, ADDON.
 
 try {
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
  **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
  **page** | **String**| The requested page. Defaults to 1. | [optional] 
  **filterLeftSquareBracketSearchRightSquareBracket** | **String**| Return products that have fields matching this term. | [optional] 
- **filterLeftSquareBracketCategoryIdsRightSquareBracket** | [**List**](.md)| Return products in the given categories. | [optional] 
+ **filterLeftSquareBracketCategoryIdsRightSquareBracket** | [**List<String>**](String.md)| Return products in the given categories. | [optional] [default to const []]
  **filterLeftSquareBracketTypeRightSquareBracket** | **String**| Return products matching the given type. Allowed values are: MAIN, ADDON. | [optional] 
 
 ### Return type

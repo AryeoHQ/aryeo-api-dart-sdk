@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -31,11 +32,13 @@ class OrdersApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<Response> getOrdersWithHttpInfo({ String sort, String perPage, String page }) async {
+  Future<Response> getOrdersWithHttpInfo({ String sort, String perPage, String page, }) async {
     // Verify required params are set.
 
+    // ignore: prefer_const_declarations
     final path = r'/orders';
 
+    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -52,19 +55,18 @@ class OrdersApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['Token'];
+    const authNames = <String>['Token'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -83,8 +85,8 @@ class OrdersApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<OrderCollection> getOrders({ String sort, String perPage, String page }) async {
-    final response = await getOrdersWithHttpInfo( sort: sort, perPage: perPage, page: page );
+  Future<OrderCollection> getOrders({ String sort, String perPage, String page, }) async {
+    final response = await getOrdersWithHttpInfo( sort: sort, perPage: perPage, page: page, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -94,7 +96,7 @@ class OrdersApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'OrderCollection',) as OrderCollection;
         }
-    return Future<OrderCollection>.value(null);
+    return Future<OrderCollection>.value();
   }
 
   /// Retrieve an order.
@@ -110,15 +112,17 @@ class OrdersApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<Response> getOrdersIdWithHttpInfo(String orderId, { String include }) async {
+  Future<Response> getOrdersIdWithHttpInfo(String orderId, { String include, }) async {
     // Verify required params are set.
     if (orderId == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: orderId');
     }
 
+    // ignore: prefer_const_declarations
     final path = r'/orders/{order_id}'
-      .replaceAll('{' + 'order_id' + '}', orderId.toString());
+      .replaceAll('{order_id}', orderId.toString());
 
+    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -129,19 +133,18 @@ class OrdersApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['Token'];
+    const authNames = <String>['Token'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -157,8 +160,8 @@ class OrdersApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<OrderResource> getOrdersId(String orderId, { String include }) async {
-    final response = await getOrdersIdWithHttpInfo(orderId,  include: include );
+  Future<OrderResource> getOrdersId(String orderId, { String include, }) async {
+    final response = await getOrdersIdWithHttpInfo(orderId,  include: include, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -168,12 +171,12 @@ class OrdersApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'OrderResource',) as OrderResource;
         }
-    return Future<OrderResource>.value(null);
+    return Future<OrderResource>.value();
   }
 
-  /// Get products available to a group.
+  /// List all products.
   ///
-  /// Get products of a group.
+  /// List all products of a group.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -191,16 +194,18 @@ class OrdersApi {
   /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
   ///   Return products that have fields matching this term.
   ///
-  /// * [List] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  /// * [List<String>] filterLeftSquareBracketCategoryIdsRightSquareBracket:
   ///   Return products in the given categories.
   ///
   /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
   ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
-  Future<Response> getProductsWithHttpInfo({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
+  Future<Response> getProductsWithHttpInfo({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List<String> filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket, }) async {
     // Verify required params are set.
 
+    // ignore: prefer_const_declarations
     final path = r'/products';
 
+    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -220,32 +225,31 @@ class OrdersApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[search]', filterLeftSquareBracketSearchRightSquareBracket));
     }
     if (filterLeftSquareBracketCategoryIdsRightSquareBracket != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[category_ids]', filterLeftSquareBracketCategoryIdsRightSquareBracket));
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'filter[category_ids]', filterLeftSquareBracketCategoryIdsRightSquareBracket));
     }
     if (filterLeftSquareBracketTypeRightSquareBracket != null) {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[type]', filterLeftSquareBracketTypeRightSquareBracket));
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['Token'];
+    const authNames = <String>['Token'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
 
-  /// Get products available to a group.
+  /// List all products.
   ///
-  /// Get products of a group.
+  /// List all products of a group.
   ///
   /// Parameters:
   ///
@@ -261,13 +265,13 @@ class OrdersApi {
   /// * [String] filterLeftSquareBracketSearchRightSquareBracket:
   ///   Return products that have fields matching this term.
   ///
-  /// * [List] filterLeftSquareBracketCategoryIdsRightSquareBracket:
+  /// * [List<String>] filterLeftSquareBracketCategoryIdsRightSquareBracket:
   ///   Return products in the given categories.
   ///
   /// * [String] filterLeftSquareBracketTypeRightSquareBracket:
   ///   Return products matching the given type. Allowed values are: MAIN, ADDON.
-  Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async {
-    final response = await getProductsWithHttpInfo( sort: sort, perPage: perPage, page: page, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket: filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket: filterLeftSquareBracketTypeRightSquareBracket );
+  Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List<String> filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket, }) async {
+    final response = await getProductsWithHttpInfo( sort: sort, perPage: perPage, page: page, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketCategoryIdsRightSquareBracket: filterLeftSquareBracketCategoryIdsRightSquareBracket, filterLeftSquareBracketTypeRightSquareBracket: filterLeftSquareBracketTypeRightSquareBracket, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -277,7 +281,7 @@ class OrdersApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ProductCollection',) as ProductCollection;
         }
-    return Future<ProductCollection>.value(null);
+    return Future<ProductCollection>.value();
   }
 
   /// Create an order.
@@ -290,30 +294,31 @@ class OrdersApi {
   ///
   /// * [OrderPostPayload] orderPostPayload:
   ///   OrderPostPayload
-  Future<Response> postOrdersWithHttpInfo({ OrderPostPayload orderPostPayload }) async {
+  Future<Response> postOrdersWithHttpInfo({ OrderPostPayload orderPostPayload, }) async {
     // Verify required params are set.
 
+    // ignore: prefer_const_declarations
     final path = r'/orders';
 
+    // ignore: prefer_final_locals
     Object postBody = orderPostPayload;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>['application/json'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['Token'];
+    const authNames = <String>['Token'];
+    const contentTypes = <String>['application/json'];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
+      contentTypes.isEmpty ? null : contentTypes[0],
       authNames,
     );
   }
@@ -326,8 +331,8 @@ class OrdersApi {
   ///
   /// * [OrderPostPayload] orderPostPayload:
   ///   OrderPostPayload
-  Future<OrderResource> postOrders({ OrderPostPayload orderPostPayload }) async {
-    final response = await postOrdersWithHttpInfo( orderPostPayload: orderPostPayload );
+  Future<OrderResource> postOrders({ OrderPostPayload orderPostPayload, }) async {
+    final response = await postOrdersWithHttpInfo( orderPostPayload: orderPostPayload, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -337,6 +342,6 @@ class OrdersApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'OrderResource',) as OrderResource;
         }
-    return Future<OrderResource>.value(null);
+    return Future<OrderResource>.value();
   }
 }

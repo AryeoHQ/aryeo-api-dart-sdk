@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -37,6 +38,7 @@ class UnconfirmedAppointmentCollection {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode) +
     (data == null ? 0 : data.hashCode) +
     (meta == null ? 0 : meta.hashCode) +
@@ -61,36 +63,49 @@ class UnconfirmedAppointmentCollection {
   }
 
   /// Returns a new [UnconfirmedAppointmentCollection] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static UnconfirmedAppointmentCollection fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : UnconfirmedAppointmentCollection(
-        status: json[r'status'],
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static UnconfirmedAppointmentCollection fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return UnconfirmedAppointmentCollection(
+        status: mapValueOfType<String>(json, r'status'),
         data: UnconfirmedAppointment.listFromJson(json[r'data']),
         meta: PaginationMeta.fromJson(json[r'meta']),
         links: PaginationLinks.fromJson(json[r'links']),
-    );
+      );
+    }
+    return null;
+  }
 
-  static List<UnconfirmedAppointmentCollection> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <UnconfirmedAppointmentCollection>[]
-      : json.map((dynamic value) => UnconfirmedAppointmentCollection.fromJson(value)).toList(growable: true == growable);
+  static List<UnconfirmedAppointmentCollection> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(UnconfirmedAppointmentCollection.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <UnconfirmedAppointmentCollection>[];
 
-  static Map<String, UnconfirmedAppointmentCollection> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, UnconfirmedAppointmentCollection> mapFromJson(dynamic json) {
     final map = <String, UnconfirmedAppointmentCollection>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = UnconfirmedAppointmentCollection.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = UnconfirmedAppointmentCollection.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of UnconfirmedAppointmentCollection-objects as value to a dart map
-  static Map<String, List<UnconfirmedAppointmentCollection>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<UnconfirmedAppointmentCollection>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<UnconfirmedAppointmentCollection>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = UnconfirmedAppointmentCollection.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = UnconfirmedAppointmentCollection.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

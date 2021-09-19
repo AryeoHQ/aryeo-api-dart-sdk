@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:aryeo/api.dart';
@@ -20,7 +21,7 @@ void main() {
     //
     // List all appointments. By default, returns a list of appointments that have been scheduled and have not been canceled
     //
-    //Future<AppointmentCollection> getAppointments({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async
+    //Future<AppointmentCollection> getAppointments({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async
     test('test getAppointments', () async {
       // TODO
     });
@@ -29,7 +30,7 @@ void main() {
     //
     // List all unconfirmed appointments. These are appointments that have not been scheduled. 
     //
-    //Future<UnconfirmedAppointmentCollection> getUnconfirmedAppointments({ String include, List filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async
+    //Future<UnconfirmedAppointmentCollection> getUnconfirmedAppointments({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async
     test('test getUnconfirmedAppointments', () async {
       // TODO
     });

@@ -5,6 +5,7 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -34,6 +35,7 @@ class PropertyWebsite {
 
   @override
   int get hashCode =>
+  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (brandedUrl == null ? 0 : brandedUrl.hashCode) +
     (unbrandedUrl == null ? 0 : unbrandedUrl.hashCode);
@@ -50,35 +52,48 @@ class PropertyWebsite {
   }
 
   /// Returns a new [PropertyWebsite] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static PropertyWebsite fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : PropertyWebsite(
-        id: json[r'id'],
-        brandedUrl: json[r'branded_url'],
-        unbrandedUrl: json[r'unbranded_url'],
-    );
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static PropertyWebsite fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+      return PropertyWebsite(
+        id: mapValueOfType<String>(json, r'id'),
+        brandedUrl: mapValueOfType<String>(json, r'branded_url'),
+        unbrandedUrl: mapValueOfType<String>(json, r'unbranded_url'),
+      );
+    }
+    return null;
+  }
 
-  static List<PropertyWebsite> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <PropertyWebsite>[]
-      : json.map((dynamic value) => PropertyWebsite.fromJson(value)).toList(growable: true == growable);
+  static List<PropertyWebsite> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
+    json is List && json.isNotEmpty
+      ? json.map(PropertyWebsite.fromJson).toList(growable: true == growable)
+      : true == emptyIsNull ? null : <PropertyWebsite>[];
 
-  static Map<String, PropertyWebsite> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, PropertyWebsite> mapFromJson(dynamic json) {
     final map = <String, PropertyWebsite>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = PropertyWebsite.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) => map[key] = PropertyWebsite.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PropertyWebsite-objects as value to a dart map
-  static Map<String, List<PropertyWebsite>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<PropertyWebsite>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PropertyWebsite>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = PropertyWebsite.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      json
+        .cast<String, dynamic>()
+        .forEach((key, dynamic value) {
+          map[key] = PropertyWebsite.listFromJson(
+            value,
+            emptyIsNull: emptyIsNull,
+            growable: growable,
+          );
+        });
     }
     return map;
   }

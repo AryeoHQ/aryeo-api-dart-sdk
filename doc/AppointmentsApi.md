@@ -38,7 +38,7 @@ final include = order,users; // String | Comma separated list of optional data t
 final filterLeftSquareBracketTenseRightSquareBracket = UPCOMING; // String | Return appointments that are upcoming or in the past.
 final filterLeftSquareBracketStartAtGteRightSquareBracket = 2021-01-01T13:00Z; // DateTime | Return appointments where the start_at field is greater than or equal to this value. Effectively, appointments that start after this date.
 final filterLeftSquareBracketStartAtLteRightSquareBracket = 2021-01-02T13:00Z; // DateTime | Return appointments where the start_at field is less than or equal to this value. Effectively, appointments that start before this date.
-final filterLeftSquareBracketUserIdsRightSquareBracket = ["00000000-0000-4000-8000-000000000000"]; // List | The IDs of users whose appointments will be retrieved. UUID Version 4.
+final filterLeftSquareBracketUserIdsRightSquareBracket = []; // List<String> | The IDs of users whose appointments will be retrieved. UUID Version 4.
 final sort = -created_at; // String | Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-start_at`.
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
  **filterLeftSquareBracketTenseRightSquareBracket** | **String**| Return appointments that are upcoming or in the past. | [optional] 
  **filterLeftSquareBracketStartAtGteRightSquareBracket** | **DateTime**| Return appointments where the start_at field is greater than or equal to this value. Effectively, appointments that start after this date. | [optional] 
  **filterLeftSquareBracketStartAtLteRightSquareBracket** | **DateTime**| Return appointments where the start_at field is less than or equal to this value. Effectively, appointments that start before this date. | [optional] 
- **filterLeftSquareBracketUserIdsRightSquareBracket** | [**List**](.md)| The IDs of users whose appointments will be retrieved. UUID Version 4. | [optional] 
+ **filterLeftSquareBracketUserIdsRightSquareBracket** | [**List<String>**](String.md)| The IDs of users whose appointments will be retrieved. UUID Version 4. | [optional] [default to const []]
  **sort** | **String**| Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-start_at`. | [optional] 
  **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
  **page** | **String**| The requested page. Defaults to 1. | [optional] 
@@ -98,7 +98,7 @@ import 'package:aryeo/api.dart';
 
 final api_instance = AppointmentsApi();
 final include = order,users; // String | Comma separated list of optional data to include in the response.
-final filterLeftSquareBracketUserIdsRightSquareBracket = ["00000000-0000-4000-8000-000000000000"]; // List | The IDs of users whose appointments will be retrieved. UUID Version 4.
+final filterLeftSquareBracketUserIdsRightSquareBracket = []; // List<String> | The IDs of users whose appointments will be retrieved. UUID Version 4.
 final sort = -created_at; // String | Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-start_at`.
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
@@ -116,7 +116,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **include** | **String**| Comma separated list of optional data to include in the response. | [optional] 
- **filterLeftSquareBracketUserIdsRightSquareBracket** | [**List**](.md)| The IDs of users whose appointments will be retrieved. UUID Version 4. | [optional] 
+ **filterLeftSquareBracketUserIdsRightSquareBracket** | [**List<String>**](String.md)| The IDs of users whose appointments will be retrieved. UUID Version 4. | [optional] [default to const []]
  **sort** | **String**| Comma separated list of fields used for sorting. Placing a minus symbol in front of a field name sorts in descending order. Defaults to `-start_at`. | [optional] 
  **perPage** | **String**| The number of items per page. Defaults to 25. | [optional] 
  **page** | **String**| The requested page. Defaults to 1. | [optional] 
