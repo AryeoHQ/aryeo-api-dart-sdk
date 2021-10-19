@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -14,92 +13,98 @@ class OrderPostPayload {
   /// Returns a new [OrderPostPayload] instance.
   OrderPostPayload({
     this.fulfillmentStatus,
+    this.internalNotes,
     this.paymentStatus,
-    this.placeId,
+    this.addressId,
+    this.customerId,
   });
 
   /// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
   OrderPostPayloadFulfillmentStatusEnum fulfillmentStatus;
 
+  /// Internal notes that will be attached to the order. Viewable only by the team.
+  String internalNotes;
+
   /// The payment status of the order. Defaults to \"UNPAID\". 
   OrderPostPayloadPaymentStatusEnum paymentStatus;
 
-  /// Google Places ID of the address to attach to the order.
-  String placeId;
+  /// ID of the address to associate with the order. UUID Version 4.
+  String addressId;
+
+  /// ID of the customer to associate with the order. UUID Version 4.
+  String customerId;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
+     other.internalNotes == internalNotes &&
      other.paymentStatus == paymentStatus &&
-     other.placeId == placeId;
+     other.addressId == addressId &&
+     other.customerId == customerId;
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode) +
+    (internalNotes == null ? 0 : internalNotes.hashCode) +
     (paymentStatus == null ? 0 : paymentStatus.hashCode) +
-    (placeId == null ? 0 : placeId.hashCode);
+    (addressId == null ? 0 : addressId.hashCode) +
+    (customerId == null ? 0 : customerId.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus, placeId=$placeId]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, paymentStatus=$paymentStatus, addressId=$addressId, customerId=$customerId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
     if (fulfillmentStatus != null) {
       json[r'fulfillment_status'] = fulfillmentStatus;
     }
+    if (internalNotes != null) {
+      json[r'internal_notes'] = internalNotes;
+    }
     if (paymentStatus != null) {
       json[r'payment_status'] = paymentStatus;
     }
-    if (placeId != null) {
-      json[r'place_id'] = placeId;
+    if (addressId != null) {
+      json[r'address_id'] = addressId;
+    }
+    if (customerId != null) {
+      json[r'customer_id'] = customerId;
     }
     return json;
   }
 
   /// Returns a new [OrderPostPayload] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static OrderPostPayload fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return OrderPostPayload(
+  /// [json] if it's non-null, null if [json] is null.
+  static OrderPostPayload fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : OrderPostPayload(
         fulfillmentStatus: OrderPostPayloadFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
+        internalNotes: json[r'internal_notes'],
         paymentStatus: OrderPostPayloadPaymentStatusEnum.fromJson(json[r'payment_status']),
-        placeId: mapValueOfType<String>(json, r'place_id'),
-      );
-    }
-    return null;
-  }
+        addressId: json[r'address_id'],
+        customerId: json[r'customer_id'],
+    );
 
-  static List<OrderPostPayload> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderPostPayload.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderPostPayload>[];
+  static List<OrderPostPayload> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderPostPayload>[]
+      : json.map((dynamic value) => OrderPostPayload.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, OrderPostPayload> mapFromJson(dynamic json) {
+  static Map<String, OrderPostPayload> mapFromJson(Map<String, dynamic> json) {
     final map = <String, OrderPostPayload>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = OrderPostPayload.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = OrderPostPayload.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of OrderPostPayload-objects as value to a dart map
-  static Map<String, List<OrderPostPayload>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<OrderPostPayload>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<OrderPostPayload>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = OrderPostPayload.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = OrderPostPayload.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -114,7 +119,7 @@ class OrderPostPayloadFulfillmentStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -130,18 +135,20 @@ class OrderPostPayloadFulfillmentStatusEnum {
   static OrderPostPayloadFulfillmentStatusEnum fromJson(dynamic value) =>
     OrderPostPayloadFulfillmentStatusEnumTypeTransformer().decode(value);
 
-  static List<OrderPostPayloadFulfillmentStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderPostPayloadFulfillmentStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderPostPayloadFulfillmentStatusEnum>[];
+  static List<OrderPostPayloadFulfillmentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderPostPayloadFulfillmentStatusEnum>[]
+      : json
+          .map((value) => OrderPostPayloadFulfillmentStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [OrderPostPayloadFulfillmentStatusEnum] to String,
 /// and [decode] dynamic data back to [OrderPostPayloadFulfillmentStatusEnum].
 class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
-  factory OrderPostPayloadFulfillmentStatusEnumTypeTransformer() => _instance ??= const OrderPostPayloadFulfillmentStatusEnumTypeTransformer._();
-
   const OrderPostPayloadFulfillmentStatusEnumTypeTransformer._();
+
+  factory OrderPostPayloadFulfillmentStatusEnumTypeTransformer() => _instance ??= OrderPostPayloadFulfillmentStatusEnumTypeTransformer._();
 
   String encode(OrderPostPayloadFulfillmentStatusEnum data) => data.value;
 
@@ -154,15 +161,13 @@ class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   OrderPostPayloadFulfillmentStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'FULFILLED': return OrderPostPayloadFulfillmentStatusEnum.FULFILLED;
-        case r'UNFULFILLED': return OrderPostPayloadFulfillmentStatusEnum.UNFULFILLED;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'FULFILLED': return OrderPostPayloadFulfillmentStatusEnum.FULFILLED;
+      case r'UNFULFILLED': return OrderPostPayloadFulfillmentStatusEnum.UNFULFILLED;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -170,7 +175,6 @@ class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
   /// Singleton [OrderPostPayloadFulfillmentStatusEnumTypeTransformer] instance.
   static OrderPostPayloadFulfillmentStatusEnumTypeTransformer _instance;
 }
-
 
 /// The payment status of the order. Defaults to \"UNPAID\". 
 class OrderPostPayloadPaymentStatusEnum {
@@ -181,7 +185,7 @@ class OrderPostPayloadPaymentStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -197,18 +201,20 @@ class OrderPostPayloadPaymentStatusEnum {
   static OrderPostPayloadPaymentStatusEnum fromJson(dynamic value) =>
     OrderPostPayloadPaymentStatusEnumTypeTransformer().decode(value);
 
-  static List<OrderPostPayloadPaymentStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderPostPayloadPaymentStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderPostPayloadPaymentStatusEnum>[];
+  static List<OrderPostPayloadPaymentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderPostPayloadPaymentStatusEnum>[]
+      : json
+          .map((value) => OrderPostPayloadPaymentStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [OrderPostPayloadPaymentStatusEnum] to String,
 /// and [decode] dynamic data back to [OrderPostPayloadPaymentStatusEnum].
 class OrderPostPayloadPaymentStatusEnumTypeTransformer {
-  factory OrderPostPayloadPaymentStatusEnumTypeTransformer() => _instance ??= const OrderPostPayloadPaymentStatusEnumTypeTransformer._();
-
   const OrderPostPayloadPaymentStatusEnumTypeTransformer._();
+
+  factory OrderPostPayloadPaymentStatusEnumTypeTransformer() => _instance ??= OrderPostPayloadPaymentStatusEnumTypeTransformer._();
 
   String encode(OrderPostPayloadPaymentStatusEnum data) => data.value;
 
@@ -221,15 +227,13 @@ class OrderPostPayloadPaymentStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   OrderPostPayloadPaymentStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'PAID': return OrderPostPayloadPaymentStatusEnum.PAID;
-        case r'UNPAID': return OrderPostPayloadPaymentStatusEnum.UNPAID;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'PAID': return OrderPostPayloadPaymentStatusEnum.PAID;
+      case r'UNPAID': return OrderPostPayloadPaymentStatusEnum.UNPAID;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -237,5 +241,4 @@ class OrderPostPayloadPaymentStatusEnumTypeTransformer {
   /// Singleton [OrderPostPayloadPaymentStatusEnumTypeTransformer] instance.
   static OrderPostPayloadPaymentStatusEnumTypeTransformer _instance;
 }
-
 

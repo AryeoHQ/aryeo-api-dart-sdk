@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -45,7 +44,6 @@ class InteractiveContent {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (displayType == null ? 0 : displayType.hashCode) +
     (contentType == null ? 0 : contentType.hashCode) +
@@ -68,50 +66,37 @@ class InteractiveContent {
   }
 
   /// Returns a new [InteractiveContent] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static InteractiveContent fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return InteractiveContent(
-        id: mapValueOfType<String>(json, r'id'),
+  /// [json] if it's non-null, null if [json] is null.
+  static InteractiveContent fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : InteractiveContent(
+        id: json[r'id'],
         displayType: InteractiveContentDisplayTypeEnum.fromJson(json[r'display_type']),
         contentType: InteractiveContentContentTypeEnum.fromJson(json[r'content_type']),
-        url: mapValueOfType<String>(json, r'url'),
-        thumbnailUrl: mapValueOfType<String>(json, r'thumbnail_url'),
-      );
-    }
-    return null;
-  }
+        url: json[r'url'],
+        thumbnailUrl: json[r'thumbnail_url'],
+    );
 
-  static List<InteractiveContent> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(InteractiveContent.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <InteractiveContent>[];
+  static List<InteractiveContent> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <InteractiveContent>[]
+      : json.map((dynamic value) => InteractiveContent.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, InteractiveContent> mapFromJson(dynamic json) {
+  static Map<String, InteractiveContent> mapFromJson(Map<String, dynamic> json) {
     final map = <String, InteractiveContent>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = InteractiveContent.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = InteractiveContent.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of InteractiveContent-objects as value to a dart map
-  static Map<String, List<InteractiveContent>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<InteractiveContent>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<InteractiveContent>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = InteractiveContent.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = InteractiveContent.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -126,7 +111,7 @@ class InteractiveContentDisplayTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -144,18 +129,20 @@ class InteractiveContentDisplayTypeEnum {
   static InteractiveContentDisplayTypeEnum fromJson(dynamic value) =>
     InteractiveContentDisplayTypeEnumTypeTransformer().decode(value);
 
-  static List<InteractiveContentDisplayTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(InteractiveContentDisplayTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <InteractiveContentDisplayTypeEnum>[];
+  static List<InteractiveContentDisplayTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <InteractiveContentDisplayTypeEnum>[]
+      : json
+          .map((value) => InteractiveContentDisplayTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [InteractiveContentDisplayTypeEnum] to String,
 /// and [decode] dynamic data back to [InteractiveContentDisplayTypeEnum].
 class InteractiveContentDisplayTypeEnumTypeTransformer {
-  factory InteractiveContentDisplayTypeEnumTypeTransformer() => _instance ??= const InteractiveContentDisplayTypeEnumTypeTransformer._();
-
   const InteractiveContentDisplayTypeEnumTypeTransformer._();
+
+  factory InteractiveContentDisplayTypeEnumTypeTransformer() => _instance ??= InteractiveContentDisplayTypeEnumTypeTransformer._();
 
   String encode(InteractiveContentDisplayTypeEnum data) => data.value;
 
@@ -168,16 +155,14 @@ class InteractiveContentDisplayTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   InteractiveContentDisplayTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'BRANDED': return InteractiveContentDisplayTypeEnum.BRANDED;
-        case r'UNBRANDED': return InteractiveContentDisplayTypeEnum.UNBRANDED;
-        case r'BOTH': return InteractiveContentDisplayTypeEnum.BOTH;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'BRANDED': return InteractiveContentDisplayTypeEnum.BRANDED;
+      case r'UNBRANDED': return InteractiveContentDisplayTypeEnum.UNBRANDED;
+      case r'BOTH': return InteractiveContentDisplayTypeEnum.BOTH;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -185,7 +170,6 @@ class InteractiveContentDisplayTypeEnumTypeTransformer {
   /// Singleton [InteractiveContentDisplayTypeEnumTypeTransformer] instance.
   static InteractiveContentDisplayTypeEnumTypeTransformer _instance;
 }
-
 
 /// The type of interactive content.
 class InteractiveContentContentTypeEnum {
@@ -196,7 +180,7 @@ class InteractiveContentContentTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -212,18 +196,20 @@ class InteractiveContentContentTypeEnum {
   static InteractiveContentContentTypeEnum fromJson(dynamic value) =>
     InteractiveContentContentTypeEnumTypeTransformer().decode(value);
 
-  static List<InteractiveContentContentTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(InteractiveContentContentTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <InteractiveContentContentTypeEnum>[];
+  static List<InteractiveContentContentTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <InteractiveContentContentTypeEnum>[]
+      : json
+          .map((value) => InteractiveContentContentTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [InteractiveContentContentTypeEnum] to String,
 /// and [decode] dynamic data back to [InteractiveContentContentTypeEnum].
 class InteractiveContentContentTypeEnumTypeTransformer {
-  factory InteractiveContentContentTypeEnumTypeTransformer() => _instance ??= const InteractiveContentContentTypeEnumTypeTransformer._();
-
   const InteractiveContentContentTypeEnumTypeTransformer._();
+
+  factory InteractiveContentContentTypeEnumTypeTransformer() => _instance ??= InteractiveContentContentTypeEnumTypeTransformer._();
 
   String encode(InteractiveContentContentTypeEnum data) => data.value;
 
@@ -236,15 +222,13 @@ class InteractiveContentContentTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   InteractiveContentContentTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'MATTERPORT': return InteractiveContentContentTypeEnum.MATTERPORT;
-        case r'OTHER': return InteractiveContentContentTypeEnum.OTHER;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'MATTERPORT': return InteractiveContentContentTypeEnum.MATTERPORT;
+      case r'OTHER': return InteractiveContentContentTypeEnum.OTHER;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -252,5 +236,4 @@ class InteractiveContentContentTypeEnumTypeTransformer {
   /// Singleton [InteractiveContentContentTypeEnumTypeTransformer] instance.
   static InteractiveContentContentTypeEnumTypeTransformer _instance;
 }
-
 

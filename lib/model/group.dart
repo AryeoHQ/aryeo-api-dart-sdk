@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -13,6 +12,7 @@ part of openapi.api;
 class Group {
   /// Returns a new [Group] instance.
   Group({
+    this.object,
     @required this.id,
     @required this.type,
     @required this.name,
@@ -30,6 +30,9 @@ class Group {
     this.users,
     @required this.isBrokerageOrBrokerageAgent,
   });
+
+  /// String representing the object’s type. Objects of the same type share the same schema.
+  String object;
 
   /// ID of the group. UUID Version 4.
   String id;
@@ -78,6 +81,7 @@ class Group {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Group &&
+     other.object == object &&
      other.id == id &&
      other.type == type &&
      other.name == name &&
@@ -97,7 +101,7 @@ class Group {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
+    (object == null ? 0 : object.hashCode) +
     (id == null ? 0 : id.hashCode) +
     (type == null ? 0 : type.hashCode) +
     (name == null ? 0 : name.hashCode) +
@@ -116,10 +120,13 @@ class Group {
     (isBrokerageOrBrokerageAgent == null ? 0 : isBrokerageOrBrokerageAgent.hashCode);
 
   @override
-  String toString() => 'Group[id=$id, type=$type, name=$name, email=$email, phone=$phone, websiteUrl=$websiteUrl, logoUrl=$logoUrl, avatarUrl=$avatarUrl, officeName=$officeName, licenseNumber=$licenseNumber, socialProfiles=$socialProfiles, defaultOrderForm=$defaultOrderForm, orderForms=$orderForms, owner=$owner, users=$users, isBrokerageOrBrokerageAgent=$isBrokerageOrBrokerageAgent]';
+  String toString() => 'Group[object=$object, id=$id, type=$type, name=$name, email=$email, phone=$phone, websiteUrl=$websiteUrl, logoUrl=$logoUrl, avatarUrl=$avatarUrl, officeName=$officeName, licenseNumber=$licenseNumber, socialProfiles=$socialProfiles, defaultOrderForm=$defaultOrderForm, orderForms=$orderForms, owner=$owner, users=$users, isBrokerageOrBrokerageAgent=$isBrokerageOrBrokerageAgent]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+    if (object != null) {
+      json[r'object'] = object;
+    }
       json[r'id'] = id;
       json[r'type'] = type;
       json[r'name'] = name;
@@ -164,61 +171,49 @@ class Group {
   }
 
   /// Returns a new [Group] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static Group fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return Group(
-        id: mapValueOfType<String>(json, r'id'),
+  /// [json] if it's non-null, null if [json] is null.
+  static Group fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : Group(
+        object: json[r'object'],
+        id: json[r'id'],
         type: GroupTypeEnum.fromJson(json[r'type']),
-        name: mapValueOfType<String>(json, r'name'),
-        email: mapValueOfType<String>(json, r'email'),
-        phone: mapValueOfType<String>(json, r'phone'),
-        websiteUrl: mapValueOfType<String>(json, r'website_url'),
-        logoUrl: mapValueOfType<String>(json, r'logo_url'),
-        avatarUrl: mapValueOfType<String>(json, r'avatar_url'),
-        officeName: mapValueOfType<String>(json, r'office_name'),
-        licenseNumber: mapValueOfType<String>(json, r'license_number'),
+        name: json[r'name'],
+        email: json[r'email'],
+        phone: json[r'phone'],
+        websiteUrl: json[r'website_url'],
+        logoUrl: json[r'logo_url'],
+        avatarUrl: json[r'avatar_url'],
+        officeName: json[r'office_name'],
+        licenseNumber: json[r'license_number'],
         socialProfiles: SocialProfiles.fromJson(json[r'social_profiles']),
         defaultOrderForm: OrderForm.fromJson(json[r'default_order_form']),
         orderForms: OrderForm.listFromJson(json[r'order_forms']),
         owner: User.fromJson(json[r'owner']),
         users: User.listFromJson(json[r'users']),
-        isBrokerageOrBrokerageAgent: mapValueOfType<bool>(json, r'is_brokerage_or_brokerage_agent'),
-      );
-    }
-    return null;
-  }
+        isBrokerageOrBrokerageAgent: json[r'is_brokerage_or_brokerage_agent'],
+    );
 
-  static List<Group> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Group.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Group>[];
+  static List<Group> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <Group>[]
+      : json.map((dynamic value) => Group.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Group> mapFromJson(dynamic json) {
+  static Map<String, Group> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Group>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Group.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Group.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Group-objects as value to a dart map
-  static Map<String, List<Group>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Group>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Group>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Group.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Group.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -233,7 +228,7 @@ class GroupTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -251,18 +246,20 @@ class GroupTypeEnum {
   static GroupTypeEnum fromJson(dynamic value) =>
     GroupTypeEnumTypeTransformer().decode(value);
 
-  static List<GroupTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(GroupTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <GroupTypeEnum>[];
+  static List<GroupTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <GroupTypeEnum>[]
+      : json
+          .map((value) => GroupTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [GroupTypeEnum] to String,
 /// and [decode] dynamic data back to [GroupTypeEnum].
 class GroupTypeEnumTypeTransformer {
-  factory GroupTypeEnumTypeTransformer() => _instance ??= const GroupTypeEnumTypeTransformer._();
-
   const GroupTypeEnumTypeTransformer._();
+
+  factory GroupTypeEnumTypeTransformer() => _instance ??= GroupTypeEnumTypeTransformer._();
 
   String encode(GroupTypeEnum data) => data.value;
 
@@ -275,16 +272,14 @@ class GroupTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   GroupTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'CREATOR': return GroupTypeEnum.CREATOR;
-        case r'AGENT': return GroupTypeEnum.AGENT;
-        case r'BROKERAGE': return GroupTypeEnum.BROKERAGE;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'CREATOR': return GroupTypeEnum.CREATOR;
+      case r'AGENT': return GroupTypeEnum.AGENT;
+      case r'BROKERAGE': return GroupTypeEnum.BROKERAGE;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -292,5 +287,4 @@ class GroupTypeEnumTypeTransformer {
   /// Singleton [GroupTypeEnumTypeTransformer] instance.
   static GroupTypeEnumTypeTransformer _instance;
 }
-
 

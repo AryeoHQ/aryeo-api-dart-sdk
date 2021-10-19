@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -55,7 +54,6 @@ class Image {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (thumbnailUrl == null ? 0 : thumbnailUrl.hashCode) +
     (largeUrl == null ? 0 : largeUrl.hashCode) +
@@ -84,52 +82,39 @@ class Image {
   }
 
   /// Returns a new [Image] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static Image fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return Image(
-        id: mapValueOfType<String>(json, r'id'),
-        thumbnailUrl: mapValueOfType<String>(json, r'thumbnail_url'),
-        largeUrl: mapValueOfType<String>(json, r'large_url'),
-        originalUrl: mapValueOfType<String>(json, r'original_url'),
-        index: mapValueOfType<int>(json, r'index'),
-        caption: mapValueOfType<String>(json, r'caption'),
-        displayInGallery: mapValueOfType<bool>(json, r'display_in_gallery'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static Image fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : Image(
+        id: json[r'id'],
+        thumbnailUrl: json[r'thumbnail_url'],
+        largeUrl: json[r'large_url'],
+        originalUrl: json[r'original_url'],
+        index: json[r'index'],
+        caption: json[r'caption'],
+        displayInGallery: json[r'display_in_gallery'],
+    );
 
-  static List<Image> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Image.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Image>[];
+  static List<Image> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <Image>[]
+      : json.map((dynamic value) => Image.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Image> mapFromJson(dynamic json) {
+  static Map<String, Image> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Image>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Image.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Image.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Image-objects as value to a dart map
-  static Map<String, List<Image>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Image>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Image>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Image.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Image.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

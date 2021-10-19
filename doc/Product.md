@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **id** | **String** | ID of the product. UUID Version 4. | 
 **title** | **String** | The title of the product. | 
 **description** | **String** | The description of the product. | [optional] 
+**active** | **bool** | The active status of a product. | [optional] 
 **type** | **String** | The type of product. | 
 **variants** | [**List<ProductVariant>**](ProductVariant.md) |  | [optional] [default to const []]
 **categories** | [**List<ProductCategory>**](ProductCategory.md) |  | [optional] [default to const []]

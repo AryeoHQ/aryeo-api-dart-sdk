@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -35,7 +34,6 @@ class ProductVariant {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (title == null ? 0 : title.hashCode) +
     (price == null ? 0 : price.hashCode);
@@ -52,48 +50,35 @@ class ProductVariant {
   }
 
   /// Returns a new [ProductVariant] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static ProductVariant fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return ProductVariant(
-        id: mapValueOfType<String>(json, r'id'),
-        title: mapValueOfType<String>(json, r'title'),
-        price: mapValueOfType<int>(json, r'price'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static ProductVariant fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : ProductVariant(
+        id: json[r'id'],
+        title: json[r'title'],
+        price: json[r'price'],
+    );
 
-  static List<ProductVariant> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ProductVariant.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ProductVariant>[];
+  static List<ProductVariant> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ProductVariant>[]
+      : json.map((dynamic value) => ProductVariant.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, ProductVariant> mapFromJson(dynamic json) {
+  static Map<String, ProductVariant> mapFromJson(Map<String, dynamic> json) {
     final map = <String, ProductVariant>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = ProductVariant.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = ProductVariant.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ProductVariant-objects as value to a dart map
-  static Map<String, List<ProductVariant>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<ProductVariant>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ProductVariant>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = ProductVariant.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = ProductVariant.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

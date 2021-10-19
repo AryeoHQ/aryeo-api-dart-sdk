@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -51,7 +50,6 @@ class FloorPlan {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (originalUrl == null ? 0 : originalUrl.hashCode) +
     (largeUrl == null ? 0 : largeUrl.hashCode) +
@@ -78,51 +76,38 @@ class FloorPlan {
   }
 
   /// Returns a new [FloorPlan] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static FloorPlan fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return FloorPlan(
-        id: mapValueOfType<String>(json, r'id'),
-        originalUrl: mapValueOfType<String>(json, r'original_url'),
-        largeUrl: mapValueOfType<String>(json, r'large_url'),
-        thumbnailUrl: mapValueOfType<String>(json, r'thumbnail_url'),
-        title: mapValueOfType<String>(json, r'title'),
-        index: mapValueOfType<int>(json, r'index'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static FloorPlan fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : FloorPlan(
+        id: json[r'id'],
+        originalUrl: json[r'original_url'],
+        largeUrl: json[r'large_url'],
+        thumbnailUrl: json[r'thumbnail_url'],
+        title: json[r'title'],
+        index: json[r'index'],
+    );
 
-  static List<FloorPlan> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(FloorPlan.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <FloorPlan>[];
+  static List<FloorPlan> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <FloorPlan>[]
+      : json.map((dynamic value) => FloorPlan.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, FloorPlan> mapFromJson(dynamic json) {
+  static Map<String, FloorPlan> mapFromJson(Map<String, dynamic> json) {
     final map = <String, FloorPlan>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = FloorPlan.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = FloorPlan.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of FloorPlan-objects as value to a dart map
-  static Map<String, List<FloorPlan>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<FloorPlan>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<FloorPlan>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = FloorPlan.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = FloorPlan.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

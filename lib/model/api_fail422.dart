@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -25,7 +24,6 @@ class ApiFail422 {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (status == null ? 0 : status.hashCode);
 
   @override
@@ -38,46 +36,33 @@ class ApiFail422 {
   }
 
   /// Returns a new [ApiFail422] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static ApiFail422 fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return ApiFail422(
-        status: mapValueOfType<String>(json, r'status'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static ApiFail422 fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : ApiFail422(
+        status: json[r'status'],
+    );
 
-  static List<ApiFail422> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ApiFail422.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ApiFail422>[];
+  static List<ApiFail422> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ApiFail422>[]
+      : json.map((dynamic value) => ApiFail422.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, ApiFail422> mapFromJson(dynamic json) {
+  static Map<String, ApiFail422> mapFromJson(Map<String, dynamic> json) {
     final map = <String, ApiFail422>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = ApiFail422.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = ApiFail422.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of ApiFail422-objects as value to a dart map
-  static Map<String, List<ApiFail422>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<ApiFail422>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<ApiFail422>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = ApiFail422.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = ApiFail422.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

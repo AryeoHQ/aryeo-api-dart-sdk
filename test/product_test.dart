@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:aryeo/api.dart';
@@ -31,6 +30,12 @@ void main() {
     // The description of the product.
     // String description
     test('to test the property `description`', () async {
+      // TODO
+    });
+
+    // The active status of a product.
+    // bool active
+    test('to test the property `active`', () async {
       // TODO
     });
 

@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -55,7 +54,6 @@ class PaginationMeta {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (total == null ? 0 : total.hashCode) +
     (perPage == null ? 0 : perPage.hashCode) +
     (currentPage == null ? 0 : currentPage.hashCode) +
@@ -84,52 +82,39 @@ class PaginationMeta {
   }
 
   /// Returns a new [PaginationMeta] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static PaginationMeta fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return PaginationMeta(
-        total: mapValueOfType<int>(json, r'total'),
-        perPage: mapValueOfType<int>(json, r'per_page'),
-        currentPage: mapValueOfType<int>(json, r'current_page'),
-        lastPage: mapValueOfType<int>(json, r'last_page'),
-        from: mapValueOfType<int>(json, r'from'),
-        to: mapValueOfType<int>(json, r'to'),
-        path: mapValueOfType<String>(json, r'path'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static PaginationMeta fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : PaginationMeta(
+        total: json[r'total'],
+        perPage: json[r'per_page'],
+        currentPage: json[r'current_page'],
+        lastPage: json[r'last_page'],
+        from: json[r'from'],
+        to: json[r'to'],
+        path: json[r'path'],
+    );
 
-  static List<PaginationMeta> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(PaginationMeta.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <PaginationMeta>[];
+  static List<PaginationMeta> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <PaginationMeta>[]
+      : json.map((dynamic value) => PaginationMeta.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, PaginationMeta> mapFromJson(dynamic json) {
+  static Map<String, PaginationMeta> mapFromJson(Map<String, dynamic> json) {
     final map = <String, PaginationMeta>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = PaginationMeta.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = PaginationMeta.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of PaginationMeta-objects as value to a dart map
-  static Map<String, List<PaginationMeta>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<PaginationMeta>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<PaginationMeta>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = PaginationMeta.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = PaginationMeta.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

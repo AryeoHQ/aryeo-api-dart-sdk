@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -91,7 +90,6 @@ class Order {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (number == null ? 0 : number.hashCode) +
     (title == null ? 0 : title.hashCode) +
@@ -150,60 +148,47 @@ class Order {
   }
 
   /// Returns a new [Order] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static Order fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return Order(
-        id: mapValueOfType<String>(json, r'id'),
-        number: mapValueOfType<int>(json, r'number'),
-        title: mapValueOfType<String>(json, r'title'),
+  /// [json] if it's non-null, null if [json] is null.
+  static Order fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : Order(
+        id: json[r'id'],
+        number: json[r'number'],
+        title: json[r'title'],
         fulfillmentStatus: OrderFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
         paymentStatus: OrderPaymentStatusEnum.fromJson(json[r'payment_status']),
         currency: OrderCurrencyEnum.fromJson(json[r'currency']),
-        totalAmount: mapValueOfType<int>(json, r'total_amount'),
-        paymentUrl: mapValueOfType<String>(json, r'payment_url'),
-        statusUrl: mapValueOfType<String>(json, r'status_url'),
+        totalAmount: json[r'total_amount'],
+        paymentUrl: json[r'payment_url'],
+        statusUrl: json[r'status_url'],
         address: Address.fromJson(json[r'address']),
         customer: Group.fromJson(json[r'customer']),
         listing: Listing.fromJson(json[r'listing']),
         items: OrderItem.listFromJson(json[r'items']),
         appointments: Appointment.listFromJson(json[r'appointments']),
         unconfirmedAppointments: UnconfirmedAppointment.listFromJson(json[r'unconfirmed_appointments']),
-      );
-    }
-    return null;
-  }
+    );
 
-  static List<Order> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Order.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Order>[];
+  static List<Order> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <Order>[]
+      : json.map((dynamic value) => Order.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Order> mapFromJson(dynamic json) {
+  static Map<String, Order> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Order>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Order.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Order.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Order-objects as value to a dart map
-  static Map<String, List<Order>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Order>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Order>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Order.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Order.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -218,7 +203,7 @@ class OrderFulfillmentStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -234,18 +219,20 @@ class OrderFulfillmentStatusEnum {
   static OrderFulfillmentStatusEnum fromJson(dynamic value) =>
     OrderFulfillmentStatusEnumTypeTransformer().decode(value);
 
-  static List<OrderFulfillmentStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderFulfillmentStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderFulfillmentStatusEnum>[];
+  static List<OrderFulfillmentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderFulfillmentStatusEnum>[]
+      : json
+          .map((value) => OrderFulfillmentStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [OrderFulfillmentStatusEnum] to String,
 /// and [decode] dynamic data back to [OrderFulfillmentStatusEnum].
 class OrderFulfillmentStatusEnumTypeTransformer {
-  factory OrderFulfillmentStatusEnumTypeTransformer() => _instance ??= const OrderFulfillmentStatusEnumTypeTransformer._();
-
   const OrderFulfillmentStatusEnumTypeTransformer._();
+
+  factory OrderFulfillmentStatusEnumTypeTransformer() => _instance ??= OrderFulfillmentStatusEnumTypeTransformer._();
 
   String encode(OrderFulfillmentStatusEnum data) => data.value;
 
@@ -258,15 +245,13 @@ class OrderFulfillmentStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   OrderFulfillmentStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'FULFILLED': return OrderFulfillmentStatusEnum.FULFILLED;
-        case r'UNFULFILLED': return OrderFulfillmentStatusEnum.UNFULFILLED;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'FULFILLED': return OrderFulfillmentStatusEnum.FULFILLED;
+      case r'UNFULFILLED': return OrderFulfillmentStatusEnum.UNFULFILLED;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -274,7 +259,6 @@ class OrderFulfillmentStatusEnumTypeTransformer {
   /// Singleton [OrderFulfillmentStatusEnumTypeTransformer] instance.
   static OrderFulfillmentStatusEnumTypeTransformer _instance;
 }
-
 
 /// The payment status of the order.
 class OrderPaymentStatusEnum {
@@ -285,7 +269,7 @@ class OrderPaymentStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -301,18 +285,20 @@ class OrderPaymentStatusEnum {
   static OrderPaymentStatusEnum fromJson(dynamic value) =>
     OrderPaymentStatusEnumTypeTransformer().decode(value);
 
-  static List<OrderPaymentStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderPaymentStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderPaymentStatusEnum>[];
+  static List<OrderPaymentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderPaymentStatusEnum>[]
+      : json
+          .map((value) => OrderPaymentStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [OrderPaymentStatusEnum] to String,
 /// and [decode] dynamic data back to [OrderPaymentStatusEnum].
 class OrderPaymentStatusEnumTypeTransformer {
-  factory OrderPaymentStatusEnumTypeTransformer() => _instance ??= const OrderPaymentStatusEnumTypeTransformer._();
-
   const OrderPaymentStatusEnumTypeTransformer._();
+
+  factory OrderPaymentStatusEnumTypeTransformer() => _instance ??= OrderPaymentStatusEnumTypeTransformer._();
 
   String encode(OrderPaymentStatusEnum data) => data.value;
 
@@ -325,15 +311,13 @@ class OrderPaymentStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   OrderPaymentStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'PAID': return OrderPaymentStatusEnum.PAID;
-        case r'UNPAID': return OrderPaymentStatusEnum.UNPAID;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'PAID': return OrderPaymentStatusEnum.PAID;
+      case r'UNPAID': return OrderPaymentStatusEnum.UNPAID;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -341,7 +325,6 @@ class OrderPaymentStatusEnumTypeTransformer {
   /// Singleton [OrderPaymentStatusEnumTypeTransformer] instance.
   static OrderPaymentStatusEnumTypeTransformer _instance;
 }
-
 
 /// The three-letter ISO 4217 currency code for the currency in which this order was or will be transacted. Must be a supported currency of Aryeo.
 class OrderCurrencyEnum {
@@ -352,7 +335,7 @@ class OrderCurrencyEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -380,18 +363,20 @@ class OrderCurrencyEnum {
   static OrderCurrencyEnum fromJson(dynamic value) =>
     OrderCurrencyEnumTypeTransformer().decode(value);
 
-  static List<OrderCurrencyEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(OrderCurrencyEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <OrderCurrencyEnum>[];
+  static List<OrderCurrencyEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <OrderCurrencyEnum>[]
+      : json
+          .map((value) => OrderCurrencyEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [OrderCurrencyEnum] to String,
 /// and [decode] dynamic data back to [OrderCurrencyEnum].
 class OrderCurrencyEnumTypeTransformer {
-  factory OrderCurrencyEnumTypeTransformer() => _instance ??= const OrderCurrencyEnumTypeTransformer._();
-
   const OrderCurrencyEnumTypeTransformer._();
+
+  factory OrderCurrencyEnumTypeTransformer() => _instance ??= OrderCurrencyEnumTypeTransformer._();
 
   String encode(OrderCurrencyEnum data) => data.value;
 
@@ -404,21 +389,19 @@ class OrderCurrencyEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   OrderCurrencyEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'USD': return OrderCurrencyEnum.USD;
-        case r'CAD': return OrderCurrencyEnum.CAD;
-        case r'GBP': return OrderCurrencyEnum.GBP;
-        case r'CHF': return OrderCurrencyEnum.CHF;
-        case r'EUR': return OrderCurrencyEnum.EUR;
-        case r'AUD': return OrderCurrencyEnum.AUD;
-        case r'NZD': return OrderCurrencyEnum.NZD;
-        case r'ZAR': return OrderCurrencyEnum.ZAR;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'USD': return OrderCurrencyEnum.USD;
+      case r'CAD': return OrderCurrencyEnum.CAD;
+      case r'GBP': return OrderCurrencyEnum.GBP;
+      case r'CHF': return OrderCurrencyEnum.CHF;
+      case r'EUR': return OrderCurrencyEnum.EUR;
+      case r'AUD': return OrderCurrencyEnum.AUD;
+      case r'NZD': return OrderCurrencyEnum.NZD;
+      case r'ZAR': return OrderCurrencyEnum.ZAR;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -426,5 +409,4 @@ class OrderCurrencyEnumTypeTransformer {
   /// Singleton [OrderCurrencyEnumTypeTransformer] instance.
   static OrderCurrencyEnumTypeTransformer _instance;
 }
-
 

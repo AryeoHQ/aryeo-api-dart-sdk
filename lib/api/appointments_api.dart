@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -47,13 +46,11 @@ class AppointmentsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<Response> getAppointmentsWithHttpInfo({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page, }) async {
+  Future<Response> getAppointmentsWithHttpInfo({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async {
     // Verify required params are set.
 
-    // ignore: prefer_const_declarations
     final path = r'/appointments';
 
-    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -85,18 +82,19 @@ class AppointmentsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
     }
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -130,8 +128,8 @@ class AppointmentsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<AppointmentCollection> getAppointments({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page, }) async {
-    final response = await getAppointmentsWithHttpInfo( include: include, filterLeftSquareBracketTenseRightSquareBracket: filterLeftSquareBracketTenseRightSquareBracket, filterLeftSquareBracketStartAtGteRightSquareBracket: filterLeftSquareBracketStartAtGteRightSquareBracket, filterLeftSquareBracketStartAtLteRightSquareBracket: filterLeftSquareBracketStartAtLteRightSquareBracket, filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, sort: sort, perPage: perPage, page: page, );
+  Future<AppointmentCollection> getAppointments({ String include, String filterLeftSquareBracketTenseRightSquareBracket, DateTime filterLeftSquareBracketStartAtGteRightSquareBracket, DateTime filterLeftSquareBracketStartAtLteRightSquareBracket, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async {
+    final response = await getAppointmentsWithHttpInfo( include: include, filterLeftSquareBracketTenseRightSquareBracket: filterLeftSquareBracketTenseRightSquareBracket, filterLeftSquareBracketStartAtGteRightSquareBracket: filterLeftSquareBracketStartAtGteRightSquareBracket, filterLeftSquareBracketStartAtLteRightSquareBracket: filterLeftSquareBracketStartAtLteRightSquareBracket, filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, sort: sort, perPage: perPage, page: page );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -141,7 +139,7 @@ class AppointmentsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'AppointmentCollection',) as AppointmentCollection;
         }
-    return Future<AppointmentCollection>.value();
+    return Future<AppointmentCollection>.value(null);
   }
 
   /// List all unconfirmed appointments.
@@ -166,13 +164,11 @@ class AppointmentsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<Response> getUnconfirmedAppointmentsWithHttpInfo({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page, }) async {
+  Future<Response> getUnconfirmedAppointmentsWithHttpInfo({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async {
     // Verify required params are set.
 
-    // ignore: prefer_const_declarations
     final path = r'/unconfirmed-appointments';
 
-    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -195,18 +191,19 @@ class AppointmentsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
     }
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -231,8 +228,8 @@ class AppointmentsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<UnconfirmedAppointmentCollection> getUnconfirmedAppointments({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page, }) async {
-    final response = await getUnconfirmedAppointmentsWithHttpInfo( include: include, filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, sort: sort, perPage: perPage, page: page, );
+  Future<UnconfirmedAppointmentCollection> getUnconfirmedAppointments({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async {
+    final response = await getUnconfirmedAppointmentsWithHttpInfo( include: include, filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, sort: sort, perPage: perPage, page: page );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -242,7 +239,7 @@ class AppointmentsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UnconfirmedAppointmentCollection',) as UnconfirmedAppointmentCollection;
         }
-    return Future<UnconfirmedAppointmentCollection>.value();
+    return Future<UnconfirmedAppointmentCollection>.value(null);
   }
 
   /// Retrieve an unconfirmed appointment.
@@ -258,17 +255,15 @@ class AppointmentsApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<Response> getUnconfirmedAppointmentsIdWithHttpInfo(String unconfirmedAppointmentId, { String include, }) async {
+  Future<Response> getUnconfirmedAppointmentsIdWithHttpInfo(String unconfirmedAppointmentId, { String include }) async {
     // Verify required params are set.
     if (unconfirmedAppointmentId == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: unconfirmedAppointmentId');
     }
 
-    // ignore: prefer_const_declarations
     final path = r'/unconfirmed-appointments/{unconfirmed_appointment_id}'
-      .replaceAll('{unconfirmed_appointment_id}', unconfirmedAppointmentId.toString());
+      .replaceAll('{' + 'unconfirmed_appointment_id' + '}', unconfirmedAppointmentId.toString());
 
-    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -279,18 +274,19 @@ class AppointmentsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
     }
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -306,8 +302,8 @@ class AppointmentsApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<UnconfirmedAppointmentResource> getUnconfirmedAppointmentsId(String unconfirmedAppointmentId, { String include, }) async {
-    final response = await getUnconfirmedAppointmentsIdWithHttpInfo(unconfirmedAppointmentId,  include: include, );
+  Future<UnconfirmedAppointmentResource> getUnconfirmedAppointmentsId(String unconfirmedAppointmentId, { String include }) async {
+    final response = await getUnconfirmedAppointmentsIdWithHttpInfo(unconfirmedAppointmentId,  include: include );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -317,7 +313,7 @@ class AppointmentsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'UnconfirmedAppointmentResource',) as UnconfirmedAppointmentResource;
         }
-    return Future<UnconfirmedAppointmentResource>.value();
+    return Future<UnconfirmedAppointmentResource>.value(null);
   }
 
   /// Cancel an appointment.
@@ -332,35 +328,34 @@ class AppointmentsApi {
   ///   The ID of an appointment.
   ///
   /// * [AppointmentCancelPutPayload] appointmentCancelPutPayload:
-  Future<Response> putAppointmentsAppointmentIdCancelWithHttpInfo(String appointmentId, { AppointmentCancelPutPayload appointmentCancelPutPayload, }) async {
+  Future<Response> putAppointmentsAppointmentIdCancelWithHttpInfo(String appointmentId, { AppointmentCancelPutPayload appointmentCancelPutPayload }) async {
     // Verify required params are set.
     if (appointmentId == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: appointmentId');
     }
 
-    // ignore: prefer_const_declarations
     final path = r'/appointments/{appointment_id}/cancel'
-      .replaceAll('{appointment_id}', appointmentId.toString());
+      .replaceAll('{' + 'appointment_id' + '}', appointmentId.toString());
 
-    // ignore: prefer_final_locals
     Object postBody = appointmentCancelPutPayload;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'PUT',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -375,8 +370,8 @@ class AppointmentsApi {
   ///   The ID of an appointment.
   ///
   /// * [AppointmentCancelPutPayload] appointmentCancelPutPayload:
-  Future<AppointmentResource> putAppointmentsAppointmentIdCancel(String appointmentId, { AppointmentCancelPutPayload appointmentCancelPutPayload, }) async {
-    final response = await putAppointmentsAppointmentIdCancelWithHttpInfo(appointmentId,  appointmentCancelPutPayload: appointmentCancelPutPayload, );
+  Future<AppointmentResource> putAppointmentsAppointmentIdCancel(String appointmentId, { AppointmentCancelPutPayload appointmentCancelPutPayload }) async {
+    final response = await putAppointmentsAppointmentIdCancelWithHttpInfo(appointmentId,  appointmentCancelPutPayload: appointmentCancelPutPayload );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -386,7 +381,7 @@ class AppointmentsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'AppointmentResource',) as AppointmentResource;
         }
-    return Future<AppointmentResource>.value();
+    return Future<AppointmentResource>.value(null);
   }
 
   /// Reschedule an appointment.
@@ -401,35 +396,34 @@ class AppointmentsApi {
   ///   The ID of an appointment.
   ///
   /// * [AppointmentReschedulePutPayload] appointmentReschedulePutPayload:
-  Future<Response> putAppointmentsAppointmentIdRescheduleWithHttpInfo(String appointmentId, { AppointmentReschedulePutPayload appointmentReschedulePutPayload, }) async {
+  Future<Response> putAppointmentsAppointmentIdRescheduleWithHttpInfo(String appointmentId, { AppointmentReschedulePutPayload appointmentReschedulePutPayload }) async {
     // Verify required params are set.
     if (appointmentId == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: appointmentId');
     }
 
-    // ignore: prefer_const_declarations
     final path = r'/appointments/{appointment_id}/reschedule'
-      .replaceAll('{appointment_id}', appointmentId.toString());
+      .replaceAll('{' + 'appointment_id' + '}', appointmentId.toString());
 
-    // ignore: prefer_final_locals
     Object postBody = appointmentReschedulePutPayload;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>['application/json'];
+    final contentTypes = <String>['application/json'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'PUT',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -444,8 +438,8 @@ class AppointmentsApi {
   ///   The ID of an appointment.
   ///
   /// * [AppointmentReschedulePutPayload] appointmentReschedulePutPayload:
-  Future<AppointmentResource> putAppointmentsAppointmentIdReschedule(String appointmentId, { AppointmentReschedulePutPayload appointmentReschedulePutPayload, }) async {
-    final response = await putAppointmentsAppointmentIdRescheduleWithHttpInfo(appointmentId,  appointmentReschedulePutPayload: appointmentReschedulePutPayload, );
+  Future<AppointmentResource> putAppointmentsAppointmentIdReschedule(String appointmentId, { AppointmentReschedulePutPayload appointmentReschedulePutPayload }) async {
+    final response = await putAppointmentsAppointmentIdRescheduleWithHttpInfo(appointmentId,  appointmentReschedulePutPayload: appointmentReschedulePutPayload );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -455,6 +449,6 @@ class AppointmentsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'AppointmentResource',) as AppointmentResource;
         }
-    return Future<AppointmentResource>.value();
+    return Future<AppointmentResource>.value(null);
   }
 }

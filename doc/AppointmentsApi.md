@@ -23,7 +23,7 @@ List all appointments.
 
 List all appointments. By default, returns a list of appointments that have been scheduled and have not been canceled
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -43,7 +43,7 @@ final sort = -created_at; // String | Comma separated list of fields used for so
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
 
-try {
+try { 
     final result = api_instance.getAppointments(include, filterLeftSquareBracketTenseRightSquareBracket, filterLeftSquareBracketStartAtGteRightSquareBracket, filterLeftSquareBracketStartAtLteRightSquareBracket, filterLeftSquareBracketUserIdsRightSquareBracket, sort, perPage, page);
     print(result);
 } catch (e) {
@@ -86,7 +86,7 @@ List all unconfirmed appointments.
 
 List all unconfirmed appointments. These are appointments that have not been scheduled. 
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -103,7 +103,7 @@ final sort = -created_at; // String | Comma separated list of fields used for so
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
 
-try {
+try { 
     final result = api_instance.getUnconfirmedAppointments(include, filterLeftSquareBracketUserIdsRightSquareBracket, sort, perPage, page);
     print(result);
 } catch (e) {
@@ -143,7 +143,7 @@ Retrieve an unconfirmed appointment.
 
 Retrieves the details of an unconfirmed appointment with the given ID.
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -157,7 +157,7 @@ final api_instance = AppointmentsApi();
 final unconfirmedAppointmentId = 00000000-0000-0000-0000-000000000000; // String | The ID of an appointment.
 final include = order,users; // String | Comma separated list of optional data to include in the response.
 
-try {
+try { 
     final result = api_instance.getUnconfirmedAppointmentsId(unconfirmedAppointmentId, include);
     print(result);
 } catch (e) {
@@ -194,7 +194,7 @@ Cancel an appointment.
 
 Cancel an appointment. The appointments order's customer can be optionally notified of this change. 
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -208,7 +208,7 @@ final api_instance = AppointmentsApi();
 final appointmentId = 00000000-0000-0000-0000-000000000000; // String | The ID of an appointment.
 final appointmentCancelPutPayload = AppointmentCancelPutPayload(); // AppointmentCancelPutPayload | 
 
-try {
+try { 
     final result = api_instance.putAppointmentsAppointmentIdCancel(appointmentId, appointmentCancelPutPayload);
     print(result);
 } catch (e) {
@@ -245,7 +245,7 @@ Reschedule an appointment.
 
 Reschedule an appointment. The appointments order's customer can be optionally notified of this change. 
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -259,7 +259,7 @@ final api_instance = AppointmentsApi();
 final appointmentId = 00000000-0000-0000-0000-000000000000; // String | The ID of an appointment.
 final appointmentReschedulePutPayload = AppointmentReschedulePutPayload(); // AppointmentReschedulePutPayload | 
 
-try {
+try { 
     final result = api_instance.putAppointmentsAppointmentIdReschedule(appointmentId, appointmentReschedulePutPayload);
     print(result);
 } catch (e) {

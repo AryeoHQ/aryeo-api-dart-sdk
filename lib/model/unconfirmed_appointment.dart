@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -69,7 +68,6 @@ class UnconfirmedAppointment {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (id == null ? 0 : id.hashCode) +
     (title == null ? 0 : title.hashCode) +
     (description == null ? 0 : description.hashCode) +
@@ -118,55 +116,46 @@ class UnconfirmedAppointment {
   }
 
   /// Returns a new [UnconfirmedAppointment] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static UnconfirmedAppointment fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return UnconfirmedAppointment(
-        id: mapValueOfType<String>(json, r'id'),
-        title: mapValueOfType<String>(json, r'title'),
-        description: mapValueOfType<String>(json, r'description'),
+  /// [json] if it's non-null, null if [json] is null.
+  static UnconfirmedAppointment fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : UnconfirmedAppointment(
+        id: json[r'id'],
+        title: json[r'title'],
+        description: json[r'description'],
         order: Order.fromJson(json[r'order']),
         users: User.listFromJson(json[r'users']),
         preferenceType: UnconfirmedAppointmentPreferenceTypeEnum.fromJson(json[r'preference_type']),
-        preferredStartAt: mapDateTime(json, r'preferred_start_at', ''),
-        preferredStartAtDay: mapDateTime(json, r'preferred_start_at_day', ''),
+        preferredStartAt: json[r'preferred_start_at'] == null
+          ? null
+          : DateTime.parse(json[r'preferred_start_at']),
+        preferredStartAtDay: json[r'preferred_start_at_day'] == null
+          ? null
+          : DateTime.parse(json[r'preferred_start_at_day']),
         preferredStartAtTimeOfDay: UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.fromJson(json[r'preferred_start_at_time_of_day']),
-        duration: mapValueOfType<int>(json, r'duration'),
-      );
-    }
-    return null;
-  }
+        duration: json[r'duration'],
+    );
 
-  static List<UnconfirmedAppointment> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(UnconfirmedAppointment.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <UnconfirmedAppointment>[];
+  static List<UnconfirmedAppointment> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <UnconfirmedAppointment>[]
+      : json.map((dynamic value) => UnconfirmedAppointment.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, UnconfirmedAppointment> mapFromJson(dynamic json) {
+  static Map<String, UnconfirmedAppointment> mapFromJson(Map<String, dynamic> json) {
     final map = <String, UnconfirmedAppointment>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = UnconfirmedAppointment.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = UnconfirmedAppointment.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of UnconfirmedAppointment-objects as value to a dart map
-  static Map<String, List<UnconfirmedAppointment>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<UnconfirmedAppointment>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<UnconfirmedAppointment>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = UnconfirmedAppointment.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = UnconfirmedAppointment.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -181,7 +170,7 @@ class UnconfirmedAppointmentPreferenceTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -199,18 +188,20 @@ class UnconfirmedAppointmentPreferenceTypeEnum {
   static UnconfirmedAppointmentPreferenceTypeEnum fromJson(dynamic value) =>
     UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer().decode(value);
 
-  static List<UnconfirmedAppointmentPreferenceTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(UnconfirmedAppointmentPreferenceTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <UnconfirmedAppointmentPreferenceTypeEnum>[];
+  static List<UnconfirmedAppointmentPreferenceTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <UnconfirmedAppointmentPreferenceTypeEnum>[]
+      : json
+          .map((value) => UnconfirmedAppointmentPreferenceTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [UnconfirmedAppointmentPreferenceTypeEnum] to String,
 /// and [decode] dynamic data back to [UnconfirmedAppointmentPreferenceTypeEnum].
 class UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer {
-  factory UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer() => _instance ??= const UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer._();
-
   const UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer._();
+
+  factory UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer() => _instance ??= UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer._();
 
   String encode(UnconfirmedAppointmentPreferenceTypeEnum data) => data.value;
 
@@ -223,16 +214,14 @@ class UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   UnconfirmedAppointmentPreferenceTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'ASAP': return UnconfirmedAppointmentPreferenceTypeEnum.ASAP;
-        case r'TIME': return UnconfirmedAppointmentPreferenceTypeEnum.TIME;
-        case r'TIME_OF_DAY': return UnconfirmedAppointmentPreferenceTypeEnum.TIME_OF_DAY;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'ASAP': return UnconfirmedAppointmentPreferenceTypeEnum.ASAP;
+      case r'TIME': return UnconfirmedAppointmentPreferenceTypeEnum.TIME;
+      case r'TIME_OF_DAY': return UnconfirmedAppointmentPreferenceTypeEnum.TIME_OF_DAY;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -240,7 +229,6 @@ class UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer {
   /// Singleton [UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer] instance.
   static UnconfirmedAppointmentPreferenceTypeEnumTypeTransformer _instance;
 }
-
 
 /// A preferred time of day for when the appointment could start. Only returned if unconfirmed appointment's preference type is TIME_OF_DAY. 
 class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum {
@@ -251,7 +239,7 @@ class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -269,18 +257,20 @@ class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum {
   static UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum fromJson(dynamic value) =>
     UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer().decode(value);
 
-  static List<UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum>[];
+  static List<UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum>[]
+      : json
+          .map((value) => UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum] to String,
 /// and [decode] dynamic data back to [UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum].
 class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer {
-  factory UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer() => _instance ??= const UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer._();
-
   const UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer._();
+
+  factory UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer() => _instance ??= UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer._();
 
   String encode(UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum data) => data.value;
 
@@ -293,16 +283,14 @@ class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'MORNING': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.MORNING;
-        case r'AFTERNOON': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.AFTERNOON;
-        case r'TWILIGHT': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.TWILIGHT;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'MORNING': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.MORNING;
+      case r'AFTERNOON': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.AFTERNOON;
+      case r'TWILIGHT': return UnconfirmedAppointmentPreferredStartAtTimeOfDayEnum.TWILIGHT;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -310,5 +298,4 @@ class UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer {
   /// Singleton [UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer] instance.
   static UnconfirmedAppointmentPreferredStartAtTimeOfDayEnumTypeTransformer _instance;
 }
-
 

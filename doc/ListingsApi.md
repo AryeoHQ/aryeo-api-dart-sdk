@@ -20,7 +20,7 @@ List all listings.
 
 Lists all listings available to a group.
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -49,7 +49,7 @@ final sort = -created_at; // String | Comma separated list of fields used for so
 final perPage = 25; // String | The number of items per page. Defaults to 25.
 final page = 2; // String | The requested page. Defaults to 1.
 
-try {
+try { 
     final result = api_instance.getListings(include, filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketAddressRightSquareBracket, filterLeftSquareBracketListAgentRightSquareBracket, filterLeftSquareBracketStatusRightSquareBracket, filterLeftSquareBracketActiveRightSquareBracket, filterLeftSquareBracketPriceGteRightSquareBracket, filterLeftSquareBracketPriceLteRightSquareBracket, filterLeftSquareBracketSquareFeetGteRightSquareBracket, filterLeftSquareBracketSquareFeetLteRightSquareBracket, filterLeftSquareBracketBedroomsGteRightSquareBracket, filterLeftSquareBracketBedroomsLteRightSquareBracket, filterLeftSquareBracketBathroomsGteRightSquareBracket, filterLeftSquareBracketBathroomsLteRightSquareBracket, sort, perPage, page);
     print(result);
 } catch (e) {
@@ -101,7 +101,7 @@ Retrieve a listing.
 
 Retrieves the details of a listing with the given ID.
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -115,7 +115,7 @@ final api_instance = ListingsApi();
 final listingId = 00000000-0000-4000-8000-000000000000; // String | The ID of a listing. UUID Version 4.
 final include = images,videos,orders; // String | Comma separated list of optional data to include in the response.
 
-try {
+try { 
     final result = api_instance.getListingsId(listingId, include);
     print(result);
 } catch (e) {

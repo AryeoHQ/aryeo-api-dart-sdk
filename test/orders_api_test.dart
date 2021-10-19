@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:aryeo/api.dart';
@@ -39,7 +38,7 @@ void main() {
     //
     // List all products of a group.
     //
-    //Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, List<String> filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async
+    //Future<ProductCollection> getProducts({ String sort, String perPage, String page, String filterLeftSquareBracketSearchRightSquareBracket, bool filterLeftSquareBracketIncludeInactiveRightSquareBracket, List<String> filterLeftSquareBracketCategoryIdsRightSquareBracket, String filterLeftSquareBracketTypeRightSquareBracket }) async
     test('test getProducts', () async {
       // TODO
     });

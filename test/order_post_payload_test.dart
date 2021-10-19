@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:aryeo/api.dart';
@@ -22,15 +21,27 @@ void main() {
       // TODO
     });
 
+    // Internal notes that will be attached to the order. Viewable only by the team.
+    // String internalNotes
+    test('to test the property `internalNotes`', () async {
+      // TODO
+    });
+
     // The payment status of the order. Defaults to \"UNPAID\". 
     // String paymentStatus
     test('to test the property `paymentStatus`', () async {
       // TODO
     });
 
-    // Google Places ID of the address to attach to the order.
-    // String placeId
-    test('to test the property `placeId`', () async {
+    // ID of the address to associate with the order. UUID Version 4.
+    // String addressId
+    test('to test the property `addressId`', () async {
+      // TODO
+    });
+
+    // ID of the customer to associate with the order. UUID Version 4.
+    // String customerId
+    test('to test the property `customerId`', () async {
       // TODO
     });
 

@@ -20,7 +20,7 @@ List all vendors.
 
 Lists all vendors available to a group.
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -33,7 +33,7 @@ import 'package:aryeo/api.dart';
 final api_instance = VendorsApi();
 final include = users; // String | Comma separated list of optional data to include in the response.
 
-try {
+try { 
     final result = api_instance.getVendors(include);
     print(result);
 } catch (e) {
@@ -69,7 +69,7 @@ Retrieve a vendor.
 
 Retrieves the details of a vendor with the given ID.
 
-### Example
+### Example 
 ```dart
 import 'package:aryeo/api.dart';
 // TODO Configure HTTP Bearer authorization: Token
@@ -83,7 +83,7 @@ final api_instance = VendorsApi();
 final vendorId = 00000000-0000-4000-8000-000000000000; // String | The ID of the group that is associated as a vendor. UUID Version 4.
 final include = default_order_form; // String | Comma separated list of optional data to include in the response.
 
-try {
+try { 
     final result = api_instance.getVendorsId(vendorId, include);
     print(result);
 } catch (e) {

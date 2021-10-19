@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -13,6 +12,7 @@ part of openapi.api;
 class Listing {
   /// Returns a new [Listing] instance.
   Listing({
+    @required this.object,
     @required this.id,
     @required this.address,
     this.mlsNumber,
@@ -34,6 +34,9 @@ class Listing {
     this.orders = const [],
     @required this.downloadsEnabled,
   });
+
+  /// String representing the object’s type. Objects of the same type share the same schema.
+  String object;
 
   /// ID of the listing. UUID Version 4.
   String id;
@@ -90,6 +93,7 @@ class Listing {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Listing &&
+     other.object == object &&
      other.id == id &&
      other.address == address &&
      other.mlsNumber == mlsNumber &&
@@ -113,7 +117,7 @@ class Listing {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
+    (object == null ? 0 : object.hashCode) +
     (id == null ? 0 : id.hashCode) +
     (address == null ? 0 : address.hashCode) +
     (mlsNumber == null ? 0 : mlsNumber.hashCode) +
@@ -136,10 +140,11 @@ class Listing {
     (downloadsEnabled == null ? 0 : downloadsEnabled.hashCode);
 
   @override
-  String toString() => 'Listing[id=$id, address=$address, mlsNumber=$mlsNumber, type=$type, subType=$subType, status=$status, standardStatus=$standardStatus, description=$description, lot=$lot, building=$building, price=$price, listAgent=$listAgent, coListAgent=$coListAgent, images=$images, videos=$videos, floorPlans=$floorPlans, interactiveContent=$interactiveContent, propertyWebsite=$propertyWebsite, orders=$orders, downloadsEnabled=$downloadsEnabled]';
+  String toString() => 'Listing[object=$object, id=$id, address=$address, mlsNumber=$mlsNumber, type=$type, subType=$subType, status=$status, standardStatus=$standardStatus, description=$description, lot=$lot, building=$building, price=$price, listAgent=$listAgent, coListAgent=$coListAgent, images=$images, videos=$videos, floorPlans=$floorPlans, interactiveContent=$interactiveContent, propertyWebsite=$propertyWebsite, orders=$orders, downloadsEnabled=$downloadsEnabled]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'object'] = object;
       json[r'id'] = id;
       json[r'address'] = address;
     if (mlsNumber != null) {
@@ -198,20 +203,19 @@ class Listing {
   }
 
   /// Returns a new [Listing] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static Listing fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return Listing(
-        id: mapValueOfType<String>(json, r'id'),
+  /// [json] if it's non-null, null if [json] is null.
+  static Listing fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : Listing(
+        object: json[r'object'],
+        id: json[r'id'],
         address: Address.fromJson(json[r'address']),
-        mlsNumber: mapValueOfType<String>(json, r'mls_number'),
+        mlsNumber: json[r'mls_number'],
         type: ListingTypeEnum.fromJson(json[r'type']),
         subType: ListingSubTypeEnum.fromJson(json[r'sub_type']),
         status: ListingStatusEnum.fromJson(json[r'status']),
         standardStatus: ListingStandardStatusEnum.fromJson(json[r'standard_status']),
-        description: mapValueOfType<String>(json, r'description'),
+        description: json[r'description'],
         lot: ListingLot.fromJson(json[r'lot']),
         building: ListingBuilding.fromJson(json[r'building']),
         price: ListingPrice.fromJson(json[r'price']),
@@ -223,40 +227,29 @@ class Listing {
         interactiveContent: InteractiveContent.listFromJson(json[r'interactive_content']),
         propertyWebsite: PropertyWebsite.fromJson(json[r'property_website']),
         orders: Order.listFromJson(json[r'orders']),
-        downloadsEnabled: mapValueOfType<bool>(json, r'downloads_enabled'),
-      );
-    }
-    return null;
-  }
+        downloadsEnabled: json[r'downloads_enabled'],
+    );
 
-  static List<Listing> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(Listing.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <Listing>[];
+  static List<Listing> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <Listing>[]
+      : json.map((dynamic value) => Listing.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, Listing> mapFromJson(dynamic json) {
+  static Map<String, Listing> mapFromJson(Map<String, dynamic> json) {
     final map = <String, Listing>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = Listing.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = Listing.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of Listing-objects as value to a dart map
-  static Map<String, List<Listing>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<Listing>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<Listing>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = Listing.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = Listing.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }
@@ -271,7 +264,7 @@ class ListingTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -301,18 +294,20 @@ class ListingTypeEnum {
   static ListingTypeEnum fromJson(dynamic value) =>
     ListingTypeEnumTypeTransformer().decode(value);
 
-  static List<ListingTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ListingTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ListingTypeEnum>[];
+  static List<ListingTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ListingTypeEnum>[]
+      : json
+          .map((value) => ListingTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [ListingTypeEnum] to String,
 /// and [decode] dynamic data back to [ListingTypeEnum].
 class ListingTypeEnumTypeTransformer {
-  factory ListingTypeEnumTypeTransformer() => _instance ??= const ListingTypeEnumTypeTransformer._();
-
   const ListingTypeEnumTypeTransformer._();
+
+  factory ListingTypeEnumTypeTransformer() => _instance ??= ListingTypeEnumTypeTransformer._();
 
   String encode(ListingTypeEnum data) => data.value;
 
@@ -325,22 +320,20 @@ class ListingTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ListingTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'BUSINESS_OPPORTUNITY': return ListingTypeEnum.BUSINESS_OPPORTUNITY;
-        case r'COMMERCIAL_LEASE': return ListingTypeEnum.COMMERCIAL_LEASE;
-        case r'COMMERCIAL_SALE': return ListingTypeEnum.COMMERCIAL_SALE;
-        case r'FARM': return ListingTypeEnum.FARM;
-        case r'LAND': return ListingTypeEnum.LAND;
-        case r'MANUFACTURED_IN_PARK': return ListingTypeEnum.MANUFACTURED_IN_PARK;
-        case r'RESIDENTIAL': return ListingTypeEnum.RESIDENTIAL;
-        case r'RESIDENTIAL_INCOME': return ListingTypeEnum.RESIDENTIAL_INCOME;
-        case r'RESIDENTIAL_LEASE': return ListingTypeEnum.RESIDENTIAL_LEASE;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'BUSINESS_OPPORTUNITY': return ListingTypeEnum.BUSINESS_OPPORTUNITY;
+      case r'COMMERCIAL_LEASE': return ListingTypeEnum.COMMERCIAL_LEASE;
+      case r'COMMERCIAL_SALE': return ListingTypeEnum.COMMERCIAL_SALE;
+      case r'FARM': return ListingTypeEnum.FARM;
+      case r'LAND': return ListingTypeEnum.LAND;
+      case r'MANUFACTURED_IN_PARK': return ListingTypeEnum.MANUFACTURED_IN_PARK;
+      case r'RESIDENTIAL': return ListingTypeEnum.RESIDENTIAL;
+      case r'RESIDENTIAL_INCOME': return ListingTypeEnum.RESIDENTIAL_INCOME;
+      case r'RESIDENTIAL_LEASE': return ListingTypeEnum.RESIDENTIAL_LEASE;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -348,7 +341,6 @@ class ListingTypeEnumTypeTransformer {
   /// Singleton [ListingTypeEnumTypeTransformer] instance.
   static ListingTypeEnumTypeTransformer _instance;
 }
-
 
 /// Further specifies the listing type. Examples include family residence and condominium.
 class ListingSubTypeEnum {
@@ -359,7 +351,7 @@ class ListingSubTypeEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -387,18 +379,20 @@ class ListingSubTypeEnum {
   static ListingSubTypeEnum fromJson(dynamic value) =>
     ListingSubTypeEnumTypeTransformer().decode(value);
 
-  static List<ListingSubTypeEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ListingSubTypeEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ListingSubTypeEnum>[];
+  static List<ListingSubTypeEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ListingSubTypeEnum>[]
+      : json
+          .map((value) => ListingSubTypeEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [ListingSubTypeEnum] to String,
 /// and [decode] dynamic data back to [ListingSubTypeEnum].
 class ListingSubTypeEnumTypeTransformer {
-  factory ListingSubTypeEnumTypeTransformer() => _instance ??= const ListingSubTypeEnumTypeTransformer._();
-
   const ListingSubTypeEnumTypeTransformer._();
+
+  factory ListingSubTypeEnumTypeTransformer() => _instance ??= ListingSubTypeEnumTypeTransformer._();
 
   String encode(ListingSubTypeEnum data) => data.value;
 
@@ -411,21 +405,19 @@ class ListingSubTypeEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ListingSubTypeEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'APARTMENT': return ListingSubTypeEnum.APARTMENT;
-        case r'CONDOMINIUM': return ListingSubTypeEnum.CONDOMINIUM;
-        case r'DUPLEX': return ListingSubTypeEnum.DUPLEX;
-        case r'FARM': return ListingSubTypeEnum.FARM;
-        case r'SINGLE_FAMILY_RESIDENCE': return ListingSubTypeEnum.SINGLE_FAMILY_RESIDENCE;
-        case r'TIMESHARE': return ListingSubTypeEnum.TIMESHARE;
-        case r'TOWNHOUSE': return ListingSubTypeEnum.TOWNHOUSE;
-        case r'OFFICE': return ListingSubTypeEnum.OFFICE;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'APARTMENT': return ListingSubTypeEnum.APARTMENT;
+      case r'CONDOMINIUM': return ListingSubTypeEnum.CONDOMINIUM;
+      case r'DUPLEX': return ListingSubTypeEnum.DUPLEX;
+      case r'FARM': return ListingSubTypeEnum.FARM;
+      case r'SINGLE_FAMILY_RESIDENCE': return ListingSubTypeEnum.SINGLE_FAMILY_RESIDENCE;
+      case r'TIMESHARE': return ListingSubTypeEnum.TIMESHARE;
+      case r'TOWNHOUSE': return ListingSubTypeEnum.TOWNHOUSE;
+      case r'OFFICE': return ListingSubTypeEnum.OFFICE;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -433,7 +425,6 @@ class ListingSubTypeEnumTypeTransformer {
   /// Singleton [ListingSubTypeEnumTypeTransformer] instance.
   static ListingSubTypeEnumTypeTransformer _instance;
 }
-
 
 /// Local, regional, or otherwise custom status for the listing used by the parties involved in the listing transaction. While variable, these statuses are typically mapped to the listing's standard status.
 class ListingStatusEnum {
@@ -444,7 +435,7 @@ class ListingStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -474,18 +465,20 @@ class ListingStatusEnum {
   static ListingStatusEnum fromJson(dynamic value) =>
     ListingStatusEnumTypeTransformer().decode(value);
 
-  static List<ListingStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ListingStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ListingStatusEnum>[];
+  static List<ListingStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ListingStatusEnum>[]
+      : json
+          .map((value) => ListingStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [ListingStatusEnum] to String,
 /// and [decode] dynamic data back to [ListingStatusEnum].
 class ListingStatusEnumTypeTransformer {
-  factory ListingStatusEnumTypeTransformer() => _instance ??= const ListingStatusEnumTypeTransformer._();
-
   const ListingStatusEnumTypeTransformer._();
+
+  factory ListingStatusEnumTypeTransformer() => _instance ??= ListingStatusEnumTypeTransformer._();
 
   String encode(ListingStatusEnum data) => data.value;
 
@@ -498,22 +491,20 @@ class ListingStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ListingStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'DRAFT': return ListingStatusEnum.DRAFT;
-        case r'COMING_SOON': return ListingStatusEnum.COMING_SOON;
-        case r'FOR_SALE': return ListingStatusEnum.FOR_SALE;
-        case r'FOR_LEASE': return ListingStatusEnum.FOR_LEASE;
-        case r'PENDING_SALE': return ListingStatusEnum.PENDING_SALE;
-        case r'PENDING_LEASE': return ListingStatusEnum.PENDING_LEASE;
-        case r'SOLD': return ListingStatusEnum.SOLD;
-        case r'LEASED': return ListingStatusEnum.LEASED;
-        case r'OFF_MARKET': return ListingStatusEnum.OFF_MARKET;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'DRAFT': return ListingStatusEnum.DRAFT;
+      case r'COMING_SOON': return ListingStatusEnum.COMING_SOON;
+      case r'FOR_SALE': return ListingStatusEnum.FOR_SALE;
+      case r'FOR_LEASE': return ListingStatusEnum.FOR_LEASE;
+      case r'PENDING_SALE': return ListingStatusEnum.PENDING_SALE;
+      case r'PENDING_LEASE': return ListingStatusEnum.PENDING_LEASE;
+      case r'SOLD': return ListingStatusEnum.SOLD;
+      case r'LEASED': return ListingStatusEnum.LEASED;
+      case r'OFF_MARKET': return ListingStatusEnum.OFF_MARKET;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -521,7 +512,6 @@ class ListingStatusEnumTypeTransformer {
   /// Singleton [ListingStatusEnumTypeTransformer] instance.
   static ListingStatusEnumTypeTransformer _instance;
 }
-
 
 /// The status of the listing as it reflects the state of the contract between the listing agent and seller or an agreement with a buyer, including Active, Active Under Contract, Canceled, Closed, Expired, Pending, and Withdrawn.
 class ListingStandardStatusEnum {
@@ -532,7 +522,7 @@ class ListingStandardStatusEnum {
   final String value;
 
   @override
-  String toString() => value ?? '';
+  String toString() => value;
 
   String toJson() => value;
 
@@ -566,18 +556,20 @@ class ListingStandardStatusEnum {
   static ListingStandardStatusEnum fromJson(dynamic value) =>
     ListingStandardStatusEnumTypeTransformer().decode(value);
 
-  static List<ListingStandardStatusEnum> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(ListingStandardStatusEnum.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <ListingStandardStatusEnum>[];
+  static List<ListingStandardStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <ListingStandardStatusEnum>[]
+      : json
+          .map((value) => ListingStandardStatusEnum.fromJson(value))
+          .toList(growable: true == growable);
 }
 
 /// Transformation class that can [encode] an instance of [ListingStandardStatusEnum] to String,
 /// and [decode] dynamic data back to [ListingStandardStatusEnum].
 class ListingStandardStatusEnumTypeTransformer {
-  factory ListingStandardStatusEnumTypeTransformer() => _instance ??= const ListingStandardStatusEnumTypeTransformer._();
-
   const ListingStandardStatusEnumTypeTransformer._();
+
+  factory ListingStandardStatusEnumTypeTransformer() => _instance ??= ListingStandardStatusEnumTypeTransformer._();
 
   String encode(ListingStandardStatusEnum data) => data.value;
 
@@ -590,24 +582,22 @@ class ListingStandardStatusEnumTypeTransformer {
   /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
   /// and users are still using an old app with the old code.
   ListingStandardStatusEnum decode(dynamic data, {bool allowNull}) {
-    if (data != null) {
-      switch (data.toString()) {
-        case r'ACTIVE': return ListingStandardStatusEnum.ACTIVE;
-        case r'ACTIVE_UNDER_CONTRACT': return ListingStandardStatusEnum.ACTIVE_UNDER_CONTRACT;
-        case r'CANCELED': return ListingStandardStatusEnum.CANCELED;
-        case r'CLOSED': return ListingStandardStatusEnum.CLOSED;
-        case r'COMING_SOON': return ListingStandardStatusEnum.COMING_SOON;
-        case r'DELETE': return ListingStandardStatusEnum.DELETE;
-        case r'EXPIRED': return ListingStandardStatusEnum.EXPIRED;
-        case r'HOLD': return ListingStandardStatusEnum.HOLD;
-        case r'INCOMPLETE': return ListingStandardStatusEnum.INCOMPLETE;
-        case r'PENDING': return ListingStandardStatusEnum.PENDING;
-        case r'WITHDRAWN': return ListingStandardStatusEnum.WITHDRAWN;
-        default:
-          if (allowNull == false) {
-            throw ArgumentError('Unknown enum value to decode: $data');
-          }
-      }
+    switch (data) {
+      case r'ACTIVE': return ListingStandardStatusEnum.ACTIVE;
+      case r'ACTIVE_UNDER_CONTRACT': return ListingStandardStatusEnum.ACTIVE_UNDER_CONTRACT;
+      case r'CANCELED': return ListingStandardStatusEnum.CANCELED;
+      case r'CLOSED': return ListingStandardStatusEnum.CLOSED;
+      case r'COMING_SOON': return ListingStandardStatusEnum.COMING_SOON;
+      case r'DELETE': return ListingStandardStatusEnum.DELETE;
+      case r'EXPIRED': return ListingStandardStatusEnum.EXPIRED;
+      case r'HOLD': return ListingStandardStatusEnum.HOLD;
+      case r'INCOMPLETE': return ListingStandardStatusEnum.INCOMPLETE;
+      case r'PENDING': return ListingStandardStatusEnum.PENDING;
+      case r'WITHDRAWN': return ListingStandardStatusEnum.WITHDRAWN;
+      default:
+        if (allowNull == false) {
+          throw ArgumentError('Unknown enum value to decode: $data');
+        }
     }
     return null;
   }
@@ -615,5 +605,4 @@ class ListingStandardStatusEnumTypeTransformer {
   /// Singleton [ListingStandardStatusEnumTypeTransformer] instance.
   static ListingStandardStatusEnumTypeTransformer _instance;
 }
-
 

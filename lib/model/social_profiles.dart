@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -45,7 +44,6 @@ class SocialProfiles {
 
   @override
   int get hashCode =>
-  // ignore: unnecessary_parenthesis
     (facebookProfileUrl == null ? 0 : facebookProfileUrl.hashCode) +
     (instagramProfileUrl == null ? 0 : instagramProfileUrl.hashCode) +
     (twitterProfileUrl == null ? 0 : twitterProfileUrl.hashCode) +
@@ -76,50 +74,37 @@ class SocialProfiles {
   }
 
   /// Returns a new [SocialProfiles] instance and imports its values from
-  /// [value] if it's a [Map], null otherwise.
-  // ignore: prefer_constructors_over_static_methods
-  static SocialProfiles fromJson(dynamic value) {
-    if (value is Map) {
-      final json = value.cast<String, dynamic>();
-      return SocialProfiles(
-        facebookProfileUrl: mapValueOfType<String>(json, r'facebook_profile_url'),
-        instagramProfileUrl: mapValueOfType<String>(json, r'instagram_profile_url'),
-        twitterProfileUrl: mapValueOfType<String>(json, r'twitter_profile_url'),
-        linkedinProfileUrl: mapValueOfType<String>(json, r'linkedin_profile_url'),
-        zillowProfileUrl: mapValueOfType<String>(json, r'zillow_profile_url'),
-      );
-    }
-    return null;
-  }
+  /// [json] if it's non-null, null if [json] is null.
+  static SocialProfiles fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : SocialProfiles(
+        facebookProfileUrl: json[r'facebook_profile_url'],
+        instagramProfileUrl: json[r'instagram_profile_url'],
+        twitterProfileUrl: json[r'twitter_profile_url'],
+        linkedinProfileUrl: json[r'linkedin_profile_url'],
+        zillowProfileUrl: json[r'zillow_profile_url'],
+    );
 
-  static List<SocialProfiles> listFromJson(dynamic json, {bool emptyIsNull, bool growable,}) =>
-    json is List && json.isNotEmpty
-      ? json.map(SocialProfiles.fromJson).toList(growable: true == growable)
-      : true == emptyIsNull ? null : <SocialProfiles>[];
+  static List<SocialProfiles> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <SocialProfiles>[]
+      : json.map((dynamic value) => SocialProfiles.fromJson(value)).toList(growable: true == growable);
 
-  static Map<String, SocialProfiles> mapFromJson(dynamic json) {
+  static Map<String, SocialProfiles> mapFromJson(Map<String, dynamic> json) {
     final map = <String, SocialProfiles>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) => map[key] = SocialProfiles.fromJson(value));
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = SocialProfiles.fromJson(value));
     }
     return map;
   }
 
   // maps a json object with a list of SocialProfiles-objects as value to a dart map
-  static Map<String, List<SocialProfiles>> mapListFromJson(dynamic json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<SocialProfiles>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
     final map = <String, List<SocialProfiles>>{};
-    if (json is Map && json.isNotEmpty) {
-      json
-        .cast<String, dynamic>()
-        .forEach((key, dynamic value) {
-          map[key] = SocialProfiles.listFromJson(
-            value,
-            emptyIsNull: emptyIsNull,
-            growable: growable,
-          );
-        });
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = SocialProfiles.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

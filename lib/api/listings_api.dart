@@ -5,7 +5,6 @@
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -74,13 +73,11 @@ class ListingsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<Response> getListingsWithHttpInfo({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page, }) async {
+  Future<Response> getListingsWithHttpInfo({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async {
     // Verify required params are set.
 
-    // ignore: prefer_const_declarations
     final path = r'/listings';
 
-    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -139,18 +136,19 @@ class ListingsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
     }
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -211,8 +209,8 @@ class ListingsApi {
   ///
   /// * [String] page:
   ///   The requested page. Defaults to 1.
-  Future<ListingCollection> getListings({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page, }) async {
-    final response = await getListingsWithHttpInfo( include: include, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketAddressRightSquareBracket: filterLeftSquareBracketAddressRightSquareBracket, filterLeftSquareBracketListAgentRightSquareBracket: filterLeftSquareBracketListAgentRightSquareBracket, filterLeftSquareBracketStatusRightSquareBracket: filterLeftSquareBracketStatusRightSquareBracket, filterLeftSquareBracketActiveRightSquareBracket: filterLeftSquareBracketActiveRightSquareBracket, filterLeftSquareBracketPriceGteRightSquareBracket: filterLeftSquareBracketPriceGteRightSquareBracket, filterLeftSquareBracketPriceLteRightSquareBracket: filterLeftSquareBracketPriceLteRightSquareBracket, filterLeftSquareBracketSquareFeetGteRightSquareBracket: filterLeftSquareBracketSquareFeetGteRightSquareBracket, filterLeftSquareBracketSquareFeetLteRightSquareBracket: filterLeftSquareBracketSquareFeetLteRightSquareBracket, filterLeftSquareBracketBedroomsGteRightSquareBracket: filterLeftSquareBracketBedroomsGteRightSquareBracket, filterLeftSquareBracketBedroomsLteRightSquareBracket: filterLeftSquareBracketBedroomsLteRightSquareBracket, filterLeftSquareBracketBathroomsGteRightSquareBracket: filterLeftSquareBracketBathroomsGteRightSquareBracket, filterLeftSquareBracketBathroomsLteRightSquareBracket: filterLeftSquareBracketBathroomsLteRightSquareBracket, sort: sort, perPage: perPage, page: page, );
+  Future<ListingCollection> getListings({ String include, String filterLeftSquareBracketSearchRightSquareBracket, String filterLeftSquareBracketAddressRightSquareBracket, String filterLeftSquareBracketListAgentRightSquareBracket, String filterLeftSquareBracketStatusRightSquareBracket, bool filterLeftSquareBracketActiveRightSquareBracket, num filterLeftSquareBracketPriceGteRightSquareBracket, num filterLeftSquareBracketPriceLteRightSquareBracket, num filterLeftSquareBracketSquareFeetGteRightSquareBracket, num filterLeftSquareBracketSquareFeetLteRightSquareBracket, int filterLeftSquareBracketBedroomsGteRightSquareBracket, int filterLeftSquareBracketBedroomsLteRightSquareBracket, num filterLeftSquareBracketBathroomsGteRightSquareBracket, num filterLeftSquareBracketBathroomsLteRightSquareBracket, String sort, String perPage, String page }) async {
+    final response = await getListingsWithHttpInfo( include: include, filterLeftSquareBracketSearchRightSquareBracket: filterLeftSquareBracketSearchRightSquareBracket, filterLeftSquareBracketAddressRightSquareBracket: filterLeftSquareBracketAddressRightSquareBracket, filterLeftSquareBracketListAgentRightSquareBracket: filterLeftSquareBracketListAgentRightSquareBracket, filterLeftSquareBracketStatusRightSquareBracket: filterLeftSquareBracketStatusRightSquareBracket, filterLeftSquareBracketActiveRightSquareBracket: filterLeftSquareBracketActiveRightSquareBracket, filterLeftSquareBracketPriceGteRightSquareBracket: filterLeftSquareBracketPriceGteRightSquareBracket, filterLeftSquareBracketPriceLteRightSquareBracket: filterLeftSquareBracketPriceLteRightSquareBracket, filterLeftSquareBracketSquareFeetGteRightSquareBracket: filterLeftSquareBracketSquareFeetGteRightSquareBracket, filterLeftSquareBracketSquareFeetLteRightSquareBracket: filterLeftSquareBracketSquareFeetLteRightSquareBracket, filterLeftSquareBracketBedroomsGteRightSquareBracket: filterLeftSquareBracketBedroomsGteRightSquareBracket, filterLeftSquareBracketBedroomsLteRightSquareBracket: filterLeftSquareBracketBedroomsLteRightSquareBracket, filterLeftSquareBracketBathroomsGteRightSquareBracket: filterLeftSquareBracketBathroomsGteRightSquareBracket, filterLeftSquareBracketBathroomsLteRightSquareBracket: filterLeftSquareBracketBathroomsLteRightSquareBracket, sort: sort, perPage: perPage, page: page );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -222,7 +220,7 @@ class ListingsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ListingCollection',) as ListingCollection;
         }
-    return Future<ListingCollection>.value();
+    return Future<ListingCollection>.value(null);
   }
 
   /// Retrieve a listing.
@@ -238,17 +236,15 @@ class ListingsApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<Response> getListingsIdWithHttpInfo(String listingId, { String include, }) async {
+  Future<Response> getListingsIdWithHttpInfo(String listingId, { String include }) async {
     // Verify required params are set.
     if (listingId == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: listingId');
     }
 
-    // ignore: prefer_const_declarations
     final path = r'/listings/{listing_id}'
-      .replaceAll('{listing_id}', listingId.toString());
+      .replaceAll('{' + 'listing_id' + '}', listingId.toString());
 
-    // ignore: prefer_final_locals
     Object postBody;
 
     final queryParams = <QueryParam>[];
@@ -259,18 +255,19 @@ class ListingsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'include', include));
     }
 
-    const authNames = <String>['Token'];
-    const contentTypes = <String>[];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
 
 
-    return apiClient.invokeAPI(
+    return await apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      contentTypes.isEmpty ? null : contentTypes[0],
+      nullableContentType,
       authNames,
     );
   }
@@ -286,8 +283,8 @@ class ListingsApi {
   ///
   /// * [String] include:
   ///   Comma separated list of optional data to include in the response.
-  Future<ListingResource> getListingsId(String listingId, { String include, }) async {
-    final response = await getListingsIdWithHttpInfo(listingId,  include: include, );
+  Future<ListingResource> getListingsId(String listingId, { String include }) async {
+    final response = await getListingsIdWithHttpInfo(listingId,  include: include );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -297,6 +294,6 @@ class ListingsApi {
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ListingResource',) as ListingResource;
         }
-    return Future<ListingResource>.value();
+    return Future<ListingResource>.value(null);
   }
 }
