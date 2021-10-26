@@ -17,6 +17,7 @@ class OrderPostPayload {
     this.paymentStatus,
     this.addressId,
     this.customerId,
+    this.notify,
   });
 
   /// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
@@ -34,13 +35,17 @@ class OrderPostPayload {
   /// ID of the customer to associate with the order. UUID Version 4.
   String customerId;
 
+  /// Indicates if the customer and creator notifications should be sent when creating the order. Requires an address and customer to be set in order for the notifications to be sent.
+  bool notify;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
      other.internalNotes == internalNotes &&
      other.paymentStatus == paymentStatus &&
      other.addressId == addressId &&
-     other.customerId == customerId;
+     other.customerId == customerId &&
+     other.notify == notify;
 
   @override
   int get hashCode =>
@@ -48,10 +53,11 @@ class OrderPostPayload {
     (internalNotes == null ? 0 : internalNotes.hashCode) +
     (paymentStatus == null ? 0 : paymentStatus.hashCode) +
     (addressId == null ? 0 : addressId.hashCode) +
-    (customerId == null ? 0 : customerId.hashCode);
+    (customerId == null ? 0 : customerId.hashCode) +
+    (notify == null ? 0 : notify.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, paymentStatus=$paymentStatus, addressId=$addressId, customerId=$customerId]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, paymentStatus=$paymentStatus, addressId=$addressId, customerId=$customerId, notify=$notify]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -70,6 +76,9 @@ class OrderPostPayload {
     if (customerId != null) {
       json[r'customer_id'] = customerId;
     }
+    if (notify != null) {
+      json[r'notify'] = notify;
+    }
     return json;
   }
 
@@ -83,6 +92,7 @@ class OrderPostPayload {
         paymentStatus: OrderPostPayloadPaymentStatusEnum.fromJson(json[r'payment_status']),
         addressId: json[r'address_id'],
         customerId: json[r'customer_id'],
+        notify: json[r'notify'],
     );
 
   static List<OrderPostPayload> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

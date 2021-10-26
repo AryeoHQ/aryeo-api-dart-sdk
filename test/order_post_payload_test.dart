@@ -45,6 +45,12 @@ void main() {
       // TODO
     });
 
+    // Indicates if the customer and creator notifications should be sent when creating the order. Requires an address and customer to be set in order for the notifications to be sent.
+    // bool notify
+    test('to test the property `notify`', () async {
+      // TODO
+    });
+
 
   });
 
