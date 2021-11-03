@@ -33,6 +33,12 @@ void main() {
       // TODO
     });
 
+    // The duration of the product item, in minutes.
+    // int duration
+    test('to test the property `duration`', () async {
+      // TODO
+    });
+
 
   });
 

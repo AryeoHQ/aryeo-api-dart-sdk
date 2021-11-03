@@ -15,6 +15,7 @@ class ProductVariant {
     @required this.id,
     @required this.title,
     @required this.price,
+    this.duration,
   });
 
   /// ID of the product variant. UUID Version 4.
@@ -26,26 +27,35 @@ class ProductVariant {
   /// A positive integer in the smallest currency unit (that is, 100 cents for $1.00) representing the price of the product variant.
   int price;
 
+  /// The duration of the product item, in minutes.
+  // minimum: 0
+  int duration;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is ProductVariant &&
      other.id == id &&
      other.title == title &&
-     other.price == price;
+     other.price == price &&
+     other.duration == duration;
 
   @override
   int get hashCode =>
     (id == null ? 0 : id.hashCode) +
     (title == null ? 0 : title.hashCode) +
-    (price == null ? 0 : price.hashCode);
+    (price == null ? 0 : price.hashCode) +
+    (duration == null ? 0 : duration.hashCode);
 
   @override
-  String toString() => 'ProductVariant[id=$id, title=$title, price=$price]';
+  String toString() => 'ProductVariant[id=$id, title=$title, price=$price, duration=$duration]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
       json[r'id'] = id;
       json[r'title'] = title;
       json[r'price'] = price;
+    if (duration != null) {
+      json[r'duration'] = duration;
+    }
     return json;
   }
 
@@ -57,6 +67,7 @@ class ProductVariant {
         id: json[r'id'],
         title: json[r'title'],
         price: json[r'price'],
+        duration: json[r'duration'],
     );
 
   static List<ProductVariant> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
