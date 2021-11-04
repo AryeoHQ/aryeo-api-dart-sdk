@@ -214,6 +214,10 @@ class ApiClient {
           return AppointmentReschedulePutPayload.fromJson(value);
         case 'AppointmentResource':
           return AppointmentResource.fromJson(value);
+        case 'CalendarDay':
+          return CalendarDay.fromJson(value);
+        case 'CalendarDayCollection':
+          return CalendarDayCollection.fromJson(value);
         case 'FloorPlan':
           return FloorPlan.fromJson(value);
         case 'Group':
@@ -266,6 +270,10 @@ class ApiClient {
           return PropertyWebsite.fromJson(value);
         case 'SocialProfiles':
           return SocialProfiles.fromJson(value);
+        case 'Timeslot':
+          return Timeslot.fromJson(value);
+        case 'TimeslotCollection':
+          return TimeslotCollection.fromJson(value);
         case 'UnconfirmedAppointment':
           return UnconfirmedAppointment.fromJson(value);
         case 'UnconfirmedAppointmentCollection':

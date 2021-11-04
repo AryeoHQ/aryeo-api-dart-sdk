@@ -25,6 +25,24 @@ void main() {
       // TODO
     });
 
+    // Fetch available days for a user or group
+    //
+    // Fetch available calendar days for scheduling or rescheduling an appointment. Availability can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through weeks, months, etc.
+    //
+    //Future<CalendarDayCollection> getAvailableDates({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, String timezone, int page, int perPage }) async
+    test('test getAvailableDates', () async {
+      // TODO
+    });
+
+    // Fetch available timeslots for a user or group
+    //
+    // Fetch available timeslots for scheduling or rescheduling an appointment. Timeslots can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through days or weeks.
+    //
+    //Future<TimeslotCollection> getAvailableTimeslots({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, int page, int perPage }) async
+    test('test getAvailableTimeslots', () async {
+      // TODO
+    });
+
     // List all unconfirmed appointments.
     //
     // List all unconfirmed appointments. These are appointments that have not been scheduled. 

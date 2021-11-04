@@ -142,6 +142,287 @@ class AppointmentsApi {
     return Future<AppointmentCollection>.value(null);
   }
 
+  /// Fetch available days for a user or group
+  ///
+  /// Fetch available calendar days for scheduling or rescheduling an appointment. Availability can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through weeks, months, etc.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [List<String>] filterLeftSquareBracketUserIdsRightSquareBracket:
+  ///   The IDs of users whose availability will be retrieved. UUID Version 4.
+  ///
+  /// * [String] filterLeftSquareBracketAppointmentIdRightSquareBracket:
+  ///   Appointment ID used to fetch availability for an existing order
+  ///
+  /// * [DateTime] filterLeftSquareBracketStartAtRightSquareBracket:
+  ///   Returns availability after start_at
+  ///
+  /// * [DateTime] filterLeftSquareBracketEndAtRightSquareBracket:
+  ///   Returns availability before end_at
+  ///
+  /// * [List<String>] filterLeftSquareBracketTimeframeRightSquareBracket:
+  ///   Returns availability for a specific timeframe. Used instead of start_at & end_at
+  ///
+  /// * [int] duration:
+  ///   Duration of the event to schedule. Required if appointment_id isn't specified
+  ///
+  /// * [int] interval:
+  ///   Interval of bookable timeslots starting at x minutes on the hour . Required if appointment_id isn't specified
+  ///
+  /// * [String] timezone:
+  ///   Timezone of the client. Localizes the available days
+  ///
+  /// * [int] page:
+  ///   The requested page of results
+  ///
+  /// * [int] perPage:
+  ///   The number of results per page. Only applies when using a date range
+  Future<Response> getAvailableDatesWithHttpInfo({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, String timezone, int page, int perPage }) async {
+    // Verify required params are set.
+
+    final path = r'/scheduling/available-dates';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (filterLeftSquareBracketUserIdsRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'filter[user_ids]', filterLeftSquareBracketUserIdsRightSquareBracket));
+    }
+    if (filterLeftSquareBracketAppointmentIdRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[appointment_id]', filterLeftSquareBracketAppointmentIdRightSquareBracket));
+    }
+    if (filterLeftSquareBracketStartAtRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[start_at]', filterLeftSquareBracketStartAtRightSquareBracket));
+    }
+    if (filterLeftSquareBracketEndAtRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[end_at]', filterLeftSquareBracketEndAtRightSquareBracket));
+    }
+    if (filterLeftSquareBracketTimeframeRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'filter[timeframe]', filterLeftSquareBracketTimeframeRightSquareBracket));
+    }
+    if (duration != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'duration', duration));
+    }
+    if (interval != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'interval', interval));
+    }
+    if (timezone != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'timezone', timezone));
+    }
+    if (page != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
+    }
+    if (perPage != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Fetch available days for a user or group
+  ///
+  /// Fetch available calendar days for scheduling or rescheduling an appointment. Availability can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through weeks, months, etc.
+  ///
+  /// Parameters:
+  ///
+  /// * [List<String>] filterLeftSquareBracketUserIdsRightSquareBracket:
+  ///   The IDs of users whose availability will be retrieved. UUID Version 4.
+  ///
+  /// * [String] filterLeftSquareBracketAppointmentIdRightSquareBracket:
+  ///   Appointment ID used to fetch availability for an existing order
+  ///
+  /// * [DateTime] filterLeftSquareBracketStartAtRightSquareBracket:
+  ///   Returns availability after start_at
+  ///
+  /// * [DateTime] filterLeftSquareBracketEndAtRightSquareBracket:
+  ///   Returns availability before end_at
+  ///
+  /// * [List<String>] filterLeftSquareBracketTimeframeRightSquareBracket:
+  ///   Returns availability for a specific timeframe. Used instead of start_at & end_at
+  ///
+  /// * [int] duration:
+  ///   Duration of the event to schedule. Required if appointment_id isn't specified
+  ///
+  /// * [int] interval:
+  ///   Interval of bookable timeslots starting at x minutes on the hour . Required if appointment_id isn't specified
+  ///
+  /// * [String] timezone:
+  ///   Timezone of the client. Localizes the available days
+  ///
+  /// * [int] page:
+  ///   The requested page of results
+  ///
+  /// * [int] perPage:
+  ///   The number of results per page. Only applies when using a date range
+  Future<CalendarDayCollection> getAvailableDates({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, String timezone, int page, int perPage }) async {
+    final response = await getAvailableDatesWithHttpInfo( filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, filterLeftSquareBracketAppointmentIdRightSquareBracket: filterLeftSquareBracketAppointmentIdRightSquareBracket, filterLeftSquareBracketStartAtRightSquareBracket: filterLeftSquareBracketStartAtRightSquareBracket, filterLeftSquareBracketEndAtRightSquareBracket: filterLeftSquareBracketEndAtRightSquareBracket, filterLeftSquareBracketTimeframeRightSquareBracket: filterLeftSquareBracketTimeframeRightSquareBracket, duration: duration, interval: interval, timezone: timezone, page: page, perPage: perPage );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'CalendarDayCollection',) as CalendarDayCollection;
+        }
+    return Future<CalendarDayCollection>.value(null);
+  }
+
+  /// Fetch available timeslots for a user or group
+  ///
+  /// Fetch available timeslots for scheduling or rescheduling an appointment. Timeslots can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through days or weeks.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [List<String>] filterLeftSquareBracketUserIdsRightSquareBracket:
+  ///   The IDs of users whose appointments will be retrieved. UUID Version 4.
+  ///
+  /// * [String] filterLeftSquareBracketAppointmentIdRightSquareBracket:
+  ///   Appointment ID used to fetch availability for an existing order
+  ///
+  /// * [DateTime] filterLeftSquareBracketStartAtRightSquareBracket:
+  ///   Returns availability after start_at
+  ///
+  /// * [DateTime] filterLeftSquareBracketEndAtRightSquareBracket:
+  ///   Returns availability before end_at
+  ///
+  /// * [List<String>] filterLeftSquareBracketTimeframeRightSquareBracket:
+  ///   Returns availability for a specific timeframe. Used instead of start_at & end_at
+  ///
+  /// * [int] duration:
+  ///   Duration of the event to schedule. Required if appointment_id isn't specified
+  ///
+  /// * [int] interval:
+  ///   Interval of bookable timeslots starting at x minutes on the hour . Required if appointment_id isn't specified
+  ///
+  /// * [int] page:
+  ///   The requested page of results
+  ///
+  /// * [int] perPage:
+  ///   The number of results per page. Only applies when using a date range
+  Future<Response> getAvailableTimeslotsWithHttpInfo({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, int page, int perPage }) async {
+    // Verify required params are set.
+
+    final path = r'/scheduling/available-timeslots';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (filterLeftSquareBracketUserIdsRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'filter[user_ids]', filterLeftSquareBracketUserIdsRightSquareBracket));
+    }
+    if (filterLeftSquareBracketAppointmentIdRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[appointment_id]', filterLeftSquareBracketAppointmentIdRightSquareBracket));
+    }
+    if (filterLeftSquareBracketStartAtRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[start_at]', filterLeftSquareBracketStartAtRightSquareBracket));
+    }
+    if (filterLeftSquareBracketEndAtRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter[end_at]', filterLeftSquareBracketEndAtRightSquareBracket));
+    }
+    if (filterLeftSquareBracketTimeframeRightSquareBracket != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'filter[timeframe]', filterLeftSquareBracketTimeframeRightSquareBracket));
+    }
+    if (duration != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'duration', duration));
+    }
+    if (interval != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'interval', interval));
+    }
+    if (page != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'page', page));
+    }
+    if (perPage != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'per_page', perPage));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['Token'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Fetch available timeslots for a user or group
+  ///
+  /// Fetch available timeslots for scheduling or rescheduling an appointment. Timeslots can be retrieved using a specific start & end date range, or using a timeframe. When using a timeframe, the page parameter can be used to flip through days or weeks.
+  ///
+  /// Parameters:
+  ///
+  /// * [List<String>] filterLeftSquareBracketUserIdsRightSquareBracket:
+  ///   The IDs of users whose appointments will be retrieved. UUID Version 4.
+  ///
+  /// * [String] filterLeftSquareBracketAppointmentIdRightSquareBracket:
+  ///   Appointment ID used to fetch availability for an existing order
+  ///
+  /// * [DateTime] filterLeftSquareBracketStartAtRightSquareBracket:
+  ///   Returns availability after start_at
+  ///
+  /// * [DateTime] filterLeftSquareBracketEndAtRightSquareBracket:
+  ///   Returns availability before end_at
+  ///
+  /// * [List<String>] filterLeftSquareBracketTimeframeRightSquareBracket:
+  ///   Returns availability for a specific timeframe. Used instead of start_at & end_at
+  ///
+  /// * [int] duration:
+  ///   Duration of the event to schedule. Required if appointment_id isn't specified
+  ///
+  /// * [int] interval:
+  ///   Interval of bookable timeslots starting at x minutes on the hour . Required if appointment_id isn't specified
+  ///
+  /// * [int] page:
+  ///   The requested page of results
+  ///
+  /// * [int] perPage:
+  ///   The number of results per page. Only applies when using a date range
+  Future<TimeslotCollection> getAvailableTimeslots({ List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String filterLeftSquareBracketAppointmentIdRightSquareBracket, DateTime filterLeftSquareBracketStartAtRightSquareBracket, DateTime filterLeftSquareBracketEndAtRightSquareBracket, List<String> filterLeftSquareBracketTimeframeRightSquareBracket, int duration, int interval, int page, int perPage }) async {
+    final response = await getAvailableTimeslotsWithHttpInfo( filterLeftSquareBracketUserIdsRightSquareBracket: filterLeftSquareBracketUserIdsRightSquareBracket, filterLeftSquareBracketAppointmentIdRightSquareBracket: filterLeftSquareBracketAppointmentIdRightSquareBracket, filterLeftSquareBracketStartAtRightSquareBracket: filterLeftSquareBracketStartAtRightSquareBracket, filterLeftSquareBracketEndAtRightSquareBracket: filterLeftSquareBracketEndAtRightSquareBracket, filterLeftSquareBracketTimeframeRightSquareBracket: filterLeftSquareBracketTimeframeRightSquareBracket, duration: duration, interval: interval, page: page, perPage: perPage );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TimeslotCollection',) as TimeslotCollection;
+        }
+    return Future<TimeslotCollection>.value(null);
+  }
+
   /// List all unconfirmed appointments.
   ///
   /// List all unconfirmed appointments. These are appointments that have not been scheduled. 
