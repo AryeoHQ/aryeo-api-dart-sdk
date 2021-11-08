@@ -14,7 +14,6 @@ class OrderPostPayload {
   OrderPostPayload({
     this.fulfillmentStatus,
     this.internalNotes,
-    this.paymentStatus,
     this.addressId,
     this.customerId,
     this.notify,
@@ -25,9 +24,6 @@ class OrderPostPayload {
 
   /// Internal notes that will be attached to the order. Viewable only by the team.
   String internalNotes;
-
-  /// The payment status of the order. Defaults to \"UNPAID\". 
-  OrderPostPayloadPaymentStatusEnum paymentStatus;
 
   /// ID of the address to associate with the order. UUID Version 4.
   String addressId;
@@ -42,7 +38,6 @@ class OrderPostPayload {
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
      other.internalNotes == internalNotes &&
-     other.paymentStatus == paymentStatus &&
      other.addressId == addressId &&
      other.customerId == customerId &&
      other.notify == notify;
@@ -51,13 +46,12 @@ class OrderPostPayload {
   int get hashCode =>
     (fulfillmentStatus == null ? 0 : fulfillmentStatus.hashCode) +
     (internalNotes == null ? 0 : internalNotes.hashCode) +
-    (paymentStatus == null ? 0 : paymentStatus.hashCode) +
     (addressId == null ? 0 : addressId.hashCode) +
     (customerId == null ? 0 : customerId.hashCode) +
     (notify == null ? 0 : notify.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, paymentStatus=$paymentStatus, addressId=$addressId, customerId=$customerId, notify=$notify]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, addressId=$addressId, customerId=$customerId, notify=$notify]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -66,9 +60,6 @@ class OrderPostPayload {
     }
     if (internalNotes != null) {
       json[r'internal_notes'] = internalNotes;
-    }
-    if (paymentStatus != null) {
-      json[r'payment_status'] = paymentStatus;
     }
     if (addressId != null) {
       json[r'address_id'] = addressId;
@@ -89,7 +80,6 @@ class OrderPostPayload {
     : OrderPostPayload(
         fulfillmentStatus: OrderPostPayloadFulfillmentStatusEnum.fromJson(json[r'fulfillment_status']),
         internalNotes: json[r'internal_notes'],
-        paymentStatus: OrderPostPayloadPaymentStatusEnum.fromJson(json[r'payment_status']),
         addressId: json[r'address_id'],
         customerId: json[r'customer_id'],
         notify: json[r'notify'],
@@ -184,71 +174,5 @@ class OrderPostPayloadFulfillmentStatusEnumTypeTransformer {
 
   /// Singleton [OrderPostPayloadFulfillmentStatusEnumTypeTransformer] instance.
   static OrderPostPayloadFulfillmentStatusEnumTypeTransformer _instance;
-}
-
-/// The payment status of the order. Defaults to \"UNPAID\". 
-class OrderPostPayloadPaymentStatusEnum {
-  /// Instantiate a new enum with the provided [value].
-  const OrderPostPayloadPaymentStatusEnum._(this.value);
-
-  /// The underlying value of this enum member.
-  final String value;
-
-  @override
-  String toString() => value;
-
-  String toJson() => value;
-
-  static const PAID = OrderPostPayloadPaymentStatusEnum._(r'PAID');
-  static const UNPAID = OrderPostPayloadPaymentStatusEnum._(r'UNPAID');
-
-  /// List of all possible values in this [enum][OrderPostPayloadPaymentStatusEnum].
-  static const values = <OrderPostPayloadPaymentStatusEnum>[
-    PAID,
-    UNPAID,
-  ];
-
-  static OrderPostPayloadPaymentStatusEnum fromJson(dynamic value) =>
-    OrderPostPayloadPaymentStatusEnumTypeTransformer().decode(value);
-
-  static List<OrderPostPayloadPaymentStatusEnum> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <OrderPostPayloadPaymentStatusEnum>[]
-      : json
-          .map((value) => OrderPostPayloadPaymentStatusEnum.fromJson(value))
-          .toList(growable: true == growable);
-}
-
-/// Transformation class that can [encode] an instance of [OrderPostPayloadPaymentStatusEnum] to String,
-/// and [decode] dynamic data back to [OrderPostPayloadPaymentStatusEnum].
-class OrderPostPayloadPaymentStatusEnumTypeTransformer {
-  const OrderPostPayloadPaymentStatusEnumTypeTransformer._();
-
-  factory OrderPostPayloadPaymentStatusEnumTypeTransformer() => _instance ??= OrderPostPayloadPaymentStatusEnumTypeTransformer._();
-
-  String encode(OrderPostPayloadPaymentStatusEnum data) => data.value;
-
-  /// Decodes a [dynamic value][data] to a OrderPostPayloadPaymentStatusEnum.
-  ///
-  /// If [allowNull] is true and the [dynamic value][data] cannot be decoded successfully,
-  /// then null is returned. However, if [allowNull] is false and the [dynamic value][data]
-  /// cannot be decoded successfully, then an [UnimplementedError] is thrown.
-  ///
-  /// The [allowNull] is very handy when an API changes and a new enum value is added or removed,
-  /// and users are still using an old app with the old code.
-  OrderPostPayloadPaymentStatusEnum decode(dynamic data, {bool allowNull}) {
-    switch (data) {
-      case r'PAID': return OrderPostPayloadPaymentStatusEnum.PAID;
-      case r'UNPAID': return OrderPostPayloadPaymentStatusEnum.UNPAID;
-      default:
-        if (allowNull == false) {
-          throw ArgumentError('Unknown enum value to decode: $data');
-        }
-    }
-    return null;
-  }
-
-  /// Singleton [OrderPostPayloadPaymentStatusEnumTypeTransformer] instance.
-  static OrderPostPayloadPaymentStatusEnumTypeTransformer _instance;
 }
 

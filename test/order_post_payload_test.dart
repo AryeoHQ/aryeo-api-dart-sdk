@@ -27,12 +27,6 @@ void main() {
       // TODO
     });
 
-    // The payment status of the order. Defaults to \"UNPAID\". 
-    // String paymentStatus
-    test('to test the property `paymentStatus`', () async {
-      // TODO
-    });
-
     // ID of the address to associate with the order. UUID Version 4.
     // String addressId
     test('to test the property `addressId`', () async {
