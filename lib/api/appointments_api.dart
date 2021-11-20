@@ -425,7 +425,7 @@ class AppointmentsApi {
 
   /// List all unconfirmed appointments.
   ///
-  /// List all unconfirmed appointments. These are appointments that have not been scheduled. 
+  /// List all unconfirmed appointments. These are appointments that have not been scheduled.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -491,7 +491,7 @@ class AppointmentsApi {
 
   /// List all unconfirmed appointments.
   ///
-  /// List all unconfirmed appointments. These are appointments that have not been scheduled. 
+  /// List all unconfirmed appointments. These are appointments that have not been scheduled.
   ///
   /// Parameters:
   ///
@@ -599,7 +599,7 @@ class AppointmentsApi {
 
   /// Cancel an appointment.
   ///
-  /// Cancel an appointment. The appointments order's customer can be optionally notified of this change. 
+  /// Cancel an appointment. The appointments order's customer can be optionally notified of this change.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -643,7 +643,7 @@ class AppointmentsApi {
 
   /// Cancel an appointment.
   ///
-  /// Cancel an appointment. The appointments order's customer can be optionally notified of this change. 
+  /// Cancel an appointment. The appointments order's customer can be optionally notified of this change.
   ///
   /// Parameters:
   ///
@@ -667,7 +667,7 @@ class AppointmentsApi {
 
   /// Reschedule an appointment.
   ///
-  /// Reschedule an appointment. The appointments order's customer can be optionally notified of this change. 
+  /// Reschedule an appointment. The appointments order's customer can be optionally notified of this change.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -711,7 +711,7 @@ class AppointmentsApi {
 
   /// Reschedule an appointment.
   ///
-  /// Reschedule an appointment. The appointments order's customer can be optionally notified of this change. 
+  /// Reschedule an appointment. The appointments order's customer can be optionally notified of this change.
   ///
   /// Parameters:
   ///

@@ -45,7 +45,7 @@ void main() {
 
     // List all unconfirmed appointments.
     //
-    // List all unconfirmed appointments. These are appointments that have not been scheduled. 
+    // List all unconfirmed appointments. These are appointments that have not been scheduled.
     //
     //Future<UnconfirmedAppointmentCollection> getUnconfirmedAppointments({ String include, List<String> filterLeftSquareBracketUserIdsRightSquareBracket, String sort, String perPage, String page }) async
     test('test getUnconfirmedAppointments', () async {
@@ -63,7 +63,7 @@ void main() {
 
     // Cancel an appointment.
     //
-    // Cancel an appointment. The appointments order's customer can be optionally notified of this change. 
+    // Cancel an appointment. The appointments order's customer can be optionally notified of this change.
     //
     //Future<AppointmentResource> putAppointmentsAppointmentIdCancel(String appointmentId, { AppointmentCancelPutPayload appointmentCancelPutPayload }) async
     test('test putAppointmentsAppointmentIdCancel', () async {
@@ -72,7 +72,7 @@ void main() {
 
     // Reschedule an appointment.
     //
-    // Reschedule an appointment. The appointments order's customer can be optionally notified of this change. 
+    // Reschedule an appointment. The appointments order's customer can be optionally notified of this change.
     //
     //Future<AppointmentResource> putAppointmentsAppointmentIdReschedule(String appointmentId, { AppointmentReschedulePutPayload appointmentReschedulePutPayload }) async
     test('test putAppointmentsAppointmentIdReschedule', () async {

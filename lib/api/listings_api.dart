@@ -39,7 +39,7 @@ class ListingsApi {
   ///   Return listings that have a certain status.
   ///
   /// * [bool] filterLeftSquareBracketActiveRightSquareBracket:
-  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). 
+  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`).
   ///
   /// * [num] filterLeftSquareBracketPriceGteRightSquareBracket:
   ///   Return listings where the price field is greater than or equal to this value.
@@ -175,7 +175,7 @@ class ListingsApi {
   ///   Return listings that have a certain status.
   ///
   /// * [bool] filterLeftSquareBracketActiveRightSquareBracket:
-  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). 
+  ///   Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`).
   ///
   /// * [num] filterLeftSquareBracketPriceGteRightSquareBracket:
   ///   Return listings where the price field is greater than or equal to this value.

@@ -36,7 +36,7 @@ final filterLeftSquareBracketSearchRightSquareBracket = 123 Main St; // String |
 final filterLeftSquareBracketAddressRightSquareBracket = 123 Main St; // String | Return listings that have an address matching this term.
 final filterLeftSquareBracketListAgentRightSquareBracket = John Doe; // String | Return listings that have a listing agent or co-listing agent matching this term.
 final filterLeftSquareBracketStatusRightSquareBracket = FOR_SALE; // String | Return listings that have a certain status.
-final filterLeftSquareBracketActiveRightSquareBracket = true; // bool | Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). 
+final filterLeftSquareBracketActiveRightSquareBracket = true; // bool | Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`).
 final filterLeftSquareBracketPriceGteRightSquareBracket = 100000; // num | Return listings where the price field is greater than or equal to this value.
 final filterLeftSquareBracketPriceLteRightSquareBracket = 4000000; // num | Return listings where the price field is less than or equal to this value.
 final filterLeftSquareBracketSquareFeetGteRightSquareBracket = 1000; // num | Return listings where the square feet field is greater than or equal to this value.
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
  **filterLeftSquareBracketAddressRightSquareBracket** | **String**| Return listings that have an address matching this term. | [optional] 
  **filterLeftSquareBracketListAgentRightSquareBracket** | **String**| Return listings that have a listing agent or co-listing agent matching this term. | [optional] 
  **filterLeftSquareBracketStatusRightSquareBracket** | **String**| Return listings that have a certain status. | [optional] 
- **filterLeftSquareBracketActiveRightSquareBracket** | **bool**| Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`).  | [optional] 
+ **filterLeftSquareBracketActiveRightSquareBracket** | **bool**| Set as true to return listings that have an active status (e.g. active statuses include `COMING_SOON`, `FOR_SALE`, `FOR_LEASE`, `PENDING_SALE`, `PENDING_LEASE`, `SOLD`, `LEASED`). | [optional] 
  **filterLeftSquareBracketPriceGteRightSquareBracket** | **num**| Return listings where the price field is greater than or equal to this value. | [optional] 
  **filterLeftSquareBracketPriceLteRightSquareBracket** | **num**| Return listings where the price field is less than or equal to this value. | [optional] 
  **filterLeftSquareBracketSquareFeetGteRightSquareBracket** | **num**| Return listings where the square feet field is greater than or equal to this value. | [optional] 
