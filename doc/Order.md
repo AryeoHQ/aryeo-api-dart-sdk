@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **totalAmount** | **int** | A positive integer in the smallest currency unit (that is, 100 cents for $1.00) representing the total order amount that was or will be charged. This accounts for order items and taxes.  | [optional] 
 **paymentUrl** | **String** | A URL of a publicly-accessible webpage to pay for the order. | [optional] 
 **statusUrl** | **String** | A URL of a publicly-accessible webpage to see the order's status. | 
+**downloadsAllowed** | **bool** | Indicates if the current user is allowed to download content from the attached listing. | [optional] 
+**paymentsAllowed** | **bool** | Indicates if the current user is allowed to make a payment for the order. | [optional] 
 **address** | [**Address**](Address.md) |  | [optional] 
 **customer** | [**Group**](Group.md) |  | [optional] 
 **listing** | [**Listing**](Listing.md) |  | [optional] 

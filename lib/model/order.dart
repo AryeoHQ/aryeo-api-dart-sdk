@@ -21,6 +21,8 @@ class Order {
     this.totalAmount,
     this.paymentUrl,
     this.statusUrl,
+    this.downloadsAllowed,
+    this.paymentsAllowed,
     this.address,
     this.customer,
     this.listing,
@@ -57,6 +59,12 @@ class Order {
   /// A URL of a publicly-accessible webpage to see the order's status.
   String statusUrl;
 
+  /// Indicates if the current user is allowed to download content from the attached listing.
+  bool downloadsAllowed;
+
+  /// Indicates if the current user is allowed to make a payment for the order.
+  bool paymentsAllowed;
+
   Address address;
 
   Group customer;
@@ -81,6 +89,8 @@ class Order {
      other.totalAmount == totalAmount &&
      other.paymentUrl == paymentUrl &&
      other.statusUrl == statusUrl &&
+     other.downloadsAllowed == downloadsAllowed &&
+     other.paymentsAllowed == paymentsAllowed &&
      other.address == address &&
      other.customer == customer &&
      other.listing == listing &&
@@ -99,6 +109,8 @@ class Order {
     (totalAmount == null ? 0 : totalAmount.hashCode) +
     (paymentUrl == null ? 0 : paymentUrl.hashCode) +
     (statusUrl == null ? 0 : statusUrl.hashCode) +
+    (downloadsAllowed == null ? 0 : downloadsAllowed.hashCode) +
+    (paymentsAllowed == null ? 0 : paymentsAllowed.hashCode) +
     (address == null ? 0 : address.hashCode) +
     (customer == null ? 0 : customer.hashCode) +
     (listing == null ? 0 : listing.hashCode) +
@@ -107,7 +119,7 @@ class Order {
     (unconfirmedAppointments == null ? 0 : unconfirmedAppointments.hashCode);
 
   @override
-  String toString() => 'Order[id=$id, number=$number, title=$title, fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus, currency=$currency, totalAmount=$totalAmount, paymentUrl=$paymentUrl, statusUrl=$statusUrl, address=$address, customer=$customer, listing=$listing, items=$items, appointments=$appointments, unconfirmedAppointments=$unconfirmedAppointments]';
+  String toString() => 'Order[id=$id, number=$number, title=$title, fulfillmentStatus=$fulfillmentStatus, paymentStatus=$paymentStatus, currency=$currency, totalAmount=$totalAmount, paymentUrl=$paymentUrl, statusUrl=$statusUrl, downloadsAllowed=$downloadsAllowed, paymentsAllowed=$paymentsAllowed, address=$address, customer=$customer, listing=$listing, items=$items, appointments=$appointments, unconfirmedAppointments=$unconfirmedAppointments]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -126,6 +138,12 @@ class Order {
       json[r'payment_url'] = paymentUrl;
     }
       json[r'status_url'] = statusUrl == null ? null : statusUrl;
+    if (downloadsAllowed != null) {
+      json[r'downloads_allowed'] = downloadsAllowed;
+    }
+    if (paymentsAllowed != null) {
+      json[r'payments_allowed'] = paymentsAllowed;
+    }
     if (address != null) {
       json[r'address'] = address;
     }
@@ -161,6 +179,8 @@ class Order {
         totalAmount: json[r'total_amount'],
         paymentUrl: json[r'payment_url'],
         statusUrl: json[r'status_url'],
+        downloadsAllowed: json[r'downloads_allowed'],
+        paymentsAllowed: json[r'payments_allowed'],
         address: Address.fromJson(json[r'address']),
         customer: Group.fromJson(json[r'customer']),
         listing: Listing.fromJson(json[r'listing']),

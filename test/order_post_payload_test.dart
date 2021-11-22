@@ -45,6 +45,18 @@ void main() {
       // TODO
     });
 
+    // Indicates if the downloads for the attached listing should be locked while there is an outstanding balance on the order.
+    // bool lockDownloadForPayment
+    test('to test the property `lockDownloadForPayment`', () async {
+      // TODO
+    });
+
+    // Indicates if the order will allow payments from the customer before the order is marked as fulfilled.
+    // bool allowPaymentsBeforeFulfillment
+    test('to test the property `allowPaymentsBeforeFulfillment`', () async {
+      // TODO
+    });
+
 
   });
 

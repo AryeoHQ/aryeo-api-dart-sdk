@@ -17,6 +17,8 @@ class OrderPostPayload {
     this.addressId,
     this.customerId,
     this.notify,
+    this.lockDownloadForPayment,
+    this.allowPaymentsBeforeFulfillment,
   });
 
   /// The fulfillment status of the order. Defaults to \"UNFULFILLED\".
@@ -34,13 +36,21 @@ class OrderPostPayload {
   /// Indicates if the customer and creator notifications should be sent when creating the order. Requires an address and customer to be set in order for the notifications to be sent.
   bool notify;
 
+  /// Indicates if the downloads for the attached listing should be locked while there is an outstanding balance on the order.
+  bool lockDownloadForPayment;
+
+  /// Indicates if the order will allow payments from the customer before the order is marked as fulfilled.
+  bool allowPaymentsBeforeFulfillment;
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is OrderPostPayload &&
      other.fulfillmentStatus == fulfillmentStatus &&
      other.internalNotes == internalNotes &&
      other.addressId == addressId &&
      other.customerId == customerId &&
-     other.notify == notify;
+     other.notify == notify &&
+     other.lockDownloadForPayment == lockDownloadForPayment &&
+     other.allowPaymentsBeforeFulfillment == allowPaymentsBeforeFulfillment;
 
   @override
   int get hashCode =>
@@ -48,10 +58,12 @@ class OrderPostPayload {
     (internalNotes == null ? 0 : internalNotes.hashCode) +
     (addressId == null ? 0 : addressId.hashCode) +
     (customerId == null ? 0 : customerId.hashCode) +
-    (notify == null ? 0 : notify.hashCode);
+    (notify == null ? 0 : notify.hashCode) +
+    (lockDownloadForPayment == null ? 0 : lockDownloadForPayment.hashCode) +
+    (allowPaymentsBeforeFulfillment == null ? 0 : allowPaymentsBeforeFulfillment.hashCode);
 
   @override
-  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, addressId=$addressId, customerId=$customerId, notify=$notify]';
+  String toString() => 'OrderPostPayload[fulfillmentStatus=$fulfillmentStatus, internalNotes=$internalNotes, addressId=$addressId, customerId=$customerId, notify=$notify, lockDownloadForPayment=$lockDownloadForPayment, allowPaymentsBeforeFulfillment=$allowPaymentsBeforeFulfillment]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -70,6 +82,12 @@ class OrderPostPayload {
     if (notify != null) {
       json[r'notify'] = notify;
     }
+    if (lockDownloadForPayment != null) {
+      json[r'lock_download_for_payment'] = lockDownloadForPayment;
+    }
+    if (allowPaymentsBeforeFulfillment != null) {
+      json[r'allow_payments_before_fulfillment'] = allowPaymentsBeforeFulfillment;
+    }
     return json;
   }
 
@@ -83,6 +101,8 @@ class OrderPostPayload {
         addressId: json[r'address_id'],
         customerId: json[r'customer_id'],
         notify: json[r'notify'],
+        lockDownloadForPayment: json[r'lock_download_for_payment'],
+        allowPaymentsBeforeFulfillment: json[r'allow_payments_before_fulfillment'],
     );
 
   static List<OrderPostPayload> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>

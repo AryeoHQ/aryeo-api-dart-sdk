@@ -69,6 +69,18 @@ void main() {
       // TODO
     });
 
+    // Indicates if the current user is allowed to download content from the attached listing.
+    // bool downloadsAllowed
+    test('to test the property `downloadsAllowed`', () async {
+      // TODO
+    });
+
+    // Indicates if the current user is allowed to make a payment for the order.
+    // bool paymentsAllowed
+    test('to test the property `paymentsAllowed`', () async {
+      // TODO
+    });
+
     // Address address
     test('to test the property `address`', () async {
       // TODO
